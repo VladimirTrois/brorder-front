@@ -3,9 +3,8 @@
         <input 
             class="breadforminput"
             :id="id"
-            placeHolder="" 
-            type="text" 
-            v-model="model"
+            :placeHolder="placeHolder" 
+            type="text"
         />
     </label>
 </template>

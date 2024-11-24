@@ -16,7 +16,7 @@ function getTomorrowsDate() {
     return date;
 }
 
-export function tomorrowString(){
+export function getTomorrowString(){
     let options = { weekday: 'long', month: 'long', day: 'numeric' };
 
     const tomorrow = getTomorrowsDate();
