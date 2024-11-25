@@ -3,7 +3,8 @@
         <input 
             class="breadforminput"
             :id="id"
-            :placeHolder="placeHolder" 
+            require :placeHolder="placeHolder"
+            v-model="model"
             type="text"
         />
     </label>
@@ -14,6 +15,7 @@ defineProps({
     id: String,
     placeHolder: String
 })
+const model = defineModel()
 </script>
 
 <style lang="postcss">

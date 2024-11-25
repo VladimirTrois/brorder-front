@@ -2,10 +2,10 @@
     <div class="product" v-for="p in productsToSell" :key="p">
         <NuxtImg 
             class="image"
-            src="https://picsum.photos/80" 
+            :src="p.image" 
             @click="addProduct(p)"
         /><br>
-        <label :for="p.name">{{ p.name}}</label>
+        <label :for="p.name">{{ p.name}}: {{ p.price }}€</label>
     </div>
 </template>
 
@@ -26,7 +26,7 @@ const addProduct = (product) => {
 
 <style lang="postcss" scoped>
 .product {
-    @apply w-24 inline-block px-1 pt-1 pb-1 float-start 
+    @apply w-28 md:w-32 inline-block px-1 pt-1 pb-1 float-start 
             justify-center place-items-center
 }
 .image {
@@ -36,6 +36,6 @@ const addProduct = (product) => {
     }
 }
 label {
-    @apply block text-center
+    @apply block text-center text-sm
 }
 </style>
