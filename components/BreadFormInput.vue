@@ -4,7 +4,6 @@
             class="breadforminput"
             :id="id"
             require :placeHolder="placeHolder"
-            v-model="model"
             type="text"
         />
     </label>

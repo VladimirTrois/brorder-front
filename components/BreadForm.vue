@@ -5,8 +5,24 @@
         <i>Bread is available from 8.30am to 11am</i>
     </p>
     <form class="form" action="" @submit.prevent="validateForm">
-        <BreadFormInput id="Nom" placeHolder="Nom / Name" v-model="order.name"/>
-        <BreadFormInput id="Pitch" placeHolder="Emplacement / Pitch" v-model="order.pitch"/>
+        <FormInput 
+            id="Name" 
+            placeHolder="Nom / Name" 
+            @change="errors.name=''" 
+            @focus="errors.name=''" 
+            @click="errors.name=''" 
+            v-model="order.name" 
+            :error="errors.name"
+        />
+        <FormInput 
+            id="Pitch" 
+            placeHolder="Emplacement / Pitch" 
+            @change="errors.pitch=''" 
+            @focus="errors.pitch=''" 
+            @click="errors.pitch=''" 
+            v-model="order.pitch" 
+            :error="errors.pitch"
+        />
         <button class="button" @click="click" type="submit">Commander</button>
         <BreadFormGrid />
     </form>
@@ -14,6 +30,7 @@
 
 <script setup>
 import { getTomorrowsDateFormatted } from '~/functions/date';
+import { insertInString } from '~/functions/string';
 
 const productsToSell = ref(
     [
@@ -27,10 +44,42 @@ provide("productsToSell",productsToSell)
 
 const order = useOrder()
 
-const validateForm = () => {
-    order.value.pickUpDate=getTomorrowsDateFormatted()
-    console.log(order.value)
+const errors = reactive({
+    name: '',
+    pitch: '',
+});
+
+const checkForm = () => {
+    //check Name
+    const regexName = new RegExp("[A-Za-z][A-Za-z0-9_]{1,29}");
+    errors.name = 
+        !order.value.name ? 'This field is required.'
+        : !regexName.test(order.value.name) ? 'Invalid.'
+        : ''
+
+    //check Pitch
+    const regexPitch = new RegExp("^[A-Za-z][0-9][0-9]$");
+    const regexPitchSmall = new RegExp("^[A-Za-z][1-9]$");
+    order.value.pitch = regexPitchSmall.test(order.value.pitch) ? insertInString(order.value.pitch,1,"0"): order.value.pitch;
+
+    errors.pitch = 
+        !order.value.pitch ? 'This field is required'
+        : !regexPitch.test(order.value.pitch) ? 'Invalid'
+        : ''
+    
+    //check Form
+    return (errors.name || errors.pitch) ? false : true;
 }
+const validateForm = () => {
+    if(checkForm()){
+        order.value.pickUpDate=getTomorrowsDateFormatted()
+        console.log("Form Is Valid")
+        console.log(order.value)
+    }
+}
+
+
+
 </script>
 
 <style lang="postcss">
