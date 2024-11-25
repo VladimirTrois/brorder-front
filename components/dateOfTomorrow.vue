@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { tomorrowString } from '~/composable/date';
+import { getTomorrowString } from '~/functions/date';
 
-const dateOfTomorrow = computed(() => tomorrowString())
+const dateOfTomorrow = getTomorrowString()
 </script>

@@ -16,7 +16,11 @@ function getTomorrowsDate() {
     return date;
 }
 
-export function tomorrowString(){
+export function getTomorrowsDateFormatted() {
+    return getTomorrowsDate().toISOString().split('T')[0]
+}
+
+export function getTomorrowString(){
     let options = { weekday: 'long', month: 'long', day: 'numeric' };
 
     const tomorrow = getTomorrowsDate();
