@@ -1,11 +1,11 @@
 <template>
-    <div class="product" v-for="p in productsToSell" :key="p">
-        <NuxtImg 
-            class="image"
+    <div class="productsContainer" v-for="p in productsToSell" :key="p">
+        <NuxtImg
+            class="productImage"
             :src="p.image" 
             @click="addProduct(p)"
         /><br>
-        <label :for="p.name">{{ p.name}}: {{ p.price }}€</label>
+        <label class="productLabel" :for="p.name">{{ p.name}}: {{ (p.price/100).toFixed(2) }}€</label>
     </div>
 </template>
 
@@ -25,17 +25,16 @@ const addProduct = (product) => {
 </script>
 
 <style lang="postcss" scoped>
-.product {
-    @apply w-28 md:w-32 inline-block px-1 pt-1 pb-1 float-start 
-            justify-center place-items-center
-}
-.image {
-    @apply w-full rounded ;
+.productsContainer {
+    @apply w-28 md:w-32 inline p-1 static float-start rounded-lg justify-center place-items-center;
     &:hover {
-        @apply bg-gray-300;
+        @apply bg-gray-200 border border-primary;
     }
 }
-label {
-    @apply block text-center text-sm
+.productImage {
+    @apply rounded-lg w-fit;
+}
+.productLabel {
+    @apply block text-center text-sm relative
 }
 </style>

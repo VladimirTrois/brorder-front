@@ -12,8 +12,8 @@
         <label v-if="error" class="error">{{error}}</label>
         <label v-else class="formInputLabel">{{placeHolder}}</label>
         
-        <!--This fieldset+legend is used for the the border and notch transition-->
-        <fieldset v-if="error" class="inset-0 absolute border border-secondary border-2 rounded pointer-events-none mt-[-9px] invisible 
+        <!--This fieldset+legend is used for when the border and notch transition-->
+        <fieldset v-if="error" class="inset-0 absolute border-2 border-secondary rounded-lg pointer-events-none mt-[-9px] invisible 
             peer-placeholder-shown:visible 
             group-focus-within:!border-secondary 
             group-focus-within:border-2"
@@ -23,11 +23,12 @@
                 whitespace-nowrap"
             >{{error}}</legend>
         </fieldset>
-        <fieldset v-else class="inset-0 absolute border border-gray-500 rounded pointer-events-none mt-[-9px] invisible 
+        <fieldset v-else class="inset-0 absolute border border-gray-300 rounded-lg pointer-events-none mt-[-9px] invisible 
             peer-placeholder-shown:visible 
             group-focus-within:!border-primary 
             group-focus-within:border-2 
-            group-hover:border-gray-800"
+            group-hover:border-primary
+            group-hover:border-10"
             ><legend class="ml-2 px-0 text-xs transition-all duration-300 invisible max-w-[0.01px] 
                 group-focus-within:max-w-full 
                 group-focus-within:px-1 
@@ -37,11 +38,11 @@
         
 
          <!--This fieldset+legend always has a notch and is shown when the input is filled, instead of the other, so the notch doesnt vanish when you unfocus the field-->
-         <fieldset v-if="error" class="inset-0 absolute border border-secondary rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible border-2
+         <fieldset v-if="error" class="inset-0 absolute border-2 border-secondary rounded-lg pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
         group-focus-within:border-2">
             <legend class="ml-2 text-xs invisible px-1 max-w-full whitespace-nowrap">{{error}}</legend>
         </fieldset> 
-        <fieldset v-else class="inset-0 absolute border border-gray-400 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+        <fieldset v-else class="inset-0 absolute border border-1 border-primary rounded-lg pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
         group-focus-within:border-2 
         group-focus-within:!border-blue-900 
         group-hover:border-gray-800">

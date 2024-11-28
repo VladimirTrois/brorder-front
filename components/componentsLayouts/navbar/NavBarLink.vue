@@ -12,7 +12,7 @@ defineProps({
 
 <style lang="postcss" scoped>
 .navBarLink {
-    @apply text-primary inline-block ;
+    @apply inline-block ;
     &:hover {
         @apply underline underline-offset-8 decoration-4 decoration-secondary;
     }

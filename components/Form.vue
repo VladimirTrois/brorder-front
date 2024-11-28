@@ -23,8 +23,8 @@
             v-model="order.pitch" 
             :error="errors.pitch"
         />
-        <button class="button" @click="click" type="submit">Commander</button>
-        <BreadFormGrid />
+        <FormGrid />
+        <FormSubmit @click="validateForm" text="Commander" />
     </form>
 </template>
 
@@ -32,22 +32,16 @@
 import { getTomorrowsDateFormatted } from '~/functions/date';
 import { insertInString } from '~/functions/string';
 
-const productsToSell = ref(
-    [
-        { price:2, name:'Tradition', weight: 150, image:'/img/products/tradition.png'},
-        { price:3, name:'Croissant', weight: 50, image:'/img/products/croissant.png'},
-        { price:1, name:'Pain au Chocolat', weight: 50, image:'/img/products/painauchocolat.png'},
-        { price:3, name:'Baguette', weight: 250, image:'/img/products/baguette.jpg'},
-    ]
-)
-provide("productsToSell",productsToSell)
-
+const props = defineProps({
+    productsToSell : Object,
+})
 const order = useOrder()
-
 const errors = reactive({
     name: '',
     pitch: '',
 });
+
+provide("productsToSell",props.productsToSell)
 
 const checkForm = () => {
     //check Name
@@ -73,13 +67,9 @@ const checkForm = () => {
 const validateForm = () => {
     if(checkForm()){
         order.value.pickUpDate=getTomorrowsDateFormatted()
-        console.log("Form Is Valid")
-        console.log(order.value)
+        
     }
 }
-
-
-
 </script>
 
 <style lang="postcss">
