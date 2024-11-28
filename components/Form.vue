@@ -24,7 +24,7 @@
             :error="errors.pitch"
         />
         <FormGrid />
-        <FormSubmit @click="validateForm" text="Commander" />
+        <FormSubmit @click="submitForm" text="Commander" />
     </form>
 </template>
 
@@ -39,17 +39,19 @@ const order = useOrder()
 const errors = reactive({
     name: '',
     pitch: '',
+    items: '',
 });
 
 provide("productsToSell",props.productsToSell)
 
-const checkForm = () => {
+const isFormValid = () => {
     //check Name
     const regexName = new RegExp("[A-Za-z][A-Za-z0-9_]{1,29}");
     errors.name = 
         !order.value.name ? 'This field is required.'
         : !regexName.test(order.value.name) ? 'Invalid.'
         : ''
+    if(errors.name!=='') {return false}
 
     //check Pitch
     const regexPitch = new RegExp("^[A-Za-z][0-9][0-9]$");
@@ -60,14 +62,20 @@ const checkForm = () => {
         !order.value.pitch ? 'This field is required'
         : !regexPitch.test(order.value.pitch) ? 'Invalid'
         : ''
+    if(errors.pitch!=='') {return false}
     
-    //check Form
-    return (errors.name || errors.pitch) ? false : true;
+    //check Items
+    errors.items = order.value.items.length>0 ? '' : 'This field is required' 
+    if(errors.items!=='') {return false}
+
+    //No errors then form is valid
+    return true
 }
-const validateForm = () => {
-    if(checkForm()){
+const submitForm = () => {
+    if(isFormValid()){
         order.value.pickUpDate=getTomorrowsDateFormatted()
-        
+        order.value.items = order.value.items.map( (a) => {return {"product": a.name,"quantity": a.quantity }});
+        console.log(order.value)
     }
 }
 </script>

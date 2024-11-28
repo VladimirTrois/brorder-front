@@ -44,7 +44,7 @@
         </fieldset> 
         <fieldset v-else class="inset-0 absolute border border-1 border-primary rounded-lg pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
         group-focus-within:border-2 
-        group-focus-within:!border-blue-900 
+        group-focus-within:!border-green-900 
         group-hover:border-gray-800">
             <legend class="ml-2 text-xs invisible px-1 max-w-full whitespace-nowrap">{{placeHolder}}</legend>
         </fieldset>       

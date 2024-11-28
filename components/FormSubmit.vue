@@ -10,9 +10,9 @@ defineProps({
 
 <style lang="postcss">
 .buttonSubmit{
-    @apply bg-gray-300 p-1 px-5 rounded-md border-transparent border-2;
+    @apply bg-secondary p-1 px-5 rounded-md border-transparent border-2 text-white;
     &:hover{
-        @apply border-primary border-2;
+        @apply border-gray-700;
     }
 }
 </style>
