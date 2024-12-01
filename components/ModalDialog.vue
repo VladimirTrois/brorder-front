@@ -35,13 +35,16 @@ defineProps({
     @apply m-auto w-80 p-5 bg-white border-2 rounded-lg shadow-sm transition-all;
 }
 .modal-header h3 {
-    @apply mt-0 bg-primary py-2 text-center text-white rounded-lg font-bold
+    @apply mt-0 bg-secondComplementary py-2 text-center text-white rounded-lg font-bold
 }
 .modal-body {
     @apply m-5 overflow-y-scroll
 }
+.modal-footer{
+  @apply flex justify-end
+}
 .modal-default-button {
-  float: right;
+  @apply px-3 border-2 border-secondComplementary rounded-lg text-white  bg-secondComplementary
 }
 /*
  * The following styles are auto-applied to elements with
