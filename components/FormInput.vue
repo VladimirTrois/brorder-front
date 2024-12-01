@@ -1,6 +1,7 @@
 <template>
     <div class="formInput group" >
         <input 
+            autocomplete="off"
             type="text" 
             class="formInputText peer" 
             @click="click" 

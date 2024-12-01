@@ -6,3 +6,7 @@ export const useOrder = () => useState('order', () => (
         "items": []
       }
 ))
+
+export const useResetOrder = () => useState('order', () => (
+  {}
+))

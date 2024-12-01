@@ -1,10 +1,11 @@
 <template>
-    <button class="buttonSubmit" @click="click" type="submit">{{text}}</button>
+    <button class="buttonSubmit" @click="click" :form="form" type="submit">{{text}}</button>
 </template>
 
 <script setup>
 defineProps({
-    text: String
+    text: String,
+    form: String,
 })
 </script>
 

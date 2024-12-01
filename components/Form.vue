@@ -4,7 +4,7 @@
     <p>Le pain est à récupérer entre 8h30 et 11h.<br>
         <i>Bread is available from 8.30am to 11am</i>
     </p>
-    <form class="form" action="" @submit.prevent="validateForm">
+    <form class="form" id="breadForm" @submit.prevent="handleFormSubmit">
         <FormInput 
             id="Name" 
             placeHolder="Nom / Name" 
@@ -24,13 +24,29 @@
             :error="errors.pitch"
         />
         <FormGrid />
-        <FormSubmit @click="submitForm" text="Commander" />
+        <FormSubmit text="Commander" form="breadForm" />
     </form>
+    <Teleport to="body">
+        <ModalDialog :show="showModal" @close="closeModal()">
+            <template #header>
+                <h3>Success</h3>
+            </template>
+            <template #body>
+                <h4>Your order :</h4>
+                <h5 v-for="item in showItems">
+                    {{ item.quantity }} x {{item.product.name}}
+                </h5>
+            </template>
+        </ModalDialog>
+    </Teleport>
 </template>
 
 <script setup>
 import { getTomorrowsDateFormatted } from '~/functions/date';
 import { insertInString } from '~/functions/string';
+
+const showModal = ref(false)
+const showItems = ref()
 
 const props = defineProps({
     productsToSell : Object,
@@ -41,6 +57,11 @@ const errors = reactive({
     pitch: '',
     items: '',
 });
+
+const closeModal = () => {
+    showModal.value=false
+    resetOrder()
+}
 
 provide("productsToSell",props.productsToSell)
 
@@ -71,13 +92,39 @@ const isFormValid = () => {
     //No errors then form is valid
     return true
 }
-const submitForm = () => {
+
+const api = "https://localhost"
+async function handleFormSubmit() {
     if(isFormValid()){
         order.value.pickUpDate=getTomorrowsDateFormatted()
-        order.value.items = order.value.items.map( (a) => {return {"product": a.name,"quantity": a.quantity }});
-        console.log(order.value)
+        order.value.items.map( (a) => {a['product']=a['@id']});
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {Accept:"application/ld+json",'content-type':"application/ld+json"},
+            body: order.value,
+        }
+
+        try{
+            const response = await $fetch(api+'/orders', requestOptions)
+            if(response){
+                showItems.value = response.items;
+                showModal.value=true;
+            }
+
+        }catch(err){
+            console.error(err);
+        }
     }
 }
+
+function resetOrder(){
+    order.value.name=''
+    order.value.pitch=''
+    order.value.items=[]
+    order.value.pickUpDate=''
+}
+
 </script>
 
 <style lang="postcss">
