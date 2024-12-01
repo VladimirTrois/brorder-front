@@ -4,7 +4,7 @@
             <NavBarLink to="/" text="Commande"/>
             <NavBarLink to="/informations" text="Allèrgenes"/>
         </nav>
-        <img src="/assets/icons/Logo_Seul.svg" alt="Logo" class="w-20 h-20 fill-current text-gray-800"/>
+        <img src="/img/Logo.svg" alt="Logo" class="w-20 h-20 fill-current"/>
         <button @click="toggleNav" class="md:hidden focus:outline-none text-gray-800">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path v-if="!isOpen" d="M4 6h16v2H4V6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -38,5 +38,4 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-
 </style>

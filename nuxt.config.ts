@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
+  routeRules: {
+    '*': { cors: true }
+  },
+
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
@@ -23,11 +27,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/fonts',
-    '@nuxt/image',
-    '@nuxtjs/tailwindcss'
-  ],
+  modules: ['@nuxt/fonts', '@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-svgo'],
   image: {
     // You can customize the image settings here if needed
   },
