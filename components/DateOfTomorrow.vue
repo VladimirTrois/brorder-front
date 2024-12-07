@@ -1,9 +1,9 @@
 <template>
-    Pour le {{ dateOfTomorrow }} 
+  <div>Pour le {{ dateOfTomorrow }}</div>
 </template>
 
 <script setup>
-import { getTomorrowString } from '~/functions/date';
+import { getTomorrowString } from "~/functions/date";
 
-const dateOfTomorrow = getTomorrowString()
+const dateOfTomorrow = getTomorrowString();
 </script>

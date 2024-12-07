@@ -1,14 +1,13 @@
 <template>
-    <span v-if="status==='pending'">Loading...</span>
-    <span v-else-if="data"><Form :productsToSell=data.member /></span>
-    <span v-else-if="error">Error: {{ error }}</span>
-  </template>
+  <span v-if="status === 'pending'">Loading...</span>
+  <span v-else-if="data">
+    <LazyForm :productsToSell="data.member" />
+  </span>
+  <span v-else-if="error">Error: {{ error }}</span>
+</template>
 
 <script setup>
-const api = "https://localhost"
-
-const { data, status, error, refresh, clear } = await useFetch(api+"/products?page=1")
-
-console.log(data.value)
-
+const { data, status, error, refresh, clear } = await useFetch(
+  import.meta.env.VITE_API_URL + "/products?page=1"
+);
 </script>
