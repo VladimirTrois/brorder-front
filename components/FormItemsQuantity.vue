@@ -1,20 +1,19 @@
 <template>
-  <div>
+  <div class="flex">
     <SvgoBin
-      class="icon iconTrash"
+      class="icon mr-2"
       alt="delete"
       loading="lazy"
       @click="item.quantity = 0"
     />
     <SvgoMinus
-      class="icon iconMinus"
+      class="icon mr-2"
       alt="-"
       loading="lazy"
       @click="item.quantity--"
     />
     <SvgoPlus
-      class="icon iconPlus"
-      quality="80"
+      class="icon mr-4"
       alt="+"
       loading="lazy"
       @click="item.quantity++"
@@ -32,30 +31,12 @@ defineProps({
 
 <style lang="postcss">
 .icon {
-  path {
-    @apply fill-black;
-  }
-  @apply w-6 h-6 md:w-7 md:h-7 text-lg border-2 border-transparent;
+  @apply h-5 text-lg text-black border border-transparent rounded;
   &:hover {
-    @apply border-2 border-black rounded;
-    path {
-      @apply fill-primary;
-    }
+    @apply bg-black text-gray-200;
   }
-}
-.iconTrash {
-  @apply mr-2;
-  &:hover {
-  }
-}
-.iconMinus {
-  @apply mr-0;
-  &:hover {
-  }
-}
-.iconPlus {
-  @apply mr-4;
-  &:hover {
+  &:md {
+    @apply h-7 text-xl;
   }
 }
 </style>
