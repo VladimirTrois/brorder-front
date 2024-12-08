@@ -1,26 +1,26 @@
 <template>
-    <NuxtLink class="navBarLink">
-        {{ text }} 
-    </NuxtLink>
+  <NuxtLink class="navBarLink">
+    {{ text }}
+  </NuxtLink>
 </template>
 
 <script setup>
 defineProps({
   text: String,
-})
+});
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 .navBarLink {
-    @apply inline-block ;
-    &:hover {
-        @apply underline underline-offset-8 decoration-4 decoration-secondary;
-    }
-    &:active{
-        @apply font-extrabold;
-    }
-    &:focus{
-        @apply font-extrabold;
-    }
+  @apply block rounded px-2 py-1 mt-1 text-xl sm:mt-0 sm:ml-4;
+  &:hover {
+    @apply underline underline-offset-8 decoration-4 decoration-secondary;
+  }
+  &:focus {
+    @apply font-extrabold;
+  }
+}
+.router-link-exact-active {
+  @apply font-bold;
 }
 </style>
