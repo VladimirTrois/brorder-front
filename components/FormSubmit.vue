@@ -17,5 +17,8 @@ defineProps({
   &:hover {
     @apply bg-secondary text-white border-white;
   }
+  &:active {
+    @apply bg-primary;
+  }
 }
 </style>

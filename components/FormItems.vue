@@ -89,5 +89,8 @@ td {
   &:hover {
     @apply bg-secondary text-white;
   }
+  &:active {
+    @apply bg-white text-secondary;
+  }
 }
 </style>

@@ -35,6 +35,9 @@ defineProps({
   &:hover {
     @apply bg-black text-gray-200;
   }
+  &:active {
+    @apply bg-white text-black;
+  }
   &:md {
     @apply h-7 text-xl;
   }

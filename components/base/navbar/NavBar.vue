@@ -44,5 +44,8 @@ const toggleNav = () => {
   &:hover {
     @apply text-white bg-primary;
   }
+  &:active {
+    @apply text-primary bg-white;
+  }
 }
 </style>

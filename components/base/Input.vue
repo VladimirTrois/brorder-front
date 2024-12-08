@@ -1,9 +1,9 @@
 <template>
   <div class="formInput group">
     <input
-      autocomplete="off"
-      type="text"
       class="formInputText peer"
+      autocomplete="off"
+      :type="type"
       @click="click"
       @focus="focus"
       @change="change"
@@ -57,6 +57,10 @@
 
 <script setup>
 defineProps({
+  type: {
+    type: String,
+    default: "text",
+  },
   id: String,
   placeHolder: String,
   error: String,
@@ -70,7 +74,7 @@ const model = defineModel();
 }
 
 .formInputText {
-  @apply outline-none px-3 py-3;
+  @apply outline-none px-3 py-3 rounded-lg;
 }
 
 .formInputLabel {

@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <div class="title">
-      <h2>Login</h2>
-    </div>
-    <div class="container form">
-      <label for="uname"><b>Username</b></label>
-      <input
-        v-model="user.username"
-        type="text"
-        class="input"
-        placeholder="Enter Username"
-        name="uname"
-        required
-      />
-
-      <label for="psw"><b>Password</b></label>
-      <input
-        v-model="user.password"
-        type="password"
-        class="input"
-        placeholder="Enter Password"
-        name="psw"
-        required
-      />
-
-      <button @click.prevent="login" class="button">Login</button>
-    </div>
-  </div>
+  <form class="loginForm" action="">
+    <h1 class="text-center font-bold">Login to admin</h1>
+    <Input
+      class="inputLogin"
+      :id="username"
+      placeHolder="Username"
+      @change="errors.name = ''"
+      @focus="errors.name = ''"
+      @click="errors.name = ''"
+      v-model="user.username"
+      :error="errors.name"
+    />
+    <Input
+      class="inputLogin"
+      :id="password"
+      type="password"
+      placeHolder="Password"
+      @change="errors.name = ''"
+      @focus="errors.name = ''"
+      @click="errors.name = ''"
+      v-model="user.password"
+      :error="errors.name"
+    />
+    <button @click.prevent="login" class="buttonLogin">Login</button>
+  </form>
 </template>
 
 <script setup>
 definePageMeta({
-  layout: "admin",
+  layout: "login",
 });
 useSeoMeta({
   title: "Login",
@@ -41,10 +38,31 @@ const user = ref({
   username: "",
   password: "",
 });
+const errors = reactive({
+  username: "",
+  password: "",
+});
 
 const login = async () => {
-  // TODO send user Data to the login endpoint and redirect if  successful
+  // TODO send user Data to the login endpoint and redirect if successful
 };
 </script>
 
+<style lang="postcss">
+.loginForm {
+  @apply m-auto sm:w-1/2 px-2 pt-4 pb-4;
+}
+.inputLogin {
+  @apply m-auto my-4;
+}
+.buttonLogin {
+  @apply block m-auto bg-primary text-white text-base font-bold uppercase py-3 rounded-md shadow hover:shadow-lg outline-none w-1/2;
+  &:hover {
+    @apply bg-primComplementary;
+  }
+  &:active {
+    @apply bg-primary;
+  }
+}
+</style>
 

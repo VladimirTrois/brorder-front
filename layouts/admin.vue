@@ -1,12 +1,13 @@
-<script>
-import AppFooter from '~/components/componentsLayouts/AppFooter.vue';
-import AppHeader from '~/components/componentsLayouts/AppHeader.vue';
-</script>
-
 <template>
   <div class="app">
+    <NavBar>
+      <NavBarLink to="/admin/today" text="Aujourd'hui" />
+      <NavBarLink to="/admin/products" text="Produits" />
+      <NavBarLink to="/admin/stats" text="Statistique" />
+    </NavBar>
     <main class="main">
       <slot />
     </main>
+    <Footer />
   </div>
 </template>

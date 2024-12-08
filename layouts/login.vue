@@ -1,8 +1,7 @@
 <template>
   <div class="app">
     <NavBar>
-      <NavBarLink to="/" text="Commande" />
-      <NavBarLink to="/informations" text="Allèrgenes" />
+      <NavBarLink to="/" text="Retour" />
     </NavBar>
     <main class="main">
       <slot />
