@@ -40,6 +40,9 @@ const toggleNav = () => {
   @apply h-14 fill-current;
 }
 .toggleIcon {
-  @apply w-10 h-10 fill-current text-black hover:text-primary focus:text-primary;
+  @apply w-10 h-10 fill-current text-primary rounded-md border-2 border-transparent;
+  &:hover {
+    @apply text-white bg-primary;
+  }
 }
 </style>
