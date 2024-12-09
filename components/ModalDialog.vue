@@ -1,50 +1,55 @@
 <script setup>
 defineProps({
-  show: Boolean
-})
+  show: Boolean,
+});
 </script>
 
 <template>
-    <Transition name="modal">
-      <div v-if="show" class="modal-mask">
-        <div class="modal-container">
-          <div class="modal-header">
-            <slot name="header">Sample Test</slot>
-          </div>
-          <div class="modal-body">
-            <slot name="body">Body of modal dialog</slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              <button
-                class="modal-default-button"
-                @click="$emit('close')"
-              >OK</button>
-            </slot>
-          </div>
+  <Transition name="modal">
+    <div v-if="show" class="modal-mask">
+      <div class="modal-container">
+        <div class="modal-header">
+          <slot name="header">Sample Test</slot>
+        </div>
+        <div class="modal-body">
+          <slot name="body">Body of modal dialog</slot>
+        </div>
+        <div class="modal-footer">
+          <slot name="footer">
+            <button class="modal-default-button" @click="$emit('close')">
+              OK
+            </button>
+          </slot>
         </div>
       </div>
-    </Transition>
-  </template>
+    </div>
+  </Transition>
+</template>
 
 <style lang="postcss">
 .modal-mask {
-    @apply fixed z-auto top-0 left-0 w-full h-full bg-gray-300 bg-opacity-60 flex transition-opacity;
+  @apply fixed z-auto top-0 left-0 w-full h-full bg-gray-300 bg-opacity-60 flex transition-opacity;
 }
 .modal-container {
-    @apply m-auto w-80 p-5 bg-white border-2 rounded-lg shadow-sm transition-all;
+  @apply m-auto w-80 p-5 bg-white border-2 rounded-lg shadow-sm transition-all;
 }
 .modal-header h3 {
-    @apply mt-0 bg-secondComplementary py-2 text-center text-white rounded-lg font-bold
+  @apply mt-0 bg-secondComplementary py-2 text-center text-white rounded-lg font-bold;
 }
 .modal-body {
-    @apply m-5 overflow-y-scroll
+  @apply m-5 overflow-y-scroll;
 }
-.modal-footer{
-  @apply flex justify-end
+.modal-footer {
+  @apply flex justify-center;
 }
 .modal-default-button {
-  @apply px-3 border-2 border-secondComplementary rounded-lg text-white  bg-secondComplementary
+  @apply w-1/2 border-2 border-secondComplementary rounded-lg text-white  bg-secondComplementary;
+  &:hover {
+    @apply bg-white text-secondComplementary;
+  }
+  &:active {
+    @apply bg-secondComplementary text-white;
+  }
 }
 /*
  * The following styles are auto-applied to elements with
