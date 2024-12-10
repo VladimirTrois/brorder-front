@@ -67,7 +67,6 @@
 <script setup>
 definePageMeta({
   layout: "admin",
-  //middleware: "auth", // this should match the name of the file inside the middleware directory
 });
 useSeoMeta({
   title: "Login",

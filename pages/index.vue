@@ -1,5 +1,5 @@
 <template>
-  <span v-if="status === 'pending'">Loading...</span>
+  <span v-if="status === 'pending'">{{ status }}</span>
   <span v-else-if="data">
     <LazyForm :productsToSell="data.member" />
   </span>
@@ -7,7 +7,8 @@
 </template>
 
 <script setup>
-const { data, status, error, refresh, clear } = await useFetch(
-  import.meta.env.VITE_API_URL + "/products?page=1"
-);
+const { getCollection } = useProducts();
+const page = 1;
+const { data, status, error, refresh, clear } = await getCollection(page);
+console.log(data, status, error, refresh, clear);
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <form class="loginForm" action="">
+  <form class="loginForm" id="adminLoginForm" @submit.prevent="handleSubmit">
     <h1 class="text-center font-bold">Login to admin</h1>
     <Input
       class="inputLogin"
@@ -22,7 +22,9 @@
       v-model="user.password"
       :error="errors.name"
     />
-    <button @click.prevent="login" class="buttonLogin">Login</button>
+    <button type="submit" form="adminLoginForm" class="buttonLogin">
+      Login
+    </button>
   </form>
 </template>
 
@@ -43,7 +45,7 @@ const errors = reactive({
   password: "",
 });
 
-const login = async () => {
+const handleSubmit = async () => {
   // TODO send user Data to the login endpoint and redirect if successful
 };
 </script>

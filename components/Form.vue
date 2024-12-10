@@ -6,7 +6,7 @@
       Le pain est à récupérer entre 8h30 et 11h.<br />
       <i>Bread is available from 8.30am to 11am</i>
     </p>
-    <form class="form" id="breadForm" @submit.prevent="handleFormSubmit">
+    <form class="form" id="breadForm">
       <Input
         id="Name"
         placeHolder="Nom / Name"
@@ -54,7 +54,8 @@ const showItems = ref();
 const props = defineProps({
   productsToSell: Object,
 });
-const order = useOrder();
+const { resetOrder, loadOrder } = useCreateOrder();
+const order = resetOrder();
 const errors = reactive({
   name: "",
   pitch: "",
@@ -63,48 +64,10 @@ const errors = reactive({
 
 const closeModal = () => {
   showModal.value = false;
-  resetOrder();
+  //resetOrder();
 };
 
 provide("productsToSell", props.productsToSell);
-
-const isFormValid = () => {
-  //check Name
-  const regexName = new RegExp("[A-Za-z][A-Za-z0-9_]{1,29}");
-  errors.name = !order.value.name
-    ? "This field is required."
-    : !regexName.test(order.value.name)
-    ? "Invalid."
-    : "";
-  if (errors.name !== "") {
-    return false;
-  }
-
-  //check Pitch
-  const regexPitch = new RegExp("^[A-Za-z][0-9][0-9]$");
-  const regexPitchSmall = new RegExp("^[A-Za-z][1-9]$");
-  order.value.pitch = regexPitchSmall.test(order.value.pitch)
-    ? insertInString(order.value.pitch, 1, "0")
-    : order.value.pitch;
-
-  errors.pitch = !order.value.pitch
-    ? "This field is required"
-    : !regexPitch.test(order.value.pitch)
-    ? "Invalid"
-    : "";
-  if (errors.pitch !== "") {
-    return false;
-  }
-
-  //check Items
-  errors.items = order.value.items.length > 0 ? "" : "This field is required";
-  if (errors.items !== "") {
-    return false;
-  }
-
-  //No errors then form is valid
-  return true;
-};
 
 async function handleFormSubmit() {
   if (isFormValid()) {
@@ -112,36 +75,12 @@ async function handleFormSubmit() {
     order.value.items.map((a) => {
       a["product"] = a["@id"];
     });
-
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/ld+json",
-        "content-type": "application/ld+json",
-      },
-      body: order.value,
-    };
-
-    try {
-      const response = await $fetch(
-        import.meta.env.VITE_API_URL + "/orders",
-        requestOptions
-      );
-      if (response) {
-        showItems.value = response.items;
-        showModal.value = true;
-      }
-    } catch (err) {
-      console.error(err);
+    const response = await loadOrder();
+    if (response) {
+      showItems.value = response.items;
+      showModal.value = true;
     }
   }
-}
-
-function resetOrder() {
-  order.value.name = "";
-  order.value.pitch = "";
-  order.value.items = [];
-  order.value.pickUpDate = "";
 }
 </script>
 

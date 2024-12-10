@@ -1,5 +1,5 @@
 <template>
-  <button class="buttonSubmit" @click="click" :form="form" type="submit">
+  <button class="buttonSubmit" :form="form" type="submit">
     {{ text }}
   </button>
 </template>
