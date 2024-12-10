@@ -13,13 +13,18 @@
     "@nuxt/fonts": "^0.10.2",
     "@nuxt/image": "^1.8.1",
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/colada-nuxt": "^0.0.4",
+    "@pinia/nuxt": "^0.9.0",
     "nuxt": "^3.14.159",
+    "nuxt-auth-utils": "^0.5.6",
     "nuxt-svgo": "^4.0.9",
+    "pinia": "^2.3.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "nuxt-open-fetch": "^0.9.5",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15"
   }

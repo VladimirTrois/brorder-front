@@ -42,7 +42,6 @@
 </template>
 
 <script setup>
-import BinSVG from "@/assets/icons/Bin.vue";
 const order = useOrder();
 
 const computeTotal = (arrayOfProduct) => {

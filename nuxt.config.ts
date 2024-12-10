@@ -27,7 +27,16 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/fonts', '@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-svgo'],
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/image',
+    '@nuxtjs/tailwindcss',
+    'nuxt-svgo',
+    'nuxt-open-fetch',
+    '@pinia/nuxt',
+    '@pinia/colada-nuxt',
+    'nuxt-auth-utils'
+  ],
   image: {
     // You can customize the image settings here if needed
   },
@@ -39,6 +48,14 @@ export default defineNuxtConfig({
     ],
     defaults: {
       styles: ['normal'],
+    }
+  },
+  openFetch: {
+    clients: {
+      brorder: {
+        schema: process.env.API_SCHEMA_URL,
+        baseURL: process.env.API_BASE_URl
+      }
     }
   }
 })

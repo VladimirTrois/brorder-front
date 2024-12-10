@@ -1,9 +1,3 @@
-<script setup>
-defineProps({
-  show: Boolean,
-});
-</script>
-
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
@@ -25,6 +19,12 @@ defineProps({
     </div>
   </Transition>
 </template>
+
+<script setup>
+defineProps({
+  show: Boolean,
+});
+</script>
 
 <style lang="postcss">
 .modal-mask {

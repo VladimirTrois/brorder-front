@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1 class="h1">Commande de pain - Bread Order</h1>
-    <h2 class="h2"><DateOfTomorrow /></h2>
+    <h2 class="h2"><LazyDateOfTomorrow /></h2>
     <p>
       Le pain est à récupérer entre 8h30 et 11h.<br />
       <i>Bread is available from 8.30am to 11am</i>
     </p>
-    <form class="form" id="breadForm">
+    <form class="form" id="breadForm" @submit.prevent="handleFormSubmit">
       <Input
-        id="Name"
+        id="name"
         placeHolder="Nom / Name"
         @change="errors.name = ''"
         @focus="errors.name = ''"
@@ -17,7 +17,7 @@
         :error="errors.name"
       />
       <Input
-        id="Pitch"
+        id="pitch"
         placeHolder="Emplacement / Pitch"
         @change="errors.pitch = ''"
         @focus="errors.pitch = ''"
@@ -25,35 +25,21 @@
         v-model="order.pitch"
         :error="errors.pitch"
       />
-      <FormGrid />
-      <FormSubmit text="Commander" form="breadForm" />
+      <FormProductGrid id="items" />
+      <FormModal id="modal" :show="showModal" @close="closeModal"></FormModal>
+      <FormSubmit id="submit" text="Commander" form="breadForm" />
     </form>
-    <Teleport to="body">
-      <ModalDialog :show="showModal" @close="closeModal()">
-        <template #header>
-          <h3>Success</h3>
-        </template>
-        <template #body>
-          <h4>Your order :</h4>
-          <h5 v-for="item in showItems" :key="item.product.name">
-            {{ item.quantity }} x {{ item.product.name }}
-          </h5>
-        </template>
-      </ModalDialog>
-    </Teleport>
   </div>
 </template>
 
 <script setup>
 import { getTomorrowsDateFormatted } from "~/functions/date";
-import { insertInString } from "~/functions/string";
+import { useProductStore } from "~/stores/ProductStore";
+const productStore = useProductStore();
+productStore.getProducts();
 
 const showModal = ref(false);
 const showItems = ref();
-
-const props = defineProps({
-  productsToSell: Object,
-});
 const { resetOrder, loadOrder } = useCreateOrder();
 const order = resetOrder();
 const errors = reactive({
@@ -67,10 +53,10 @@ const closeModal = () => {
   //resetOrder();
 };
 
-provide("productsToSell", props.productsToSell);
-
 async function handleFormSubmit() {
-  if (isFormValid()) {
+  showModal.value = true;
+
+  if (useOrder().isFormValid()) {
     order.value.pickUpDate = getTomorrowsDateFormatted();
     order.value.items.map((a) => {
       a["product"] = a["@id"];
