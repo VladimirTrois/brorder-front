@@ -61,7 +61,7 @@ const totalPrice = computed(() => computeTotal(order.value.items));
 .tableContainer {
   @apply relative flex flex-col w-full h-full overflow-scroll text-sm md:text-base rounded-lg border-2;
   &:hover {
-    @apply border-primary;
+    @apply border-dark_accent;
   }
 }
 .table {
@@ -84,12 +84,12 @@ td {
   @apply pl-2;
 }
 .binFooter {
-  @apply h-full border border-transparent rounded text-secondary;
+  @apply h-full border border-transparent rounded text-dark_shades;
   &:hover {
-    @apply bg-secondary text-white;
+    @apply bg-dark_shades text-white;
   }
   &:active {
-    @apply bg-white text-secondary;
+    @apply bg-white text-dark_shades;
   }
 }
 </style>

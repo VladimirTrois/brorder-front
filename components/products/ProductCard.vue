@@ -19,7 +19,7 @@ defineProps({
 .productContainer {
   @apply w-28 md:w-32 inline p-1 static float-start rounded-lg justify-center place-items-center;
   &:hover {
-    @apply bg-gray-200 border border-primary;
+    @apply bg-gray-200 border border-dark_accent;
   }
   &:active {
     @apply border-transparent;

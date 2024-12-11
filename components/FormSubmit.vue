@@ -13,12 +13,12 @@ defineProps({
 
 <style lang="postcss">
 .buttonSubmit {
-  @apply bg-white text-lg md:text-xl m-2 p-1 px-5 rounded-md border-secondary border-2 text-secondary;
+  @apply bg-white text-lg md:text-xl m-2 p-1 px-5 rounded-md border-dark_shades border-2 text-dark_shades;
   &:hover {
-    @apply bg-secondary text-white border-white;
+    @apply bg-dark_shades text-white border-white;
   }
   &:active {
-    @apply bg-primary;
+    @apply bg-dark_accent;
   }
 }
 </style>

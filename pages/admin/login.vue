@@ -36,6 +36,9 @@ useSeoMeta({
   title: "Login",
 });
 
+const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
+const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+
 const user = ref({
   username: "",
   password: "",
@@ -46,7 +49,13 @@ const errors = reactive({
 });
 
 const handleSubmit = async () => {
-  // TODO send user Data to the login endpoint and redirect if successful
+  console.log("Submit");
+  console.log(user.value);
+  await authenticateUser(user.value); // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+  if (authenticated) {
+    router.push("/");
+  }
 };
 </script>
 
@@ -58,12 +67,12 @@ const handleSubmit = async () => {
   @apply m-auto my-4;
 }
 .buttonLogin {
-  @apply block m-auto bg-primary text-white text-base font-bold uppercase py-3 rounded-md shadow hover:shadow-lg outline-none w-1/2;
+  @apply block m-auto bg-dark_accent text-white text-base font-bold uppercase py-3 rounded-md shadow hover:shadow-lg outline-none w-1/2;
   &:hover {
     @apply bg-primComplementary;
   }
   &:active {
-    @apply bg-primary;
+    @apply bg-dark_accent;
   }
 }
 </style>

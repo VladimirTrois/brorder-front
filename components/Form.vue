@@ -1,35 +1,33 @@
 <template>
-  <div>
+  <form class="form" id="breadForm" @submit.prevent="handleFormSubmit">
     <h1 class="h1">Commande de pain - Bread Order</h1>
     <h2 class="h2"><LazyDateOfTomorrow /></h2>
     <p>
       Le pain est à récupérer entre 8h30 et 11h.<br />
       <i>Bread is available from 8.30am to 11am</i>
     </p>
-    <form class="form" id="breadForm" @submit.prevent="handleFormSubmit">
-      <Input
-        id="name"
-        placeHolder="Nom / Name"
-        @change="errors.name = ''"
-        @focus="errors.name = ''"
-        @click="errors.name = ''"
-        v-model="order.name"
-        :error="errors.name"
-      />
-      <Input
-        id="pitch"
-        placeHolder="Emplacement / Pitch"
-        @change="errors.pitch = ''"
-        @focus="errors.pitch = ''"
-        @click="errors.pitch = ''"
-        v-model="order.pitch"
-        :error="errors.pitch"
-      />
-      <FormProductGrid id="items" />
-      <FormModal id="modal" :show="showModal" @close="closeModal"></FormModal>
-      <FormSubmit id="submit" text="Commander" form="breadForm" />
-    </form>
-  </div>
+    <Input
+      id="name"
+      placeHolder="Nom / Name"
+      @change="errors.name = ''"
+      @focus="errors.name = ''"
+      @click="errors.name = ''"
+      v-model="order.name"
+      :error="errors.name"
+    />
+    <Input
+      id="pitch"
+      placeHolder="Emplacement / Pitch"
+      @change="errors.pitch = ''"
+      @focus="errors.pitch = ''"
+      @click="errors.pitch = ''"
+      v-model="order.pitch"
+      :error="errors.pitch"
+    />
+    <FormProductGrid id="items" />
+    <FormModal id="modal" :show="showModal" @close="closeModal"></FormModal>
+    <FormSubmit id="submit" text="Commander" form="breadForm" />
+  </form>
 </template>
 
 <script setup>
@@ -72,6 +70,6 @@ async function handleFormSubmit() {
 
 <style lang="postcss">
 .form {
-  @apply text-sm md:text-xl lg:text-2xl bg-transparent shadow-md rounded px-2 pt-4 pb-4 mb-4;
+  @apply text-sm md:text-xl lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded p-2 md:p-4;
 }
 </style>

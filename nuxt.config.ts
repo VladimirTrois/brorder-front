@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     'nuxt-open-fetch',
     '@pinia/nuxt',
     '@pinia/colada-nuxt',
-    'nuxt-auth-utils'
+    'nuxt-auth-utils',
+    '@nuxtjs/color-mode'
   ],
   image: {
     // You can customize the image settings here if needed
@@ -57,5 +58,8 @@ export default defineNuxtConfig({
         baseURL: process.env.API_BASE_URl
       }
     }
+  },
+  colorMode: {
+    classSuffix:''
   }
 })

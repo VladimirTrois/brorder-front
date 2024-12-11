@@ -34,7 +34,7 @@ defineProps({
   @apply m-auto w-80 p-5 bg-white border-2 rounded-lg shadow-sm transition-all;
 }
 .modal-header h3 {
-  @apply mt-0 bg-secondComplementary py-2 text-center text-white rounded-lg font-bold;
+  @apply mt-0 bg-light_shades py-2 text-center text-white rounded-lg font-bold;
 }
 .modal-body {
   @apply m-5 overflow-y-scroll;
@@ -43,12 +43,12 @@ defineProps({
   @apply flex justify-center;
 }
 .modal-default-button {
-  @apply w-1/2 border-2 border-secondComplementary rounded-lg text-white  bg-secondComplementary;
+  @apply w-1/2 border-2 border-light_shades rounded-lg text-white  bg-light_shades;
   &:hover {
-    @apply bg-white text-secondComplementary;
+    @apply bg-white text-light_shades;
   }
   &:active {
-    @apply bg-secondComplementary text-white;
+    @apply bg-light_shades text-white;
   }
 }
 /*
