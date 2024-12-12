@@ -11,7 +11,7 @@ export const useOrderStore = defineStore("OrderStore",{
     //actions
     actions:{
         async getOrders(){
-            this.products = (await useBrorder("/api/orders")).data.value.member;
+            this.orders = (await useBrorder("/api/orders")).data.value.member;
         }
     }
 

@@ -1,14 +1,8 @@
 <template>
   <NuxtLink class="navBarLink">
-    {{ text }}
+    <slot />
   </NuxtLink>
 </template>
-
-<script setup>
-defineProps({
-  text: String,
-});
-</script>
 
 <style lang="postcss">
 .navBarLink {

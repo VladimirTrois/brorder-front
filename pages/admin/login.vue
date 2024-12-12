@@ -1,30 +1,29 @@
 <template>
   <form class="loginForm" id="adminLoginForm" @submit.prevent="handleSubmit">
-    <h1 class="text-center font-bold">Login to admin</h1>
-    <Input
+    <h1 class="text-center text-light_shades font-semibold">BRORDER</h1>
+    <InputAdmin
       class="inputLogin"
-      :id="username"
+      id="username"
       placeHolder="Username"
-      @change="errors.name = ''"
-      @focus="errors.name = ''"
-      @click="errors.name = ''"
       v-model="user.username"
-      :error="errors.name"
+      :error="errors.username"
+      @reset="errors.username = ''"
     />
-    <Input
+    <InputAdmin
       class="inputLogin"
-      :id="password"
+      id="password"
       type="password"
       placeHolder="Password"
-      @change="errors.name = ''"
-      @focus="errors.name = ''"
-      @click="errors.name = ''"
       v-model="user.password"
-      :error="errors.name"
+      :error="errors.password"
+      @reset="errors.password = ''"
     />
     <button type="submit" form="adminLoginForm" class="buttonLogin">
       Login
     </button>
+    <div class="error" v-if="errors.login">
+      <span>{{ errors.login }}</span>
+    </div>
   </form>
 </template>
 
@@ -36,44 +35,43 @@ useSeoMeta({
   title: "Login",
 });
 
+const authStore = useAuthStore();
 const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-
-const user = ref({
-  username: "",
-  password: "",
-});
-const errors = reactive({
-  username: "",
-  password: "",
-});
+const { user, authenticated, errors } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+const router = useRouter();
 
 const handleSubmit = async () => {
-  console.log("Submit");
-  console.log(user.value);
-  await authenticateUser(user.value); // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
-  if (authenticated) {
-    router.push("/");
+  if (authStore.isUserValid()) {
+    await authenticateUser(user);
+    // await authenticateUser(user); // call authenticateUser and pass the user object
+    // redirect to homepage if user is authenticated
+    if (authenticated.value) {
+      console.log("authenticated");
+      router.push("/admin");
+    }
   }
 };
 </script>
 
 <style lang="postcss">
 .loginForm {
-  @apply m-auto sm:w-1/2 px-2 pt-4 pb-4;
+  @apply mt-10 p-6 bg-primary_mono rounded-lg shadow-lg shadow-primary_a50;
 }
 .inputLogin {
-  @apply m-auto my-4;
+  @apply m-auto my-4 rounded-lg;
 }
 .buttonLogin {
-  @apply block m-auto bg-dark_accent text-white text-base font-bold uppercase py-3 rounded-md shadow hover:shadow-lg outline-none w-1/2;
+  @apply block mt-4 m-auto text-base font-bold uppercase py-1 rounded-md outline-none w-1/2 border-4
+  shadow-primary bg-second text-light_shades border-second;
   &:hover {
-    @apply bg-primComplementary;
+    @apply bg-primary text-second;
   }
   &:active {
-    @apply bg-dark_accent;
+    @apply bg-second text-light_shades;
   }
+}
+.error {
+  @apply mt-4 py-1 text-light_shades rounded-lg text-center font-extrabold bg-second;
 }
 </style>
 

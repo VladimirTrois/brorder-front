@@ -8,4 +8,6 @@ npx nuxi@latest module add pinia
 npx nuxi module add @pinia/colada-nuxt
 npx nuxi@latest module add auth-utils
 npx nuxi module add color-mode
+npx nuxi module add icon
+
 

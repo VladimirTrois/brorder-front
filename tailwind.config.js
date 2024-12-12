@@ -23,7 +23,7 @@ export default {
         dark_accent:'rgb(var(--color-primary))',
 
         primary_mono: 'rgb(var(--color-primary-mono))',
-        secondary_mono: 'rgb(var(--color-second-mono))',
+        second_mono: 'rgb(var(--color-second-mono))',
 
         primary_a5: 'rgb(var(--color-primary-a5))',
         primary_a10: 'rgb(var(--color-primary-a10))',

@@ -1,7 +1,7 @@
 <template>
-  <div class="formInput group">
+  <div class="InputContainer group">
     <input
-      class="formInputText peer"
+      class="Input peer"
       autocomplete="off"
       :type="type"
       @click="click"
@@ -11,7 +11,7 @@
       placeholder=" "
     />
     <label v-if="error" class="error">{{ error }}</label>
-    <label v-else class="formInputLabel">{{ placeHolder }}</label>
+    <label v-else class="InputLabel">{{ placeHolder }}</label>
 
     <!--This fieldset+legend is used for when the border and notch transition-->
     <fieldset
@@ -26,7 +26,7 @@
     </fieldset>
     <fieldset
       v-else
-      class="inset-0 absolute border border-gray-300 rounded-lg pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible group-focus-within:!border-main group-focus-within:border-2 group-hover:border-main group-hover:border-10"
+      class="inset-0 absolute border border-gray-300 rounded-lg pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible group-focus-within:!border-main group-focus-within:border-2 group-hover:border-main group-hover:border-1"
     >
       <legend
         class="ml-2 px-0 text-xs transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap"
@@ -69,15 +69,15 @@ const model = defineModel();
 </script>
 
 <style lang="postcss">
-.formInput {
+.InputContainer {
   @apply relative m-2 max-w-[fit-content];
 }
 
-.formInputText {
-  @apply outline-none px-3 py-3 rounded-lg;
+.Input {
+  @apply outline-none px-3 py-3 rounded-lg bg-primary_mono border-primary_mono;
 }
 
-.formInputLabel {
+.InputLabel {
   @apply absolute left-[9px] top-px text-xs text-black transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
         peer-placeholder-shown:top-1/2
         peer-placeholder-shown:text-sm
