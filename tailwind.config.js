@@ -2,25 +2,25 @@
 
 export default {
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-    "./error.vue",
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './app.vue',
+    './error.vue',
   ],
   darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        robotoSlab: ['"Roboto Slab"'],
-      },
+      // fontFamily: {
+      //   robotoSlab: ['"Roboto Slab"'],
+      // },
       colors: {
-        light_shades:'rgb(var(--color-light-shades))',
-        light_accent:'rgb(var(--color-light-accent))',
+        light_shades: 'rgb(var(--color-light-shades))',
+        light_accent: 'rgb(var(--color-light-accent))',
         main: 'rgb(var(--color-main))',
-        dark_shades:'rgb(var(--color-dark-shades))',
-        dark_accent:'rgb(var(--color-primary))',
+        dark_shades: 'rgb(var(--color-dark-shades))',
+        dark_accent: 'rgb(var(--color-primary))',
 
         primary_mono: 'rgb(var(--color-primary-mono))',
         second_mono: 'rgb(var(--color-second-mono))',
@@ -29,12 +29,12 @@ export default {
         primary_a10: 'rgb(var(--color-primary-a10))',
         primary_a15: 'rgb(var(--color-primary-a15))',
         primary_a20: 'rgb(var(--color-primary-a20))',
-        primary_a25: 'rgb(var(--color-primary-a25))', 
-        primary: 'rgb(var(--color-primary))', 
-        primary_a35: 'rgb(var(--color-primary-a35))', 
-        primary_a40: 'rgb(var(--color-primary-a40))', 
-        primary_a45: 'rgb(var(--color-primary-a45))', 
-        primary_a50: 'rgb(var(--color-primary-a50))', 
+        primary_a25: 'rgb(var(--color-primary-a25))',
+        primary: 'rgb(var(--color-primary))',
+        primary_a35: 'rgb(var(--color-primary-a35))',
+        primary_a40: 'rgb(var(--color-primary-a40))',
+        primary_a45: 'rgb(var(--color-primary-a45))',
+        primary_a50: 'rgb(var(--color-primary-a50))',
         primary_a55: 'rgb(var(--color-primary-a55))',
         second_a5: 'rgb(var(--color-second-a5))',
         second_a10: 'rgb(var(--color-second-a10))',
@@ -54,13 +54,12 @@ export default {
         secondComp_a25: 'rgb(var(--color-secondComp-a25))',
         secondComp: 'rgb(var(--color-secondComp))',
         secondComp_a35: 'rgb(var(--color-secondComp-a35))',
-        secondComp_a40: 'rgb(var(--color-secondComp-a40))', 
-        secondComp_a45: 'rgb(var(--color-secondComp-a45))', 
-        secondComp_a50: 'rgb(var(--color-secondComp-a50))', 
+        secondComp_a40: 'rgb(var(--color-secondComp-a40))',
+        secondComp_a45: 'rgb(var(--color-secondComp-a45))',
+        secondComp_a50: 'rgb(var(--color-secondComp-a50))',
         secondComp_a55: 'rgb(var(--color-secondComp-a55))',
       },
     },
   },
   plugins: [],
-}
-
+};

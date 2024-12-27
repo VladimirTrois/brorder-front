@@ -2,14 +2,20 @@
   <div class="app">
     <NavBar>
       <NavBarLink to="/admin" text="Aujourd'hui" />
-      <NavBarLink to="/admin/commandes" text="Commandes" />
+      <NavBarLink to="/admin/orders" text="Commandes" />
       <NavBarLink to="/admin/products" text="Produits" />
       <NavBarLink to="/admin/stats" text="Statistique" />
-      <a href="/admin/login">
-        <button class="logoutBtn group" @click="logout">
-          <Icon class="logoutIcon" name="hugeicons:logout-05" size="2em" />
-        </button>
-      </a>
+      <div class="w-full flex justify-end">
+        <a href="/admin/login">
+          <IconButton
+            class="logoutBtn"
+            color="primary"
+            size="10"
+            name="material-symbols:logout"
+            @click="logout"
+          />
+        </a>
+      </div>
     </NavBar>
     <main class="main">
       <slot />
@@ -20,7 +26,8 @@
 
 <script setup>
 import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
-import { useAuthStore } from "~/stores/auth"; // import the auth store we just created
+import { useAuth } from "~/composables/useAuth";
+const { logout } = useAuth();
 const colorMode = useColorMode();
 const toggleColorMode = () => {
   colorMode.preference === "dark"
@@ -30,38 +37,26 @@ const toggleColorMode = () => {
 
 const router = useRouter();
 const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-
-const logout = () => {
-  logUserOut();
-  router.push("/login");
-};
 </script>
 
 <style lang="postcss">
 .app {
-  @apply bg-light_shades;
+  @apply bg-light_shades mx-auto h-screen flex flex-col flex-1;
 }
 .main {
-  @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-light_shades;
+  @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;
 }
-.h1 {
+h1 {
   @apply text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold leading-none tracking-tight;
 }
-.h2 {
+h2 {
   @apply text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight;
 }
-.logoutBtn {
-  @apply m-1 px-1 pt-1 float-end rounded-lg text-light_shades;
-  &:hover {
-    @apply bg-light_shades text-primary;
-  }
-  &:active {
-    @apply bg-transparent;
-  }
+h3 {
+  @apply text-base sm:text-xl md:text-2xl lg:text-3xl tracking-tight;
 }
-.logoutIcon {
-  @apply bg-light_shades group-hover:bg-primary group-active:bg-light_shades;
+.logoutBtn {
+  @apply m-1 px-1 pt-1 rounded-lg;
 }
 
 footer {

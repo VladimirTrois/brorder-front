@@ -24,7 +24,7 @@ const toggleTheme = () => {
 };
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .theme-icon {
   @apply w-7 h-7 cursor-pointer transition-transform duration-100;
 }

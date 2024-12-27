@@ -1,11 +1,11 @@
 <template>
-  <form class="loginForm" id="adminLoginForm" @submit.prevent="handleSubmit">
+  <form class="loginForm" id="adminLoginForm" @submit.prevent="handleLogin">
     <h1 class="text-center text-light_shades font-semibold">BRORDER</h1>
     <InputAdmin
       class="inputLogin"
       id="username"
       placeHolder="Username"
-      v-model="user.username"
+      v-model="credentials.username"
       :error="errors.username"
       @reset="errors.username = ''"
     />
@@ -14,7 +14,7 @@
       id="password"
       type="password"
       placeHolder="Password"
-      v-model="user.password"
+      v-model="credentials.password"
       :error="errors.password"
       @reset="errors.password = ''"
     />
@@ -35,25 +35,28 @@ useSeoMeta({
   title: "Login",
 });
 
-const authStore = useAuthStore();
-const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
-const { user, authenticated, errors } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-const router = useRouter();
+import { useAuth } from "~/composables/useAuth";
 
-const handleSubmit = async () => {
-  if (authStore.isUserValid()) {
-    await authenticateUser(user);
-    // await authenticateUser(user); // call authenticateUser and pass the user object
-    // redirect to homepage if user is authenticated
-    if (authenticated.value) {
-      console.log("authenticated");
-      router.push("/admin");
-    }
+const { login } = useAuth();
+const credentials = reactive({
+  username: "",
+  password: "",
+});
+const errors = reactive({
+  username: "",
+  password: "",
+  login: "",
+});
+const handleLogin = async () => {
+  if (await login(credentials)) {
+    navigateTo("/admin");
+  } else {
+    // Handle login error
   }
 };
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .loginForm {
   @apply mt-10 p-6 bg-primary_mono rounded-lg shadow-lg shadow-primary_a50;
 }

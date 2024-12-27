@@ -17,5 +17,6 @@
 <script setup>
 defineProps({
   show: Boolean,
+  order: Object,
 });
 </script>

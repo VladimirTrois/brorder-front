@@ -5,7 +5,7 @@
     </div>
     <div class="md:col-span-3">
       <LazyProductCard
-        v-for="p in productStore.products"
+        v-for="p in collectionProduct.productsFromCurrentPage"
         :key="p.name"
         :product="p"
         @click="addProduct(p)"
@@ -15,9 +15,9 @@
 </template>
 
 <script setup>
-import { useProductStore } from "~/stores/ProductStore";
-const productStore = useProductStore();
-productStore.getProducts();
+import { useCollectionProduct } from "~/stores/collectionProduct";
+const collectionProduct = useCollectionProduct();
+collectionProduct.fetchProducts();
 const order = useOrder();
 
 const addProduct = (product) => {

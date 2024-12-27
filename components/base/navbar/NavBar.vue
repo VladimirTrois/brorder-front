@@ -5,10 +5,16 @@
         <img src="/img/Logo.svg" alt="Logo" class="logo" />
       </div>
       <div class="sm:hidden">
-        <button type="button" @click="toggleNav">
-          <SvgoBurgerMenu v-if="!isOpen" class="toggleIcon" />
-          <SvgoX v-else class="toggleIcon" />
-        </button>
+        <IconButton
+          v-if="isOpen"
+          name="material-symbols:close-rounded"
+          @click="toggleNav"
+        />
+        <IconButton
+          v-else
+          name="material-symbols:menu-rounded"
+          @click="toggleNav"
+        />
       </div>
     </div>
     <div class="drawer" :class="isOpen ? 'block' : 'hidden'">
@@ -34,7 +40,7 @@ const toggleNav = () => {
   @apply flex items-center justify-between px-5 py-2 sm:p-0;
 }
 .drawer {
-  @apply px-3 sm:flex sm:p-0;
+  @apply w-full px-3 sm:flex sm:p-0 sm:items-center mb-3 sm:mb-0;
 }
 .logo {
   @apply h-14 fill-current;

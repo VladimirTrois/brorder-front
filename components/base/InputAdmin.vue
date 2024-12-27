@@ -45,19 +45,20 @@ div {
 }
 
 input {
-  @apply block outline-none px-3 py-3 rounded-lg bg-primary_mono border-2 border-primary 
-  group-hover:border-primary_a45
-  group-focus-within:!border-primary_a45;
+  @apply block outline-none px-3 py-3 rounded-lg bg-transparent border-2 border-primary 
+  group-hover:border-light_shades
+  group-focus-within:!border-primary;
 }
 label {
-  @apply absolute left-[9px] top-px text-xs transition-all duration-300 px-1 transform -translate-y-1/2 peer-placeholder-shown:top-1/2 
+  @apply absolute left-[9px] top-px text-xs transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+  peer-placeholder-shown:top-1/2 
   peer-placeholder-shown:text-sm 
   group-focus-within:!top-px 
   group-focus-within:!text-sm;
 }
 
 .textLabel {
-  @apply text-light_shades group-focus-within:!text-main;
+  @apply text-light_shades group-focus-within:!text-primary;
 }
 .inputError {
   @apply text-second_a25 bottom-2;

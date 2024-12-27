@@ -1,31 +1,44 @@
-const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+import { format } from 'date-fns';
 
-function capitalizeEachWord(sentence){
-    const words = sentence.split(" ");
-    for (let i = 0; i < words.length; i++) {
-        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-    }
+const weekday = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
-    sentence = words.join(" ");
-    return sentence;
+function capitalizeEachWord(sentence) {
+  const words = sentence.split(' ');
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+  }
+
+  sentence = words.join(' ');
+  return sentence;
 }
 
-function getTomorrowsDate() {
-    let date = new Date();
-    date.setDate(date.getDate() + 1);
-    return date;
+export function todayDate() {
+  const todayDate = new Date();
+  return todayDate;
 }
 
-export function getTomorrowsDateFormatted() {
-    return getTomorrowsDate().toISOString().split('T')[0]
+//return tomorrow's date
+export function tomorrowDate() {
+  let date = new Date();
+  date.setDate(date.getDate() + 1);
+  return date;
 }
 
-export function getTomorrowString(){
-    let options = { weekday: 'long', month: 'long', day: 'numeric' };
+//format date to YYYY-MM-DD
+export function formatDate(date) {
+  return format(date, 'yyyy-MM-dd');
+}
 
-    const tomorrow = getTomorrowsDate();
-    const tomorrowString = tomorrow.toLocaleDateString('fr-FR', options);
-
-
-    return capitalizeEachWord(tomorrowString);
+export function getDateWritten(date) {
+  let options = { weekday: 'long', month: 'long', day: 'numeric' };
+  const dateString = date.toLocaleDateString('fr-FR', options);
+  return capitalizeEachWord(dateString);
 }

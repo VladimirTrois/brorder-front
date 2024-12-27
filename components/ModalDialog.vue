@@ -2,7 +2,7 @@
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
       <div class="modal-container">
-        <div class="modal-header">
+        <div :class="['modal-header', colorClasses]">
           <slot name="header">Sample Test</slot>
         </div>
         <div class="modal-body">
@@ -10,9 +10,13 @@
         </div>
         <div class="modal-footer">
           <slot name="footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              OK
-            </button>
+            <Button
+              class="modal-default-button"
+              :color="color"
+              @click="$emit('close')"
+            >
+              Fermer
+            </Button>
           </slot>
         </div>
       </div>
@@ -21,35 +25,45 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   show: Boolean,
+  color: {
+    type: String,
+    default: "primary",
+  },
+});
+
+const colorClasses = computed(() => {
+  switch (props.color) {
+    case "primary":
+      return "bg-primary";
+    case "second":
+      return "bg-second";
+    // Add more color options as needed
+    default:
+      return "bg-primary_mono";
+  }
 });
 </script>
 
 <style lang="postcss">
 .modal-mask {
-  @apply fixed z-auto top-0 left-0 w-full h-full bg-gray-300 bg-opacity-60 flex transition-opacity;
+  @apply z-50 fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-60 flex transition-opacity;
 }
 .modal-container {
-  @apply m-auto w-80 p-5 bg-white border-2 rounded-lg shadow-sm transition-all;
+  @apply m-auto w-80 md:w-96  p-5 bg-light_shades border-2 rounded-lg shadow-sm transition-all;
+  &:hover {
+    @apply border-primary;
+  }
 }
-.modal-header h3 {
-  @apply mt-0 bg-light_shades py-2 text-center text-white rounded-lg font-bold;
+.modal-header {
+  @apply mt-0 py-2 text-center text-light_shades rounded-lg font-bold;
 }
 .modal-body {
   @apply m-5 overflow-y-scroll;
 }
 .modal-footer {
   @apply flex justify-center;
-}
-.modal-default-button {
-  @apply w-1/2 border-2 border-light_shades rounded-lg text-white  bg-light_shades;
-  &:hover {
-    @apply bg-white text-light_shades;
-  }
-  &:active {
-    @apply bg-light_shades text-white;
-  }
 }
 /*
  * The following styles are auto-applied to elements with

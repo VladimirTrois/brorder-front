@@ -1,12 +1,13 @@
 <template>
   <div class="flex">
     <SvgoBin
-      class="icon mr-2"
+      class="icon -ml-1 md:ml-0 mr-4"
       alt="delete"
       loading="lazy"
-      @click="item.quantity = 0"
+      @click="removeItem"
     />
     <SvgoMinus
+      :class="item.quantity < 2 ? 'invisible' : ''"
       class="icon mr-2"
       alt="-"
       loading="lazy"
@@ -23,10 +24,16 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   item: Object,
   index: Number,
 });
+
+const singleOrder = useSingleOrder();
+
+const removeItem = () => {
+  singleOrder.order.items.splice(props.index, 1);
+};
 </script>
 
 <style lang="postcss">

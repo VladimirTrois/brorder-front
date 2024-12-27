@@ -1,55 +1,44 @@
 <template>
   <div class="InputContainer group">
     <input
-      class="Input peer"
+      :id="id"
+      class="outline-none px-3 py-3 peer bg-transparent"
       autocomplete="off"
       :type="type"
-      @click="click"
-      @focus="focus"
-      @change="change"
+      @focus="
+        if (error !== '') {
+          resetError();
+        }
+      "
       v-model="model"
       placeholder=" "
     />
-    <label v-if="error" class="error">{{ error }}</label>
-    <label v-else class="InputLabel">{{ placeHolder }}</label>
+    <label v-if="error" :for="id" class="inputLabelBase errorInputColor">
+      {{ error }}
+    </label>
+    <label v-else :for="id" class="inputLabelBase inputColor">
+      {{ placeHolder }}
+    </label>
 
     <!--This fieldset+legend is used for when the border and notch transition-->
     <fieldset
-      v-if="error"
-      class="inset-0 absolute border-2 border-dark_shades rounded-lg pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible group-focus-within:!border-dark_shades group-focus-within:border-2"
+      class="fieldsetBase invisible peer-placeholder-shown:visible"
+      :class="error ? 'errorFieldsetColor' : 'fieldsetColor'"
     >
       <legend
-        class="ml-2 px-0 text-xs transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap"
+        class="ml-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap"
       >
-        {{ error }}
-      </legend>
-    </fieldset>
-    <fieldset
-      v-else
-      class="inset-0 absolute border border-gray-300 rounded-lg pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible group-focus-within:!border-main group-focus-within:border-2 group-hover:border-main group-hover:border-1"
-    >
-      <legend
-        class="ml-2 px-0 text-xs transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap"
-      >
-        {{ placeHolder }}
+        {{ error ? error : placeHolder }}
       </legend>
     </fieldset>
 
     <!--This fieldset+legend always has a notch and is shown when the input is filled, instead of the other, so the notch doesnt vanish when you unfocus the field-->
     <fieldset
-      v-if="error"
-      class="inset-0 absolute border-2 border-dark_shades rounded-lg pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible group-focus-within:border-2"
+      class="fieldsetBase visible peer-placeholder-shown:invisible"
+      :class="error ? 'errorFieldsetColor' : 'fieldsetColor'"
     >
-      <legend class="ml-2 text-xs invisible px-1 max-w-full whitespace-nowrap">
-        {{ error }}
-      </legend>
-    </fieldset>
-    <fieldset
-      v-else
-      class="inset-0 absolute border border-1 border-main rounded-lg pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible group-focus-within:border-2 group-focus-within:!border-light_shades group-hover:border-gray-800"
-    >
-      <legend class="ml-2 text-xs invisible px-1 max-w-full whitespace-nowrap">
-        {{ placeHolder }}
+      <legend class="ml-2 text-sm invisible px-1 max-w-full whitespace-nowrap">
+        {{ error ? error : placeHolder }}
       </legend>
     </fieldset>
   </div>
@@ -57,40 +46,45 @@
 
 <script setup>
 defineProps({
+  id: String,
   type: {
     type: String,
     default: "text",
   },
-  id: String,
   placeHolder: String,
   error: String,
+  resetError: Function,
 });
 const model = defineModel();
 </script>
 
 <style lang="postcss">
 .InputContainer {
-  @apply relative m-2 max-w-[fit-content];
+  @apply relative mx-1 my-2 max-w-[fit-content] mb-4;
 }
 
-.Input {
-  @apply outline-none px-3 py-3 rounded-lg bg-primary_mono border-primary_mono;
+.inputLabelBase {
+  @apply absolute left-[9px] top-px text-sm transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
+  peer-placeholder-shown:top-1/2 
+  peer-placeholder-shown:text-base
+  md:peer-placeholder-shown:text-lg
+  group-focus-within:!top-px 
+  group-focus-within:!text-sm;
 }
-
-.InputLabel {
-  @apply absolute left-[9px] top-px text-xs text-black transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-        peer-placeholder-shown:top-1/2
-        peer-placeholder-shown:text-sm
-        group-focus-within:!top-px 
-        group-focus-within:!text-xs 
-        group-focus-within:!text-main;
+.inputColor {
+  @apply text-black group-focus-within:!text-primary;
 }
-.error {
-  @apply absolute left-[9px] top-px text-xs text-dark_shades transition-all duration-300 px-1 transform -translate-y-1/2
-    peer-placeholder-shown:top-1/2
-    peer-placeholder-shown:text-sm
-    group-focus-within:!top-px 
-    group-focus-within:!text-xs 
-    group-focus-within:!text-dark_shades;
+.errorInputColor {
+  @apply text-second group-focus-within:!text-second;
+}
+.fieldsetBase {
+  @apply inset-0 absolute rounded-lg pointer-events-none mt-[-9px] 
+  border group-focus-within:border-2;
+}
+.fieldsetColor {
+  @apply border-primary_mono group-focus-within:!border-primary group-hover:!border-primary;
+}
+.errorFieldsetColor {
+  @apply border-second_a20 group-focus-within:!border-second group-hover:!border-second;
 }
 </style>

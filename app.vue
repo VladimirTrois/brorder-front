@@ -10,6 +10,7 @@
 
 <script setup>
 const config = useAppConfig();
+
 useSeoMeta({
   title: config.title,
   description: config.description,
