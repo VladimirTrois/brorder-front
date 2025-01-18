@@ -1,0 +1,52 @@
+<template>
+  <div class="flex">
+    <SvgoBin
+      class="icon -ml-1 md:ml-0 mr-4"
+      alt="delete"
+      loading="lazy"
+      @click="removeItem"
+    />
+    <SvgoMinus
+      :class="item.quantity < 2 ? 'invisible' : ''"
+      class="icon mr-2"
+      alt="-"
+      loading="lazy"
+      @click="item.quantity--"
+    />
+    <SvgoPlus
+      class="icon mr-4"
+      alt="+"
+      loading="lazy"
+      @click="item.quantity++"
+    />
+    {{ item.quantity }}
+  </div>
+</template>
+  
+  <script setup>
+const props = defineProps({
+  item: Object,
+  index: Number,
+});
+
+const singleOrder = useSingleOrder();
+
+const removeItem = () => {
+  singleOrder.order.items.splice(props.index, 1);
+};
+</script>
+  
+  <style lang="postcss">
+.icon {
+  @apply h-5 text-lg text-black border border-transparent rounded;
+  &:hover {
+    @apply bg-black text-gray-200;
+  }
+  &:active {
+    @apply bg-white text-black;
+  }
+  &:md {
+    @apply h-7 text-xl;
+  }
+}
+</style>

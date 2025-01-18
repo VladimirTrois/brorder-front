@@ -1,14 +1,23 @@
 <template>
-    <span v-if="status==='pending'">Loading...</span>
-    <span v-else-if="data"><Form :productsToSell=data.member /></span>
-    <span v-else-if="error">Error: {{ error }}</span>
-  </template>
+  <div>
+    <div class="text-left ml-5">
+      <h1>Commande de pain</h1>
+      <h2 class="">Pour le {{ getDateWritten(tomorrowDate()) }}</h2>
+      <p class="m-1">
+        Le pain est à récupérer entre 8h30 et 11h<br />
+        <i>Bread is available from 8.30am to 11am</i>
+      </p>
+    </div>
+    <OrderForm type-of-form="create" />
+  </div>
+</template>
 
 <script setup>
-const api = "https://localhost"
+useSeoMeta({
+  title: "Commande",
+});
+import { getDateWritten, tomorrowDate, formatDate } from "~/functions/date";
 
-const { data, status, error, refresh, clear } = await useFetch(api+"/products?page=1")
-
-console.log(data.value)
-
+const singleOrder = useSingleOrder();
+singleOrder.newOrder(formatDate(tomorrowDate()));
 </script>

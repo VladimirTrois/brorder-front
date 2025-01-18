@@ -4,7 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   routeRules: {
-    '*': { cors: true }
+    '*': { cors: true,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://your-allowed-origin.com'
+      }
+    }
   },
 
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
@@ -27,7 +31,22 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/fonts', '@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-svgo'],
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/image',
+    '@nuxtjs/tailwindcss',
+    'nuxt-svgo',
+    'nuxt-open-fetch',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
+    '@pinia/colada-nuxt',
+    'nuxt-auth-utils',
+    '@nuxtjs/color-mode',
+    '@nuxt/icon',
+    '@vueuse/nuxt',
+    '@samk-dev/nuxt-vcalendar',
+  ],
+
   image: {
     // You can customize the image settings here if needed
   },
@@ -40,5 +59,19 @@ export default defineNuxtConfig({
     defaults: {
       styles: ['normal'],
     }
-  }
+  },
+  openFetch: {
+    clients: {
+      brorder: {
+        schema: process.env.API_SCHEMA_URL,
+        baseURL: process.env.API_BASE_URl
+      }
+    }
+  },
+  colorMode: {
+    classSuffix:''
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
 })

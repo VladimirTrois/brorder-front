@@ -1,24 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --primary: 23,40,48;
+  --second: 142,21,55;
+}
+
 /* Base html font family */
 @layer base {
+  :root{
+    --color-light-shades: 250 247 247 ; /*#faf7f7*/
+    --color-primary: 23 40 48; /*#172830*/
+    --color-primary-mono: 125 128 129;  /* #7d8081   40 69 82  #7D8081 */
+    --color-second: 142 21 55; /*#8E1537*/
+
+
+    --color-light-accent: 184 113 80; /*#B87150*/
+    --color-main: 105 132 165; /*#6984A5*/
+    --color-dark-accent: 142 21 55; /*#8E1537*/
+    --color-dark-shades: 23 40 48; /*#172830*/
+
+    --color-second-mono: 186 28 72; /*#ba1c48*/
+
+    --color-primary-a5: 212	215	217; /*#d4d7d9*/
+    --color-primary-a10: 170	177	180; /*#aab1b4*/
+    --color-primary-a15: 131	140	144; /*#838c90*/
+    --color-primary-a20: 93	104	110; /*#5d686e*/
+    --color-primary-a25: 79 82 84; /*# 57	71	78 39474e*/  /*gris #15191b*/
+    --color-primary-a30: 23	40	48; /*#172830*/
+    --color-primary-a35: 21	34	41; /*#152229*/
+    --color-primary-a40: 19	29	34; /*#131d22*/
+    --color-primary-a45: 16	24	27; /*#10181b*/
+    --color-primary-a50: 11	18	21; /*#0b1215*/
+    --color-primary-a55: 6	10	12; /*#060a0c*/
+
+    --color-second-a5: 240	217	218; /*#f0d9da*/
+    --color-second-a10: 223	179	183; /*#dfb3b7*/
+    --color-second-a15: 205	142	148; /*#cd8e94*/
+    --color-second-a20: 142 21 55; /*#b96a73*/
+    --color-second-a25: 164	68	84; /*#a44454*/
+    --color-second-a30: 142	21	55; /*#8E1537*/
+    --color-second-a35: 118	23	47; /*#76172f*/
+    --color-second-a40: 94	23	38; /*#5e1726*/
+    --color-second-a45: 71	21	30; /*#47151e*/
+    --color-second-a50: 49	18	23; /*#311217*/
+    --color-second-a55: 30	12	13; /*#1e0c0d*/
+
+    --color-secondComp-a5: 220	236	229; /*#dcece5*/
+    --color-secondComp-a10: 185	217	204; /*#b9d9cc*/
+    --color-secondComp-a15: 150	198	179; /*#96c6b3*/
+    --color-secondComp-a20: 115	180	155; /*#73b49b*/
+    --color-secondComp-a25: 76	161	131; /*#4ca183*/
+    --color-secondComp: 21	142	108; /*#158e6c*/
+    --color-secondComp-a35: 26	117	89; /*#1a7559*/
+    --color-secondComp-a40: 26	93	72; /*#1a5d48*/
+    --color-secondComp-a45: 25	70	54; /*#194636*/
+    --color-secondComp-a50: 21	48	38; /*#153026*/
+    --color-secondComp-a55: 15	27	23; /*#0f1b17*/
+  }
     html {
       font-family: "Roboto Slab";
-      @apply text-sm sm:text-base text-black;
     }
-    .app{
-      @apply mx-auto h-screen flex flex-col flex-1
-    }
-    .main{
-      @apply container mx-auto px-4 pt-4 flex-grow
-    }
-    .h1 {
-      @apply text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold leading-none tracking-tight
-    } 
-    .h2 {
-      @apply text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight
-    } 
-
 }

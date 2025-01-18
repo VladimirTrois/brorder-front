@@ -9,14 +9,15 @@
 </template>
 
 <script setup>
-  const config = useAppConfig()
-  useSeoMeta({
-    title: config.title,
-    description: config.description,
-    author: config.author,
-  })
-  useHead({
-    link: config.link,
-    htmlAttrs: { lang: 'fr' },
-  })
+const config = useAppConfig();
+
+useSeoMeta({
+  title: config.title,
+  description: config.description,
+  author: config.author,
+});
+useHead({
+  link: config.link,
+  htmlAttrs: { lang: "fr" },
+});
 </script>
