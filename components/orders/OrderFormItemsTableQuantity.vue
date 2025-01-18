@@ -22,8 +22,8 @@
     {{ item.quantity }}
   </div>
 </template>
-
-<script setup>
+  
+  <script setup>
 const props = defineProps({
   item: Object,
   index: Number,
@@ -35,8 +35,8 @@ const removeItem = () => {
   singleOrder.order.items.splice(props.index, 1);
 };
 </script>
-
-<style lang="postcss">
+  
+  <style lang="postcss">
 .icon {
   @apply h-5 text-lg text-black border border-transparent rounded;
   &:hover {

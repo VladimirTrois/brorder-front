@@ -155,16 +155,17 @@
           </tfoot>
         </table>
       </div>
-
+      {{ singleOrder.order }}
       <Pagination
         :currentPage="collectionOrders.currentPage"
         :totalPages="collectionOrders.totalPages"
         @pageChange="collectionOrders.setPage"
       />
-      <Modal
+      <OrderModal
         :isOpen="isModalOpen"
         :title="modalTitle"
         :message="modalMessage"
+        :order="singleOrder.order"
         @close="closeModal"
       />
     </div>
@@ -213,18 +214,19 @@ const updateFilters = () => {
 };
 
 const sell = async (order) => {
+  singleOrder.order = order;
   order.isTaken = !order.isTaken;
-  const response = await singleOrder.update(order, ["isTaken"]);
-  if (order.isTaken) {
-    openModal("Success", response.name);
+  const { response, error } = await singleOrder.update(order, ["isTaken"]);
+  if (order.isTaken && response) {
+    openModal("Success", response);
   }
 };
 
 onMounted(() => {
   collectionOrders.date = formatDate(new Date());
   collectionOrders.fetchOrders();
-  collectionOrders.fetchStats();
   productStore.fetchProducts();
+  collectionOrders.fetchStats();
 });
 </script>
 

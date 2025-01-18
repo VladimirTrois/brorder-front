@@ -51,12 +51,14 @@ export const useSingleOrder = defineStore('singleOrder', {
     },
     async update(order, selectedProperties) {
       const api = useAPI();
-      const response = await api.orders.update(
-        order.id,
-        order,
-        selectedProperties,
-      );
-      return response;
+      let response = null;
+      let error = null;
+      try {
+        response = await api.orders.update(order.id, order, selectedProperties);
+      } catch (e) {
+        error = e;
+      }
+      return { response, error };
     },
     async safeDelete(order) {
       this.order.isDeleted = true;

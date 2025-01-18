@@ -18,7 +18,7 @@
           :id="item.name"
         >
           <td>
-            <FormItemsQuantity :item="item" :index="index" />
+            <OrderFormItemsTableQuantity :item="item" :index="index" />
           </td>
           <th scope="row">{{ item.product.name }}</th>
           <td class="text-right">
