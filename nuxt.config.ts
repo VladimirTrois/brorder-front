@@ -36,7 +36,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-svgo',
-    'nuxt-open-fetch',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     '@pinia/colada-nuxt',
@@ -58,14 +57,6 @@ export default defineNuxtConfig({
     ],
     defaults: {
       styles: ['normal'],
-    }
-  },
-  openFetch: {
-    clients: {
-      brorder: {
-        schema: process.env.API_SCHEMA_URL,
-        baseURL: process.env.API_BASE_URl
-      }
     }
   },
   colorMode: {
