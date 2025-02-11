@@ -3,9 +3,10 @@ import { useAuthStore } from '~/stores/auth';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const authStore = useAuthStore();
+  const config = useRuntimeConfig();
 
   const api = $fetch.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: config.public.apiBase,
     headers: {
       Accept: 'application/ld+json',
     },
@@ -75,7 +76,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     if (refreshToken) {
       try {
         const tokenFreshResponse = await $fetch(
-          import.meta.env.VITE_API_URL + '/token/refresh',
+          config.public.apiBase + '/token/refresh',
           {
             method: 'POST',
             body: { refresh_token: refreshToken },

@@ -22,7 +22,7 @@ export const useCreateOrder = () => {
     const error = ref(null);
     const loading = ref(true);
 
-    const urlCreateOrder = import.meta.env.VITE_API_URL + '/orders';
+    const urlCreateOrder = import.meta.env.NUXT_API_URL + '/orders';
     const requestOptions = {
       method: 'POST',
       headers: {

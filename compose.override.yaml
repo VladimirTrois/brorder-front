@@ -1,0 +1,10 @@
+services:
+  node:
+    build: 
+      context: .
+      target: node_dev
+    volumes:
+      - ./:/app
+    environment:
+      PORT: 3000
+      NUXT_PUBLIC_API_BASE: ${NUXT_PUBLIC_API_BASE:-localhost}

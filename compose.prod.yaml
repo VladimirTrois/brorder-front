@@ -1,0 +1,12 @@
+services:
+  node:
+    build: 
+      context: .
+      target: node_prod
+    ports:
+      - "3000:3000" 
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      NUXT_PUBLIC_API_BASE: ${NUXT_PUBLIC_API_BASE:-localhost}
+      
