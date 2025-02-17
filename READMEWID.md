@@ -13,4 +13,5 @@ npx nuxi@latest module add vueuse
 npx nuxi@latest module add @samk-dev/nuxt-vcalendar
 npm install --save-dev @nuxtjs/date-fns
 npm i pinia-plugin-persistedstate
+npm install multer
 

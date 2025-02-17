@@ -4,14 +4,14 @@ import { ref } from 'vue';
 export const useModal = () => {
   const isModalOpen = ref(false);
   const modalTitle = ref('');
-  const modalMessage = ref('');
-  const modalColor = ref('');
+  const modalContent = ref('');
+  const modalType = ref('');
 
-  const openModal = (title, message, color) => {
-    modalTitle.value = title;
-    modalMessage.value = message;
+  const openModal = (title, content, type) => {
     isModalOpen.value = true;
-    modalColor.value = color ? color : '';
+    modalTitle.value = title;
+    modalContent.value = content;
+    modalType.value = type ? type : 'message';
   };
 
   const closeModal = () => {
@@ -21,9 +21,9 @@ export const useModal = () => {
   return {
     isModalOpen,
     modalTitle,
-    modalMessage,
+    modalContent,
+    modalType,
     openModal,
     closeModal,
-    modalColor,
   };
 };

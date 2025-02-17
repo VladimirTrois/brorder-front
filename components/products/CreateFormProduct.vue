@@ -1,7 +1,7 @@
 <template>
-  <form class="form" id="product" @submit.prevent="handleCreateProduct">
+  <form class="createForm" id="product" @submit.prevent="handleCreateProduct">
     <div class="text-center mb-4">
-      Creating : {{ singleProduct.product.name }}
+      <h2>Nouveau Produit : {{ singleProduct.product.name }}</h2>
     </div>
     <Toggle class="mb-4" v-model="singleProduct.product.isAvailable">
       {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
@@ -48,8 +48,13 @@
       :error="singleProduct.formErrors.rank"
       :resetError="() => (singleProduct.formErrors.rank = '')"
     />
-    <div class="flex justify-end">
-      <Button class="m-2 start-left" type="submit"> Create </Button>
+    <div class="flex justify-evenly">
+      <IconButton
+        color="primary"
+        name="material-symbols:imagesmode-outline"
+        @click="navigateTo({ path: '/admin/products/images' })"
+      />
+      <IconButton type="submit" color="primary" name="material-symbols:save" />
     </div>
   </form>
 </template>
@@ -68,8 +73,8 @@ const handleCreateProduct = async () => {
 </script>
 
 <style lang="postcss">
-.form {
-  @apply text-sm md:text-xl lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded p-2 md:p-4;
+.createForm {
+  @apply grid w-full md:w-fit place-items-center text-sm md:text-lg lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded p-2;
 }
 .legendStock {
   @apply text-xs mx-2;

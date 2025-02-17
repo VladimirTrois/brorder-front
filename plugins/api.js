@@ -46,8 +46,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         case 422:
           throw createError({
             statusCode: response.status,
-            statusMessage: response._data.description,
-            message: response.description,
+            statusMessage: response._data.message,
+            message: response._data.message,
             data: response._data,
             fatal: true,
           });

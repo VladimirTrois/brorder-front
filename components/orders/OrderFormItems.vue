@@ -43,6 +43,11 @@ const addProduct = (product) => {
   singleOrder.formErrors.items = "";
   singleOrder.addProduct(product);
 };
+
+// Load images on page load
+onMounted(() => {
+  collectionProduct.fetchProducts();
+});
 </script>
 
 <style lang="postcss">

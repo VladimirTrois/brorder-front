@@ -10,7 +10,7 @@
         Commande pour le
         {{ getDateWritten(new Date(singleOrder.order.pickUpDate)) }}
       </h2>
-      <OrderForm type-of-form="edit" />
+      <OrderForm typeOfForm="edit" />
     </div>
     <div v-else class="flex flex-col items-center">
       <h2 class="m-4 text-center">Merci de selectionné une commande</h2>
@@ -27,4 +27,6 @@ useSeoMeta({
 });
 import { getDateWritten } from "~/functions/date";
 const singleOrder = useSingleOrder();
+
+console.log(singleOrder.order.id);
 </script>

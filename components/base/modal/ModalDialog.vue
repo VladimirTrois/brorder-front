@@ -60,7 +60,7 @@ const colorClasses = computed(() => {
   @apply mt-0 py-2 text-center text-light_shades rounded-lg font-bold;
 }
 .modal-body {
-  @apply m-5 overflow-y-scroll;
+  @apply overflow-y-scroll w-full;
 }
 .modal-footer {
   @apply flex justify-center;

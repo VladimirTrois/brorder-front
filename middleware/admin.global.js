@@ -7,8 +7,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const authStore = useAuthStore();
 
   // redirection only for admin pages
-  console.log(to.path);
-  console.log(authStore);
   if (!to.path.includes('admin')) {
     return;
   }

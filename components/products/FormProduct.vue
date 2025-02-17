@@ -1,7 +1,10 @@
 <template>
-  <form class="editForm" id="product" @submit.prevent="handleEditProduct">
+  <form class="formProduct" id="product" @submit.prevent="handleForm">
     <div class="text-center mb-4">
-      <h2>Editing : {{ singleProduct.product.name }}</h2>
+      <h2 v-if="singleProduct.product.id">
+        Editing : {{ singleProduct.product.name }}
+      </h2>
+      <h2 v-else>Nouveau Produit : {{ singleProduct.product.name }}</h2>
     </div>
     <Toggle class="mb-4" v-model="singleProduct.product.isAvailable">
       {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
@@ -55,24 +58,41 @@
     />
     <div class="flex justify-around">
       <IconButton
+        v-if="singleProduct.product.id"
+        type="submit"
         color="primary"
-        name="material-symbols:imagesmode-outline"
-        @click="navigateTo({ path: '/admin/products/images' })"
+        name="material-symbols:save"
       />
-      <IconButton type="submit" color="primary" name="material-symbols:save" />
+      <IconButton
+        v-else
+        type="submit"
+        color="primary"
+        name="material-symbols:upload-rounded"
+      />
       <!-- <IconButton
-        class="ml-4"
-        color="second"
-        name="material-symbols:delete-forever"
-        @click="deleteProduct"
-      /> -->
+          class="ml-4"
+          color="second"
+          name="material-symbols:delete-forever"
+          @click="deleteProduct"
+        /> -->
     </div>
   </form>
 </template>
-
-<script setup>
+  
+  <script setup>
 const singleProduct = useSingleProduct();
 const collectionProduct = useCollectionProduct();
+
+const handleForm = async () => {
+  if (singleProduct.validateProductForm()) {
+    if (singleProduct.product.id) {
+      const response = await singleProduct.update(singleProduct.product);
+    } else {
+      const response = await singleProduct.create(singleProduct.product);
+    }
+    await collectionProduct.fetchProducts();
+  }
+};
 
 const handleEditProduct = async () => {
   if (singleProduct.validateProductForm()) {
@@ -92,9 +112,9 @@ const deleteProduct = async () => {
   await collectionProduct.fetchProducts();
 };
 </script>
-
-<style lang="postcss">
-.editForm {
+  
+  <style lang="postcss">
+.formProduct {
   @apply grid w-full md:w-fit place-items-center text-sm md:text-lg lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded p-2;
 }
 .legendStock {

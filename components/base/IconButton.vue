@@ -44,17 +44,17 @@ const colorClassesIcon = computed(() => {
 const sizeClass = computed(() => {
   switch (props.size) {
     case "xs":
-      return "size-6";
+      return "size-6 md:size-8";
     case "sm":
-      return "size-8";
+      return "size-8 md:size-10";
     case "md":
-      return "size-10";
+      return "size-10 md:size-12";
     case "lg":
-      return "size-12";
+      return "size-12 md:size-14";
     case "xl":
-      return "size-14";
+      return "size-14 md:size-16";
     default:
-      return "size-10";
+      return "size-10 md:size-12";
   }
 });
 </script>

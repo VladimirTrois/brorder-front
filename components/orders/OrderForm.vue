@@ -33,9 +33,11 @@
     <Modal
       :isOpen="isModalOpen"
       :title="modalTitle"
-      :message="modalMessage"
-      :color="modalColor"
+      :content="modalContent"
+      :type="modalType"
       @close="closeModal"
+      @refresh="refresh"
+      @replace="editOrder"
     />
   </form>
 </template>
@@ -49,9 +51,9 @@ const props = defineProps({
 });
 const {
   isModalOpen,
-  modalColor,
+  modalType,
   modalTitle,
-  modalMessage,
+  modalContent,
   closeModal,
   openModal,
 } = useModal();
@@ -65,12 +67,22 @@ const createOrder = async () => {
     });
     const { response, error } = await singleOrder.create(newOrder);
     if (response) {
-      openModal("Commande validée", response);
+      openModal("Commande validée", response, "showOrder");
     } else {
       if (error.message.includes("already used")) {
         singleOrder.formErrors.name = "Le duo existe déjà";
         singleOrder.formErrors.pitch = "Le duo existe déjà";
-        openModal("ERREUR", "Nom et Emplacement déjà utilisé.", "second");
+        singleOrder.existingOrder = error.data.cause;
+        singleOrder.order.id = singleOrder.existingOrder.id;
+        openModal(
+          "Doublon !",
+          [
+            "Nom et Emplacement déjà utilisé.",
+            singleOrder.existingOrder,
+            singleOrder.order,
+          ],
+          "orderExist"
+        );
       }
     }
   }
@@ -78,11 +90,7 @@ const createOrder = async () => {
 
 const editOrder = async () => {
   if (singleOrder.isOrderFormValid()) {
-    const orderUpdate = JSON.parse(JSON.stringify(singleOrder.order));
-    orderUpdate.items.map((a) => {
-      a["product"] = a.product["@id"];
-    });
-    const response = await singleOrder.update(orderUpdate, [
+    const { response, error } = await singleOrder.update(singleOrder.order, [
       "name",
       "isTaken",
       "isDeleted",
@@ -90,9 +98,23 @@ const editOrder = async () => {
       "pickUpDate",
       "items",
     ]);
-    openModal("Success", "La commande a bien été modifée.");
+    if (response) {
+      openModal("Commande modifée.", response, "showOrder");
+    } else {
+      openModal("Erreur", error, "error");
+    }
   }
 };
+
+const refresh = () => {
+  if (props.typeOfForm === "create") {
+    singleOrder.newOrder();
+  }
+};
+
+onMounted(() => {
+  refresh();
+});
 </script>
 
 <style lang="postcss">

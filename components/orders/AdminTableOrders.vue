@@ -37,14 +37,17 @@
               </div>
             </th>
             <th
-              class="text-sm max-w-[fit-content] whitespace-nowrap"
+              class="rotate"
               v-for="product in productStore.products[productStore.currentPage]"
               :key="product.name"
             >
-              {{ product.name }}
+              <div>
+                <span>
+                  {{ product.name }}
+                </span>
+              </div>
             </th>
-            <th>Total</th>
-            <!-- Add other columns as needed -->
+            <th class="text-right">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -76,8 +79,9 @@
             >
               {{ collectionOrders.getOrderQuantityFromProduct(order, product) }}
             </td>
-            <td>{{ (order.total / 100).toFixed(2) + "€" }}</td>
-            <!-- Add other columns as needed -->
+            <td class="text-right">
+              {{ (order.total / 100).toFixed(2) + "€" }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -150,7 +154,7 @@ onMounted(() => {
   }
 }
 table {
-  @apply w-full text-left table-auto min-w-max overflow-scroll;
+  @apply w-full text-left table-auto min-w-max overflow-scroll max-h-screen;
 }
 table tr:first-child th:first-child {
   @apply rounded-t-lg;
@@ -166,13 +170,25 @@ td {
 .trHead {
   @apply align-bottom;
 }
-tr:nth-child(even) {
+tbody tr:nth-child(even) {
   @apply bg-primary_a5;
 }
 .trBody {
-  @apply mt-6;
+  @apply mt-6 md:text-lg;
   &:hover {
     @apply bg-primary_a10 rounded;
   }
+}
+
+th.rotate {
+  /* Something you can count on */
+  @apply text-sm whitespace-nowrap h-28 w-20;
+}
+
+th.rotate div {
+  @apply -rotate-45 w-4 translate-y-1;
+}
+th.rotate div span {
+  padding: 5px 10px;
 }
 </style>

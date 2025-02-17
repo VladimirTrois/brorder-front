@@ -19,6 +19,7 @@
     "@pinia/nuxt": "^0.9.0",
     "@samk-dev/nuxt-vcalendar": "^1.0.4",
     "@vueuse/nuxt": "^12.0.0",
+    "multer": "^1.4.5-lts.1",
     "nuxt": "^3.14.159",
     "nuxt-auth-utils": "^0.5.6",
     "nuxt-svgo": "^4.0.9",

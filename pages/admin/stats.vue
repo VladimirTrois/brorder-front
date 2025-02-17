@@ -23,14 +23,23 @@
           <br />
           Commandes
         </h2>
-        <div class="text-left">
-          <div
-            v-for="(total, name) in collectionOrders.totalProducts"
-            :key="name"
-          >
-            <h3>{{ total }} {{ name }}</h3>
-          </div>
-        </div>
+        <table
+          class="text-left text-lg md:text-2xl border-separate border-spacing-x-4"
+        >
+          <tbody>
+            <tr
+              v-for="(total, name) in collectionOrders.totalProducts"
+              :key="name"
+            >
+              <td class="text-right border-spacing-4">
+                {{ name }}
+              </td>
+              <td class="text-center">
+                {{ total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

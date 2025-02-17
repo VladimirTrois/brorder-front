@@ -16,6 +16,7 @@ export const useSingleOrder = defineStore('singleOrder', {
       isDeleted: '',
       items: '',
     },
+    existingOrder: {},
   }),
   persist: true,
 
@@ -31,6 +32,16 @@ export const useSingleOrder = defineStore('singleOrder', {
       newOrder.total = 0;
       newOrder.items = [];
       this.order = newOrder;
+      this.formErrors = {
+        id: '',
+        name: '',
+        pitch: '',
+        pickUpDate: '',
+        total: '',
+        isTaken: '',
+        isDeleted: '',
+        items: '',
+      };
     },
 
     async fetch(id) {
@@ -50,11 +61,16 @@ export const useSingleOrder = defineStore('singleOrder', {
       return { response, error };
     },
     async update(order, selectedProperties) {
+      const updateOrder = this.prepareOrder(order);
       const api = useAPI();
       let response = null;
       let error = null;
       try {
-        response = await api.orders.update(order.id, order, selectedProperties);
+        response = await api.orders.update(
+          updateOrder.id,
+          updateOrder,
+          selectedProperties,
+        );
       } catch (e) {
         error = e;
       }
@@ -118,6 +134,14 @@ export const useSingleOrder = defineStore('singleOrder', {
       }
 
       return true;
+    },
+
+    prepareOrder(order) {
+      const orderUpdate = JSON.parse(JSON.stringify(order));
+      orderUpdate.items.map((a) => {
+        a['product'] = a.product['@id'];
+      });
+      return orderUpdate;
     },
   },
 });
