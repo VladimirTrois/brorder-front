@@ -75,7 +75,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const refreshToken = useCookie('refreshToken').value;
     if (refreshToken) {
       try {
-        const tokenFreshResponse = await $fetch(
+        const tokenRefreshResponse = await $fetch(
           config.public.apiBase + '/token/refresh',
           {
             method: 'POST',
@@ -83,13 +83,13 @@ export default defineNuxtPlugin((nuxtApp) => {
           },
         );
         authStore.setTokens(
-          tokenFreshResponse.token,
-          tokenFreshResponse.refresh_token,
+          tokenRefreshResponse.token,
+          tokenRefreshResponse.refresh_token,
         );
         // Retry the original request
         return await $fetch(request, {
           onRequest({ options }) {
-            const newAccessToken = tokenFreshResponse.token;
+            const newAccessToken = tokenRefreshResponse.token;
             const headers = options.headers || {};
             if (Array.isArray(headers)) {
               headers.push(['Authorization', `Bearer ${newAccessToken}`]);

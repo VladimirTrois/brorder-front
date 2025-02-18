@@ -1,7 +1,10 @@
 import { readdir } from 'fs/promises';
 import { join } from 'path';
+import authMiddleware from '~/server/routes/middleware/auth.js';
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  await authMiddleware(event);
+
   const folderPath = join(process.cwd(), 'public/img/products');
 
   try {

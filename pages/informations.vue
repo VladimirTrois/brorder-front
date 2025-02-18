@@ -13,54 +13,56 @@
             <th>Pain au chocolat</th>
           </tr>
         </thead>
-        <tr>
-          <td>Gluten</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-        </tr>
-        <tr>
-          <td>Oeufs/Eggs</td>
-          <td class="no">Non/no</td>
-          <td class="no">Non/no</td>
-          <td class="maybe">Traces Possibles/May Contain</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-        </tr>
-        <tr>
-          <td>Lait/Milk</td>
-          <td class="maybe">Traces Possibles/May Contain</td>
-          <td class="no">Non/no</td>
-          <td class="no">Non/no</td>
-          <td class="true">Oui/Yes</td>
-          <td class="true">Oui/Yes</td>
-        </tr>
-        <tr>
-          <td>Soja</td>
-          <td class="no">Non/no</td>
-          <td class="no">Non/no</td>
-          <td class="maybe">Traces Possibles/May Contain</td>
-          <td class="no">Non/no</td>
-          <td class="true">Oui/Yes</td>
-        </tr>
-        <tr>
-          <td>Graines de sésame</td>
-          <td class="maybe">Traces Possibles/May Contain</td>
-          <td class="maybe">Traces Possibles/May Contain</td>
-          <td class="true">Oui/Yes</td>
-          <td class="no">Non/no</td>
-          <td class="no">Non/no</td>
-        </tr>
-        <tr>
-          <td>Poids</td>
-          <td>280g</td>
-          <td>280g</td>
-          <td>250g</td>
-          <td>70g</td>
-          <td>80g</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Gluten</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+          </tr>
+          <tr>
+            <td>Oeufs/Eggs</td>
+            <td class="no">Non/no</td>
+            <td class="no">Non/no</td>
+            <td class="maybe">Traces Possibles/May Contain</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+          </tr>
+          <tr>
+            <td>Lait/Milk</td>
+            <td class="maybe">Traces Possibles/May Contain</td>
+            <td class="no">Non/no</td>
+            <td class="no">Non/no</td>
+            <td class="true">Oui/Yes</td>
+            <td class="true">Oui/Yes</td>
+          </tr>
+          <tr>
+            <td>Soja</td>
+            <td class="no">Non/no</td>
+            <td class="no">Non/no</td>
+            <td class="maybe">Traces Possibles/May Contain</td>
+            <td class="no">Non/no</td>
+            <td class="true">Oui/Yes</td>
+          </tr>
+          <tr>
+            <td>Graines de sésame</td>
+            <td class="maybe">Traces Possibles/May Contain</td>
+            <td class="maybe">Traces Possibles/May Contain</td>
+            <td class="true">Oui/Yes</td>
+            <td class="no">Non/no</td>
+            <td class="no">Non/no</td>
+          </tr>
+          <tr>
+            <td>Poids</td>
+            <td>280g</td>
+            <td>280g</td>
+            <td>250g</td>
+            <td>70g</td>
+            <td>80g</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

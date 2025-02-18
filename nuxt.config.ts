@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   runtimeConfig: {
+    secureToken: process.env.NUXT_SECURE_TOKEN, // Private token
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://default-api-url.com',
     }

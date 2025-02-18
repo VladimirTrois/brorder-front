@@ -4,7 +4,7 @@
       <NavBarLink to="/" text="Commande" />
       <NavBarLink to="/informations" text="Allèrgenes" />
     </NavBar>
-    <main class="main">
+    <main class="mainPublic">
       <slot />
     </main>
     <Footer />
@@ -12,8 +12,8 @@
 </template>
 
 <style lang="postcss">
-.main {
-  @apply px-1 md:px-0  text-sm sm:text-base text-black bg-transparent;
+.mainPublic {
+  @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;
 }
 h1 {
   @apply text-2xl sm:text-3xl md:text-5xl md:m-2 lg:text-6xl font-semibold leading-none tracking-tight;

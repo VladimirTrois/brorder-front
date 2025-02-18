@@ -3,7 +3,9 @@ import { defineStore } from 'pinia';
 export const useAuthStore = defineStore('auth', {
   state: () => {
     return {
-      user: null,
+      user: {
+        username: '',
+      },
       loading: false,
       errors: {
         username: '',
@@ -21,16 +23,21 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     setTokens(accessToken, refreshToken) {
-      useCookie('accessToken', { sameSite: 'lax' }).value = accessToken;
+      useCookie('accessToken', { sameSite: 'lax', secure: true }).value =
+        accessToken;
       refreshCookie('accessToken');
-      useCookie('refreshToken', { sameSite: 'lax' }).value = refreshToken;
+      useCookie('refreshToken', { sameSite: 'lax', secure: true }).value =
+        refreshToken;
       refreshCookie('refreshToken');
     },
     setUser(user) {
       this.user = user;
     },
+    setUsername(username) {
+      this.user.username = username;
+    },
     clearAuth() {
-      this.user = null;
+      this.user.username = '';
       useCookie('accessToken', { sameSite: 'lax' }).value = null;
       useCookie('refreshToken', { sameSite: 'lax' }).value = null;
     },

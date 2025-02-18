@@ -4,20 +4,21 @@
       <NavBarLink to="/admin" text="Aujourd'hui" />
       <NavBarLink to="/admin/orders" text="Commandes" />
       <NavBarLink to="/admin/products" text="Produits" />
-      <NavBarLink to="/admin/stats" text="Statistique" />
+      <NavBarLink to="/admin/stats" text="Statistiques" />
+      <NavBarLink to="/admin/products/images" text="Images" />
       <div class="w-full flex justify-end">
         <a href="/admin/login">
           <IconButton
             class="logoutBtn"
             color="primary"
-            size="10"
+            size="md"
             name="material-symbols:logout"
             @click="logout"
           />
         </a>
       </div>
     </NavBar>
-    <main class="main">
+    <main class="mainAdmin">
       <slot />
     </main>
     <Footer />
@@ -25,25 +26,15 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
 import { useAuth } from "~/composables/useAuth";
 const { logout } = useAuth();
-const colorMode = useColorMode();
-const toggleColorMode = () => {
-  colorMode.preference === "dark"
-    ? (colorMode.preference = "light")
-    : (colorMode.preference = "dark");
-};
-
-const router = useRouter();
-const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
 </script>
 
 <style lang="postcss">
 .app {
   @apply bg-light_shades mx-auto h-screen flex flex-col flex-1;
 }
-.main {
+.mainAdmin {
   @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;
 }
 h1 {

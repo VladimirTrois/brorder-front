@@ -6,11 +6,13 @@
       </div>
       <div class="sm:hidden">
         <IconButton
+          size="md"
           v-if="isOpen"
           name="material-symbols:close-rounded"
           @click="toggleNav"
         />
         <IconButton
+          size="md"
           v-else
           name="material-symbols:menu-rounded"
           @click="toggleNav"

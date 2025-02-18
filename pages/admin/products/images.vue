@@ -66,7 +66,7 @@ const handleSubmit = async () => {
     return;
   }
 
-  postImage(image.value);
+  const data = await postImage(image.value);
 
   const formData = new FormData();
   formData.append("image", image.value);

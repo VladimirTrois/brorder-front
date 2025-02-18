@@ -13,11 +13,12 @@ export const useAuth = () => {
         body: credentials,
       });
       authStore.setTokens(response.token, response.refresh_token);
-      authStore.setUser(response.user); // a faire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      authStore.setUsername(response.username);
       return true;
     } catch (error) {
-      console.error('Login failed:', error);
-      return false;
+      alert(error);
+      // Handle errors
+      throw error;
     }
   };
 

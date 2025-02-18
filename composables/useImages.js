@@ -1,23 +1,26 @@
 // composables/useModal.js
 import { ref } from 'vue';
+import { useAuthStore } from '~/stores/auth';
 
 export const useImages = () => {
+  const accessToken = useCookie('accessToken').value;
+  const authStore = useAuthStore();
   // Reactive references
   const images = ref([]);
   const error = ref(null);
 
   const fetchImages = async () => {
     try {
-      const response = await fetch('/api/images');
-      const data = await response.json();
-
-      if (data.error) {
-        error.value = data.error;
-      } else {
-        images.value = data.images;
+      const response = await $fetch('/admin/images', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response) {
+        images.value = response.images;
       }
     } catch (err) {
-      error.value = 'Failed to fetch images.';
+      alert('Failed to fetch images.');
     }
   };
 
@@ -26,14 +29,20 @@ export const useImages = () => {
     formData.append('image', image);
 
     try {
-      await fetch('/api/images', {
+      const response = await $fetch('/admin/images', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          username: authStore.user.username,
+        },
         method: 'POST',
         body: formData,
       });
 
       fetchImages();
+      return response;
     } catch (error) {
-      console.error('Error uploading image:', error);
       alert('Failed to upload the image.');
     }
   };
@@ -45,18 +54,21 @@ export const useImages = () => {
     }
 
     try {
-      const response = await fetch(`/api/images?filename=${filename}`, {
+      const response = await $fetch(`/admin/images`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          username: authStore.user.username,
+          filename: filename,
+        },
         method: 'DELETE',
       });
 
-      const data = await response.json();
-      if (data.success) {
+      if (response.success) {
         fetchImages(); // Refresh the image list
-      } else {
-        alert(`Failed to delete image: ${data.message}`);
       }
     } catch (error) {
-      console.error('Error deleting image:', error);
       alert('Failed to delete the image.');
     }
   };

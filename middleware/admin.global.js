@@ -1,6 +1,4 @@
 // middleware/auth.ts
-import Admin from '~/layouts/admin.vue';
-import Login from '~/layouts/login.vue';
 import { useAuthStore } from '~/stores/auth';
 
 export default defineNuxtRouteMiddleware((to, from) => {

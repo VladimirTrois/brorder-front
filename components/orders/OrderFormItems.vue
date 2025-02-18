@@ -52,15 +52,15 @@ onMounted(() => {
 
 <style lang="postcss">
 .carrouselProducts {
-  @apply gap-4;
+  @apply grid grid-cols-4 place-items-start gap-1;
 }
-.carrouselProduct {
-  @apply gap-4;
+.productInCarrousel {
+  @apply max-w-fit;
 }
 
 @media (max-width: 768px) {
   .carrouselProducts {
-    @apply flex overflow-x-auto px-1 -mx-1 snap-x snap-proximity;
+    @apply flex overflow-x-auto px-6 -mx-4 snap-x snap-proximity sm:-mx-7;
   }
 
   .productInCarrousel {

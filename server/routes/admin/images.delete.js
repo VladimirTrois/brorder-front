@@ -1,7 +1,10 @@
 import { join } from 'path';
 import { unlink } from 'fs/promises';
+import authMiddleware from '~/server/routes/middleware/auth.js';
 
 export default defineEventHandler(async (event) => {
+  authMiddleware(event);
+
   try {
     // Read the filename from the query or body
     const { filename } = getQuery(event); // For query parameters

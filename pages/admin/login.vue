@@ -47,11 +47,14 @@ const errors = reactive({
   password: "",
   login: "",
 });
+
+//Handle login form
 const handleLogin = async () => {
   if (await login(credentials)) {
     navigateTo("/admin");
   } else {
     // Handle login error
+    alert("Wrong credentials");
   }
 };
 </script>

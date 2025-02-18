@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="tableContainer">
-      <table v-if="collectionOrders.totalItems > 0">
+      <table>
+        <div v-if="collectionOrders.totalItems === 0">
+          <h2 class="text-center">Pas de commande</h2>
+        </div>
         <thead class="thead">
           <tr class="trHead">
             <th></th>
@@ -85,9 +88,6 @@
           </tr>
         </tbody>
       </table>
-      <div v-else>
-        <h2 class="text-center m-4">Pas de commande pour ce jour</h2>
-      </div>
     </div>
 
     <Pagination
@@ -119,11 +119,16 @@ watch(
 );
 
 const updateSearch = (searchByName, searchByPitch) => {
+  const nameSearch = searchByName
+    ? searchByName[0].toUpperCase() + searchByName.slice(1)
+    : null;
+
+  const pitchSearch = searchByPitch ? searchByPitch.toUpperCase() : null;
   clearTimeout(searchTimeout.value);
   searchTimeout.value = setTimeout(() => {
     collectionOrders.setFilters({
-      searchByName: searchByName,
-      searchByPitch: searchByPitch,
+      searchByName: nameSearch,
+      searchByPitch: pitchSearch,
     });
   }, 300);
 };
