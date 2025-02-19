@@ -33,9 +33,6 @@ export const useImages = () => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        params: {
-          username: authStore.user.username,
-        },
         method: 'POST',
         body: formData,
       });
@@ -59,7 +56,6 @@ export const useImages = () => {
           Authorization: `Bearer ${accessToken}`,
         },
         params: {
-          username: authStore.user.username,
           filename: filename,
         },
         method: 'DELETE',

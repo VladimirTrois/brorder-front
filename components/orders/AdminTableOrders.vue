@@ -100,37 +100,27 @@
 </template>
 
 <script setup>
-definePageMeta({
-  layout: "admin",
-});
-useSeoMeta({
-  title: "Admin",
-});
-
 const collectionOrders = useCollectionOrder();
 const singleOrder = useSingleOrder();
 const productStore = useCollectionProduct();
 const searchTimeout = ref(null);
 
-const route = useRoute();
-watch(
-  () => route.query,
-  () => refreshNuxtData()
-);
-
 const updateSearch = (searchByName, searchByPitch) => {
+  //prepare name search
   const nameSearch = searchByName
-    ? searchByName[0].toUpperCase() + searchByName.slice(1)
+    ? searchByName[0].toUpperCase() + searchByName.slice(1).toLowerCase()
     : null;
 
+  //prepare pitch search
   const pitchSearch = searchByPitch ? searchByPitch.toUpperCase() : null;
+
   clearTimeout(searchTimeout.value);
   searchTimeout.value = setTimeout(() => {
     collectionOrders.setFilters({
       searchByName: nameSearch,
       searchByPitch: pitchSearch,
     });
-  }, 300);
+  }, 800);
 };
 
 const changeDeleteOrder = async (order) => {

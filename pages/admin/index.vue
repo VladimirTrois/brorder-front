@@ -10,9 +10,12 @@
     </div>
     <div class="tableContainer">
       <table>
+        <div v-if="collectionOrders.totalItems === 0">
+          <h2 class="text-center">Pas de commande</h2>
+        </div>
         <thead class="thead">
           <tr class="trHead">
-            <th>Etat</th>
+            <th></th>
             <th>
               <input
                 class="w-36 outline-none rounded-lg bg-primary_mono border-2 border-transparent hover:border-light_shades focus:border-primary"
@@ -147,6 +150,7 @@
       </table>
     </div>
     <Pagination
+      v-if="collectionOrders.totalPages > 1"
       :currentPage="collectionOrders.currentPage"
       :totalPages="collectionOrders.totalPages"
       @pageChange="collectionOrders.setPage"
@@ -188,13 +192,21 @@ watch(
 );
 
 const updateSearch = (searchByName, searchByPitch) => {
+  //prepare name search
+  const nameSearch = searchByName
+    ? searchByName[0].toUpperCase() + searchByName.slice(1).toLowerCase()
+    : null;
+
+  //prepare pitch search
+  const pitchSearch = searchByPitch ? searchByPitch.toUpperCase() : null;
+
   clearTimeout(searchDebounce.value);
   searchDebounce.value = setTimeout(() => {
     collectionOrders.setFilters({
-      searchByName: searchByName,
-      searchByPitch: searchByPitch,
+      searchByName: nameSearch,
+      searchByPitch: pitchSearch,
     });
-  }, 300);
+  }, 800);
 };
 
 const updateFilters = () => {
@@ -258,6 +270,7 @@ const refreshPage = async () => {
 
 onMounted(() => {
   collectionOrders.date = formatDate(new Date());
+  collectionOrders.isDeleted = false;
   collectionOrders.fetchOrders();
   productStore.fetchProducts();
   collectionOrders.fetchStats();

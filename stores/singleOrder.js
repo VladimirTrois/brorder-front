@@ -50,11 +50,12 @@ export const useSingleOrder = defineStore('singleOrder', {
       return response;
     },
     async create(order) {
+      const newOrder = this.prepareOrder(order);
       const api = useAPI();
       let response = null;
       let error = null;
       try {
-        response = await api.orders.create(order);
+        response = await api.orders.create(newOrder);
       } catch (e) {
         error = e;
       }
@@ -137,11 +138,24 @@ export const useSingleOrder = defineStore('singleOrder', {
     },
 
     prepareOrder(order) {
-      const orderUpdate = JSON.parse(JSON.stringify(order));
-      orderUpdate.items.map((a) => {
+      const preparedOrder = JSON.parse(JSON.stringify(order));
+
+      //Uppercase pitch
+      preparedOrder.pitch = preparedOrder.pitch
+        ? preparedOrder.pitch.toUpperCase()
+        : null;
+
+      //First letter uppercase for name
+      preparedOrder.name = preparedOrder.name
+        ? preparedOrder.name[0].toUpperCase() +
+          preparedOrder.name.slice(1).toLowerCase()
+        : null;
+
+      //Add product field coresponding IRI
+      preparedOrder.items.map((a) => {
         a['product'] = a.product['@id'];
       });
-      return orderUpdate;
+      return preparedOrder;
     },
   },
 });

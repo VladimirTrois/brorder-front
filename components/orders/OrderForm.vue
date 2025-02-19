@@ -61,11 +61,7 @@ const singleOrder = useSingleOrder();
 
 const createOrder = async () => {
   if (singleOrder.isOrderFormValid()) {
-    const newOrder = JSON.parse(JSON.stringify(singleOrder.order));
-    newOrder.items.map((a) => {
-      a["product"] = a.product["@id"];
-    });
-    const { response, error } = await singleOrder.create(newOrder);
+    const { response, error } = await singleOrder.create(singleOrder.order);
     if (response) {
       openModal("Commande validée", response, "showOrder");
     } else {

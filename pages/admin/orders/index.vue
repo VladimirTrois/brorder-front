@@ -30,6 +30,12 @@ useSeoMeta({
   title: "Commande",
 });
 
+const route = useRoute();
+watch(
+  () => route.query,
+  () => refreshNuxtData()
+);
+
 import { getDateWritten, formatDate, tomorrowDate } from "~/functions/date";
 const collectionOrders = useCollectionOrder();
 const showDatePicker = ref(false);
