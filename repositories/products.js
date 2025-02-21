@@ -28,6 +28,7 @@ function pickForPatch(order) {
     'weight',
     'isAvailable',
     'stock',
+    'image',
   ]);
 }
 

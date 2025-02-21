@@ -37,6 +37,6 @@ const copyToClipboard = () => {
   @apply rounded-lg w-fit;
 }
 .imageLabel {
-  @apply block text-center text-xs overflow-hidden text-wrap;
+  @apply block text-center text-xs overflow-scroll text-wrap;
 }
 </style>

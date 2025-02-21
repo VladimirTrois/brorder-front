@@ -32,7 +32,7 @@ const { logout } = useAuth();
 
 <style lang="postcss">
 .app {
-  @apply bg-light_shades mx-auto h-screen flex flex-col flex-1;
+  @apply bg-light_shades mx-auto h-full flex flex-col flex-1;
 }
 .mainAdmin {
   @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;

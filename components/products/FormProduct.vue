@@ -1,15 +1,15 @@
 <template>
   <div class="formProduct">
-    <form id="product" @submit.prevent="handleForm">
-      <div class="text-center mb-4 overflow-x-scroll">
-        <h2
-          class="text-nowrap overflow-x-scroll"
-          v-if="singleProduct.product.id"
-        >
-          Editing : {{ singleProduct.product.name }}
-        </h2>
-        <h2 v-else>Nouveau Produit : {{ singleProduct.product.name }}</h2>
-      </div>
+    <div class="w-full overflow-x-auto">
+      <h2 class="text-center px-4 inline-block">
+        {{
+          singleProduct.product.id
+            ? `Editing : ${singleProduct.product.name}`
+            : `Nouveau Produit`
+        }}
+      </h2>
+    </div>
+    <form id="product" @submit.prevent="handleSubmit">
       <Toggle class="mb-4" v-model="singleProduct.product.isAvailable">
         {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
       </Toggle>
@@ -62,16 +62,14 @@
       />
       <div class="flex justify-around">
         <IconButton
-          v-if="singleProduct.product.id"
           type="submit"
           color="primary"
-          name="material-symbols:save"
-        />
-        <IconButton
-          v-else
-          type="submit"
-          color="primary"
-          name="material-symbols:upload-rounded"
+          :name="
+            singleProduct.product.id
+              ? 'material-symbols:save'
+              : 'material-symbols:upload-rounded'
+          "
+          @click="handleSubmit"
         />
         <!-- <IconButton
           class="ml-4"
@@ -88,7 +86,7 @@
 const singleProduct = useSingleProduct();
 const collectionProduct = useCollectionProduct();
 
-const handleForm = async () => {
+const handleSubmit = async () => {
   if (singleProduct.validateProductForm()) {
     if (singleProduct.product.id) {
       const response = await singleProduct.update(singleProduct.product);
@@ -112,7 +110,7 @@ const deleteProduct = async () => {
   
   <style lang="postcss">
 .formProduct {
-  @apply max-w-sm md:max-w-md w-full place-items-center text-sm md:text-lg lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded p-2;
+  @apply grid justify-items-center w-full max-w-sm md:max-w-full h-fit text-sm md:text-base lg:text-2xl bg-light_shades shadow-md shadow-primary_mono rounded md:p-2;
 }
 .legendStock {
   @apply text-xs mx-2;

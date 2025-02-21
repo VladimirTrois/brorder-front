@@ -1,3 +1,6 @@
 <template>
-  <footer>© 2022 Copyrights. All rights reserved.</footer>
+  <footer>
+    © 2025 Copyrights. All rights reserved.<br />
+    <p class="text-xs">Created by Vladimir Trois</p>
+  </footer>
 </template>

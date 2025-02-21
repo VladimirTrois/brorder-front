@@ -1,50 +1,48 @@
 <template>
   <div>
     <h2 class="text-center">Gestion des produits</h2>
-    <div class="md:grid md:grid-cols-5 md:place-items-center gap-2 mb-4">
-      <div class="md:col-span-2 grid place-items-center">
-        <LazyFormProduct />
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8">
+      <LazyFormProduct
+        class="md:col-span-2 justify-self-center md:justify-self-end"
+      />
       <div class="md:col-span-3">
-        <div class="mt-8">
-          <div
-            v-if="singleProduct.product.id"
-            class="flex flex-row justify-left"
-          >
-            <IconButton
-              name="material-symbols:add-circle"
-              @click="createNewProduct"
-            />
-            <div class="mx-10 flex flex-col justify-center items-center">
-              <div>Produit selectionné :</div>
-              <LazyProductCard
-                v-if="singleProduct.product.id"
-                :key="singleProduct.product.name"
-                :product="singleProduct.product"
-              />
-            </div>
-          </div>
-          <div v-else class="m-1">Selectionnez un produit pour l'éditer</div>
-          <div
-            v-if="collectionProduct.productsFromCurrentPage"
-            class="carrouselProducts md:col-span-3"
-          >
+        <div
+          v-if="singleProduct.product.id"
+          class="flex flex-row justify-center md:justify-normal"
+        >
+          <IconButton
+            name="material-symbols:add-circle"
+            @click="createNewProduct"
+          />
+          <div class="mx-10 flex flex-col justify-center items-center">
+            <div>Produit selectionné :</div>
             <LazyProductCard
-              class="productInCarrousel"
-              v-for="p in collectionProduct.productsFromCurrentPage"
-              :key="p.name"
-              :product="p"
-              :forAdmin="true"
-              @click="singleProduct.product = JSON.parse(JSON.stringify(p))"
+              v-if="singleProduct.product.id"
+              :key="singleProduct.product.name"
+              :product="singleProduct.product"
             />
           </div>
-          <Pagination
-            v-if="collectionProduct.totalPages > 1"
-            :currentPage="collectionProduct.currentPage"
-            :totalPages="collectionProduct.totalPages"
-            @pageChange="changePage"
+        </div>
+        <div v-else class="m-1">Selectionnez un produit pour l'éditer</div>
+        <div
+          v-if="collectionProduct.productsFromCurrentPage"
+          class="carrouselProducts md:col-span-3"
+        >
+          <LazyProductCard
+            class="productInCarrousel"
+            v-for="p in collectionProduct.productsFromCurrentPage"
+            :key="p.name"
+            :product="p"
+            :forAdmin="true"
+            @click="handleSelectProduct(p)"
           />
         </div>
+        <Pagination
+          v-if="collectionProduct.totalPages > 1"
+          :currentPage="collectionProduct.currentPage"
+          :totalPages="collectionProduct.totalPages"
+          @pageChange="changePage"
+        />
       </div>
 
       <div class="flex items-center justify-center gap-2 md:col-span-5">
@@ -74,6 +72,10 @@ const singleProduct = useSingleProduct();
 
 const createNewProduct = () => {
   singleProduct.newProduct();
+};
+
+const handleSelectProduct = (product) => {
+  singleProduct.product = JSON.parse(JSON.stringify(product));
 };
 
 onMounted(() => {
