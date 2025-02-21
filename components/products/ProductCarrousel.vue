@@ -1,0 +1,39 @@
+<template>
+  <div class="carrouselProducts">
+    <LazyProductCard
+      class="productInCarrousel"
+      v-for="availableProduct in products"
+      :key="availableProduct.name"
+      :product="availableProduct"
+      @click="$emit('clickProduct', availableProduct)"
+    />
+  </div>
+</template>
+
+<script setup>
+defineProps({
+  products: [Object],
+  forAdmin: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(["clickProduct"]);
+</script>
+
+<style lang="postcss" scoped>
+.carrouselProducts {
+  @apply inline-block gap-1;
+}
+
+@media (max-width: 768px) {
+  .carrouselProducts {
+    @apply flex overflow-x-auto px-6 -mx-4 snap-x snap-proximity sm:-mx-7;
+  }
+
+  .productInCarrousel {
+    @apply min-w-32 snap-center;
+  }
+}
+</style>

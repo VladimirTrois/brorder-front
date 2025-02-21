@@ -39,7 +39,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/fonts',
-    '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-svgo',
     '@pinia/nuxt',
@@ -51,10 +50,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@samk-dev/nuxt-vcalendar',
   ],
-
-  image: {
-    // You can customize the image settings here if needed
-  },
   fonts: {
     // Options
     families: [

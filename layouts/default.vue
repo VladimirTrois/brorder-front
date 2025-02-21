@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="appPublic">
     <NavBar>
       <NavBarLink to="/" text="Commande" />
       <NavBarLink to="/informations" text="Allèrgenes" />
@@ -12,8 +12,12 @@
 </template>
 
 <style lang="postcss">
+.appPublic {
+  @apply bg-light_shades mx-auto h-screen flex flex-col flex-1;
+}
+
 .mainPublic {
-  @apply container mx-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;
+  @apply container mx-auto my-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-light_shades;
 }
 h1 {
   @apply text-2xl sm:text-3xl md:text-5xl md:m-2 lg:text-6xl font-semibold leading-none tracking-tight;

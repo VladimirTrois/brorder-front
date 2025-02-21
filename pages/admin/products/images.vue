@@ -13,7 +13,7 @@
       <div class="m-4 flex items-center justify-around">
         <Image
           v-if="selectedImage"
-          class="border rounded w-28 md:w-36"
+          class="rounded-lg w-28 md:w-36"
           :filename="selectedImage"
           alt="Chosen Image"
         />

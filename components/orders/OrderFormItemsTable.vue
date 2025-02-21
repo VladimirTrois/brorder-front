@@ -20,7 +20,11 @@
           <td>
             <OrderFormItemsTableQuantity :item="item" :index="index" />
           </td>
-          <th scope="row">{{ item.product.name }}</th>
+          <th class="overflow-x-scroll" scope="row">
+            <p class="text-nowrap">
+              {{ item.product.name }}
+            </p>
+          </th>
           <td class="text-right">
             {{ (item.product.price / 100).toFixed(2) }}€
           </td>
@@ -66,7 +70,7 @@ singleOrder.order.total = computed(() => computeTotal(singleOrder.order.items));
 
 <style lang="postcss">
 .tableContainer {
-  @apply relative flex flex-col w-full h-full overflow-x-scroll text-sm md:text-base rounded-lg border-2;
+  @apply relative flex flex-col w-full h-fit overflow-x-scroll text-sm md:text-base rounded-lg border-2;
   &:hover {
     @apply border-dark_accent;
   }

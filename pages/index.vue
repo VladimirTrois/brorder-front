@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="publicOrder">
     <h1>Commande de pain</h1>
     <h2 class="md:m-2">Pour le {{ getDateWritten(tomorrowDate()) }}</h2>
     <p class="md:ml-2">

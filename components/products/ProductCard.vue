@@ -3,9 +3,9 @@
     class="productContainer"
     :class="product.isAvailable ? null : 'opacity-50'"
   >
-    <NuxtImg
+    <Image
       class="productImage"
-      :src="product.image"
+      :filename="product.image"
       :id="product.name"
     /><br />
     <label class="productLabel" :for="product.name">
@@ -34,7 +34,7 @@ defineProps({
 
 <style lang="postcss" scoped>
 .productContainer {
-  @apply w-28 md:w-36 xl:w-40 inline p-1 static float-start rounded-lg justify-center place-items-center;
+  @apply max-w-20 md:max-w-32 lg:max-w-40 inline p-1 static float-start rounded-lg justify-center place-items-center;
   &:hover {
     @apply bg-gray-200 border border-dark_accent;
   }
@@ -46,6 +46,6 @@ defineProps({
   @apply rounded-lg w-fit;
 }
 .productLabel {
-  @apply block text-center text-sm relative -top-4;
+  @apply block text-center overflow-x-scroll text-nowrap text-sm md:text-base relative -top-4;
 }
 </style>

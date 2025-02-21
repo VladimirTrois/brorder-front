@@ -14,21 +14,51 @@
       :error="singleOrder.formErrors.pitch"
       :resetError="() => (singleOrder.formErrors.pitch = '')"
     />
-    <OrderFormItems />
-    <Button
-      v-if="typeOfForm === 'create'"
-      class="m-2 text-4xl md:text-4xl"
-      color="second"
-      @click="createOrder"
-      >Valider</Button
-    >
-    <Button
-      v-if="typeOfForm === 'edit'"
-      class="m-2"
-      color="primary"
-      @click="editOrder"
-      >Modifier</Button
-    >
+    <div class="md:grid md:grid-cols-5 gap-2">
+      <div class="md:col-span-2">
+        <OrderFormItemsTable v-if="singleOrder.order.items.length > 0" />
+        <p
+          v-else
+          class="text-center text-xl"
+          :class="singleOrder.formErrors.items ? 'text-second' : ''"
+        >
+          Selectionnez des articles
+          <br />
+          Choose products
+        </p>
+        <div
+          class="text-second text-center"
+          v-if="singleOrder.formErrors.items"
+        >
+          {{ singleOrder.formErrors.items }}
+        </div>
+        <Button
+          v-if="typeOfForm === 'create' && singleOrder.order.items.length > 0"
+          class="mt-3 text-2xl md:text-4xl"
+          color="second"
+          @click="createOrder"
+          >Valider</Button
+        >
+        <Button
+          v-if="typeOfForm === 'edit'"
+          class="mt-3 text-2xl md:text-4xl"
+          color="primary"
+          @click="editOrder"
+          >Modifier</Button
+        >
+      </div>
+      <div class="md:col-span-3">
+        <LazyProductCarrousel
+          v-if="collectionProduct.productsFromCurrentPage"
+          :products="
+            collectionProduct.productsFromCurrentPage.filter(
+              (p) => p.stock !== 0
+            )
+          "
+          @clickProduct="addProduct"
+        />
+      </div>
+    </div>
     <br />
     <Modal
       :isOpen="isModalOpen"
@@ -58,6 +88,14 @@ const {
   openModal,
 } = useModal();
 const singleOrder = useSingleOrder();
+const collectionProduct = useCollectionProduct();
+collectionProduct.isAvailable = true;
+collectionProduct.fetchProducts();
+
+const addProduct = (product) => {
+  singleOrder.formErrors.items = "";
+  singleOrder.addProduct(product);
+};
 
 const createOrder = async () => {
   if (singleOrder.isOrderFormValid()) {
@@ -106,6 +144,7 @@ const refresh = () => {
   if (props.typeOfForm === "create") {
     singleOrder.newOrder();
   }
+  collectionProduct.fetchProducts();
 };
 
 onMounted(() => {
