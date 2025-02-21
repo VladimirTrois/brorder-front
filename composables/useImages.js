@@ -17,7 +17,7 @@ export const useImages = () => {
         },
       });
       if (response) {
-        images.value = response.images;
+        images.value = response.imageNames;
       }
     } catch (err) {
       alert('Failed to fetch images.');
@@ -38,7 +38,7 @@ export const useImages = () => {
       });
 
       fetchImages();
-      return response;
+      return response.uploadedFileName;
     } catch (error) {
       alert('Failed to upload the image.');
     }

@@ -1,6 +1,6 @@
 services:
   node:
-    image: ${IMAGES_PREFIX:-}app-node
+    image: brorder-front
     ports:
       - "3000:3000"
     restart: unless-stopped

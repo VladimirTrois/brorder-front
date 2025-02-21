@@ -11,19 +11,19 @@
         <InputFile id="image" @change="handleFileChange" :file="image" />
       </form>
       <div class="m-4 flex items-center justify-around">
-        <NuxtImg
-          v-if="imagePath"
+        <Image
+          v-if="selectedImage"
           class="border rounded w-28 md:w-36"
-          :src="imagePath"
+          :filename="selectedImage"
           alt="Chosen Image"
         />
         <IconButton
-          v-if="imagePath"
+          v-if="selectedImage"
           color="second"
           name="material-symbols:delete-forever"
           @click="
-            deleteImage(imagePath);
-            imagePath = null;
+            deleteImage(selectedImage);
+            selectedImage = null;
           "
         />
       </div>
@@ -45,12 +45,12 @@ useSeoMeta({
 
 // Reactive references
 const image = ref(null);
-const imagePath = ref("");
+const selectedImage = ref("");
 
 const { images, fetchImages, postImage, deleteImage } = useImages();
 
-const handleSelectImage = (selectedImage) => {
-  imagePath.value = selectedImage;
+const handleSelectImage = (image) => {
+  selectedImage.value = image;
 };
 
 // Handle file selection
@@ -66,11 +66,11 @@ const handleSubmit = async () => {
     return;
   }
 
-  const data = await postImage(image.value);
+  const uploadedFileName = await postImage(image.value);
 
   const formData = new FormData();
   formData.append("image", image.value);
-  imagePath.value = data.filePath; // Store the uploaded image path
+  selectedImage.value = uploadedFileName; // Store the uploaded image path
   fetchImages();
 };
 

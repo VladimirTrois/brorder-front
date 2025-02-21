@@ -1,6 +1,6 @@
 <template>
   <div class="imageContainer">
-    <NuxtImg class="image" :src="src" :id="src" @click="emit('click')" /><br />
+    <Image class="image" :filename="filename" @click="emit('click')" /><br />
     <div class="flex items-center -mt-4">
       <IconButton
         class="text-center"
@@ -9,17 +9,17 @@
         name="material-symbols:content-copy-outline"
         @click="copyToClipboard"
       />
-      <label class="imageLabel" :for="src">{{ src }} </label>
+      <label class="imageLabel" :for="filename">{{ filename }} </label>
     </div>
   </div>
 </template>
   
-  <script setup>
-const props = defineProps(["src"]);
+<script setup>
+const props = defineProps(["filename"]);
 const emit = defineEmits(["click"]);
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(props.src);
+  navigator.clipboard.writeText(props.filename);
 };
 </script>
   

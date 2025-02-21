@@ -3,10 +3,10 @@
     <div class="carrouselImages">
       <ImageCard
         class="imageInCarrousel"
-        v-for="image in imageList"
-        :key="image"
-        :src="image"
-        @click="emit('click', image)"
+        v-for="imageName in imageList"
+        :key="imageName"
+        :filename="imageName"
+        @click="emit('click', imageName)"
       />
     </div>
   </div>

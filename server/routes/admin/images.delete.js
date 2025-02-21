@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Resolve the full path to the image
-    const imagePath = join(process.cwd(), 'public', filename);
+    const imagePath = join(process.cwd(), 'data', filename);
 
     // Delete the file
     await unlink(imagePath);

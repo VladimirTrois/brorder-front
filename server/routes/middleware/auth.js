@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    // Test API to verify credentials (not the best security...)
+    // Test API to verify credentials (not the best handle on security...)
     const response = await $fetch(config.public.apiBase + '/orders', {
       method: 'GET',
       headers: {

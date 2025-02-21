@@ -1,10 +1,11 @@
 import multer from 'multer';
 import { join } from 'path';
+import path from 'path';
 import authMiddleware from '~/server/routes/middleware/auth.js';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, join(process.cwd(), 'public/img/products')); // Save in public/img/products
+    cb(null, path.resolve('data')); // Save in public/img/products
   },
   filename: (req, file, cb) => {
     cb(null, `${file.originalname}`); // Use the desired name with the correct extension
@@ -21,8 +22,8 @@ export default defineEventHandler((event) => {
       if (err) {
         reject(err);
       } else {
-        const filePath = `/img/products/${event.node.req.file.filename}`;
-        resolve({ filePath });
+        const uploadedFileName = `${event.node.req.file.filename}`;
+        resolve({ uploadedFileName });
       }
     });
   });
