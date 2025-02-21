@@ -34,7 +34,7 @@ defineProps({
 
 <style lang="postcss" scoped>
 .productContainer {
-  @apply max-w-20 md:max-w-32 lg:max-w-40 inline p-1 static float-start rounded-lg justify-center place-items-center;
+  @apply max-w-20 md:max-w-32 lg:max-w-40 p-1 static float-start rounded-lg;
   &:hover {
     @apply bg-gray-200 border border-dark_accent;
   }

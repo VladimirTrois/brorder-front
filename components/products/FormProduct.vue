@@ -1,88 +1,93 @@
 <template>
-  <div class="formProduct">
-    <div class="w-full overflow-x-auto">
-      <h2 class="text-center px-4 inline-block">
+  <form class="formProduct" id="product" @submit.prevent="handleSubmit">
+    <div class="w-full overflow-x-auto px-8">
+      <h2 class="w-full text-center inline-block mb-8">
         {{
-          singleProduct.product.id
+          typeOfForm === "edit"
             ? `Editing : ${singleProduct.product.name}`
             : `Nouveau Produit`
         }}
       </h2>
     </div>
-    <form id="product" @submit.prevent="handleSubmit">
-      <Toggle class="mb-4" v-model="singleProduct.product.isAvailable">
-        {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
-      </Toggle>
-      <Input
-        id="name"
-        placeHolder="Nom / Name"
-        v-model="singleProduct.product.name"
-        :error="singleProduct.formErrors.name"
-        :resetError="() => (singleProduct.formErrors.name = '')"
+    <Toggle
+      class="mb-4 justify-self-center"
+      v-model="singleProduct.product.isAvailable"
+    >
+      {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
+    </Toggle>
+    <Input
+      id="name"
+      placeHolder="Nom / Name"
+      v-model="singleProduct.product.name"
+      :error="singleProduct.formErrors.name"
+      :resetError="() => (singleProduct.formErrors.name = '')"
+    />
+    <Input
+      id="price"
+      placeHolder="Prix / Price (cents)"
+      type="number"
+      v-model="singleProduct.product.price"
+      :error="singleProduct.formErrors.price"
+      :resetError="() => (singleProduct.formErrors.price = '')"
+    />
+    <Input
+      id="weight"
+      placeHolder="Poids / Weight (g)"
+      type="number"
+      v-model="singleProduct.product.weight"
+      :error="singleProduct.formErrors.weight"
+      :resetError="() => (singleProduct.formErrors.weight = '')"
+    />
+    <Input
+      id="stock"
+      placeHolder="Stock"
+      type="number"
+      v-model="singleProduct.product.stock"
+      :error="singleProduct.formErrors.stock"
+      :resetError="() => (singleProduct.formErrors.stock = '')"
+    />
+    <p class="legendStock -mt-3 mb-3">(-1 illimité)</p>
+    <Input
+      id="rank"
+      placeHolder="Ordre"
+      type="number"
+      v-model="singleProduct.product.rank"
+      :error="singleProduct.formErrors.rank"
+      :resetError="() => (singleProduct.formErrors.rank = '')"
+    />
+    <Input
+      id="imagePath"
+      placeHolder="Image"
+      v-model="singleProduct.product.image"
+      :error="singleProduct.formErrors.image"
+      :resetError="() => (singleProduct.formErrors.image = '')"
+    />
+    <div class="flex justify-around">
+      <IconButton
+        v-if="typeOfForm === 'edit'"
+        type="submit"
+        color="primary"
+        :name="'material-symbols:save'"
       />
-      <Input
-        id="price"
-        placeHolder="Prix / Price (cents)"
-        type="number"
-        v-model="singleProduct.product.price"
-        :error="singleProduct.formErrors.price"
-        :resetError="() => (singleProduct.formErrors.price = '')"
+      <IconButton
+        v-else
+        type="submit"
+        color="primary"
+        :name="'material-symbols:upload-rounded'"
       />
-      <Input
-        id="weight"
-        placeHolder="Poids / Weight (g)"
-        type="number"
-        v-model="singleProduct.product.weight"
-        :error="singleProduct.formErrors.weight"
-        :resetError="() => (singleProduct.formErrors.weight = '')"
-      />
-      <Input
-        id="stock"
-        placeHolder="Stock"
-        type="number"
-        v-model="singleProduct.product.stock"
-        :error="singleProduct.formErrors.stock"
-        :resetError="() => (singleProduct.formErrors.stock = '')"
-      />
-      <p class="legendStock -mt-3 mb-3">(-1 illimité)</p>
-      <Input
-        id="rank"
-        placeHolder="Ordre"
-        type="number"
-        v-model="singleProduct.product.rank"
-        :error="singleProduct.formErrors.rank"
-        :resetError="() => (singleProduct.formErrors.rank = '')"
-      />
-      <Input
-        id="imagePath"
-        placeHolder="Image"
-        v-model="singleProduct.product.image"
-        :error="singleProduct.formErrors.image"
-        :resetError="() => (singleProduct.formErrors.image = '')"
-      />
-      <div class="flex justify-around">
-        <IconButton
-          type="submit"
-          color="primary"
-          :name="
-            singleProduct.product.id
-              ? 'material-symbols:save'
-              : 'material-symbols:upload-rounded'
-          "
-          @click="handleSubmit"
-        />
-        <!-- <IconButton
+      <!-- <IconButton
           class="ml-4"
           color="second"
           name="material-symbols:delete-forever"
           @click="deleteProduct"
         /> -->
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </template>
   
-  <script setup>
+<script setup>
+const props = defineProps(["typeOfForm"]);
+
 const singleProduct = useSingleProduct();
 const collectionProduct = useCollectionProduct();
 

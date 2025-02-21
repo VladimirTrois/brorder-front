@@ -24,7 +24,7 @@ const emit = defineEmits(["clickProduct"]);
 
 <style lang="postcss" scoped>
 .carrouselProducts {
-  @apply inline-block gap-1;
+  @apply inline-block;
 }
 
 @media (max-width: 768px) {

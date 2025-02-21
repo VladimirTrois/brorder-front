@@ -13,7 +13,7 @@
 
 <style lang="postcss">
 .appPublic {
-  @apply bg-light_shades mx-auto h-screen flex flex-col flex-1;
+  @apply bg-light_shades mx-auto min-h-screen flex flex-col flex-1;
 }
 
 .mainPublic {

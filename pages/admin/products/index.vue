@@ -3,12 +3,13 @@
     <h2 class="text-center">Gestion des produits</h2>
     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8">
       <LazyFormProduct
+        :type-of-form="singleProduct.product.id ? 'edit' : 'create'"
         class="md:col-span-2 justify-self-center md:justify-self-end"
       />
       <div class="md:col-span-3">
         <div
           v-if="singleProduct.product.id"
-          class="flex flex-row justify-center md:justify-normal"
+          class="flex flex-row mb-2 justify-center md:justify-normal"
         >
           <IconButton
             name="material-symbols:add-circle"
@@ -79,8 +80,8 @@ const handleSelectProduct = (product) => {
 };
 
 onMounted(() => {
-  collectionProduct.fetchProducts();
   fetchImages();
+  collectionProduct.fetchProducts();
 });
 
 watch(
