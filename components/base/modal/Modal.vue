@@ -90,21 +90,14 @@
         <OrderView :order="order" />
       </template>
       <template #footer>
-        <div class="grid grid-cols-2">
+        <div class="grid mt-2">
           <IconButton
-            class="mr-3"
-            :color="color"
-            name="material-symbols:check-box"
+            color="second"
+            name="material-symbols:refresh"
             @click="
-              $emit('sell');
+              $emit('refresh');
               $emit('close');
             "
-          />
-          <IconButton
-            class="ml-9"
-            color="second"
-            name="material-symbols:cancel"
-            @click="$emit('close')"
           />
         </div>
       </template>

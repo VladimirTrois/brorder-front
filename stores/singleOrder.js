@@ -94,7 +94,10 @@ export const useSingleOrder = defineStore('singleOrder', {
       );
       if (productIndex === -1) {
         this.order.items.push({ product: product, quantity: 1 });
-      } else {
+      } else if (
+        product.stock < 0 ||
+        this.order.items[productIndex].quantity < product.stock
+      ) {
         this.order.items[productIndex].quantity++;
       }
     },

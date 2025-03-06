@@ -51,13 +51,20 @@ export default defineNuxtPlugin((nuxtApp) => {
             data: response._data,
             fatal: true,
           });
+        case 409:
+          console.error('response');
+          console.error(response._data);
+          console.error(response._data.detail);
+          throw createError({
+            statusCode: response.status,
+            statusMessage: response._data.message,
+            message: response._data.detail,
+            data: response._data,
+            fatal: true,
+          });
         default:
           // Handle other errors
-          console.error(
-            'API Response Error:',
-            response.status,
-            response.statusText,
-          );
+          console.error('API Response Error:', response.status, response);
           throw createError({
             statusCode: response.status,
             statusMessage: response.statusText,

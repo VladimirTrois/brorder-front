@@ -117,6 +117,10 @@ const createOrder = async () => {
           ],
           "orderExist"
         );
+      } else if (error.message.includes("Not enough stock available")) {
+        openModal("Le stock n'est plus disponible", error, "error");
+      } else {
+        openModal("Erreur", error, "error");
       }
     }
   }
