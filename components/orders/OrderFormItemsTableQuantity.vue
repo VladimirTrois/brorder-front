@@ -15,7 +15,7 @@
       />
       <SvgoPlus
         :class="
-          item.product.stock > 0 && item.quantity >= item.product.stock
+          item.product.stock >= 0 && item.quantity >= item.product.stock
             ? 'invisible'
             : 'icon mr-3'
         "
@@ -31,7 +31,7 @@
     </div>
     <p class="text-center text-second">
       {{
-        item.product.stock > 0 && item.quantity >= item.product.stock
+        item.product.stock >= 0 && item.quantity >= item.product.stock
           ? "Stock max"
           : null
       }}
