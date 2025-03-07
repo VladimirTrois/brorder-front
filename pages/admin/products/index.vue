@@ -27,11 +27,7 @@
         <div v-else class="m-1">Selectionnez un produit pour l'éditer</div>
         <LazyProductCarrousel
           v-if="collectionProduct.productsFromCurrentPage"
-          :products="
-            collectionProduct.productsFromCurrentPage.filter(
-              (p) => p.stock !== 0
-            )
-          "
+          :products="collectionProduct.productsFromCurrentPage"
           :forAdmin="true"
           @clickProduct="handleSelectProduct"
         />
