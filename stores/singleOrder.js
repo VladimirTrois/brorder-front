@@ -104,7 +104,7 @@ export const useSingleOrder = defineStore('singleOrder', {
 
     isOrderFormValid() {
       //check Name
-      const regexName = /([à-ü]|[a-z0-9_-]){3,29}/gi;
+      const regexName = /^([à-ü]|[a-z0-9_-]){3,29}$/gi;
       this.formErrors.name = !this.order.name
         ? 'This field is required.'
         : !regexName.test(this.order.name)

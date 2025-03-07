@@ -5,6 +5,7 @@
       v-for="availableProduct in products"
       :key="availableProduct.name"
       :product="availableProduct"
+      :forAdmin="forAdmin"
       @click="$emit('clickProduct', availableProduct)"
     />
   </div>

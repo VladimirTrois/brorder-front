@@ -25,19 +25,16 @@
           </div>
         </div>
         <div v-else class="m-1">Selectionnez un produit pour l'éditer</div>
-        <div
+        <LazyProductCarrousel
           v-if="collectionProduct.productsFromCurrentPage"
-          class="carrouselProducts md:col-span-3"
-        >
-          <LazyProductCard
-            class="productInCarrousel"
-            v-for="p in collectionProduct.productsFromCurrentPage"
-            :key="p.name"
-            :product="p"
-            :forAdmin="true"
-            @click="handleSelectProduct(p)"
-          />
-        </div>
+          :products="
+            collectionProduct.productsFromCurrentPage.filter(
+              (p) => p.stock !== 0
+            )
+          "
+          :forAdmin="true"
+          @clickProduct="handleSelectProduct"
+        />
         <Pagination
           v-if="collectionProduct.totalPages > 1"
           :currentPage="collectionProduct.currentPage"
@@ -88,30 +85,11 @@ watch(
   () => collectionProduct.isCollectionFetched,
   (isFetched) => {
     if (isFetched) {
-      singleProduct.product =
-        collectionProduct.products[collectionProduct.currentPage][0];
+      handleSelectProduct(
+        collectionProduct.products[collectionProduct.currentPage][0]
+      );
     }
   },
   { deep: true }
 );
 </script>
-
-
-<style lang="postcss">
-.carrouselProducts {
-  @apply grid grid-cols-4 place-items-start gap-1;
-}
-.productInCarrousel {
-  @apply max-w-fit;
-}
-
-@media (max-width: 768px) {
-  .carrouselProducts {
-    @apply flex overflow-x-auto px-6 -mx-4 snap-x snap-proximity sm:-mx-7;
-  }
-
-  .productInCarrousel {
-    @apply min-w-32 snap-center;
-  }
-}
-</style>

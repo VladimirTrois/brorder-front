@@ -39,7 +39,15 @@ export const useSingleProduct = defineStore('singleProduct', {
     },
     async update(product) {
       const api = useAPI();
-      const response = await api.products.update(product.id, product);
+      const response = await api.products.update(product.id, product, [
+        'name',
+        'price',
+        'weight',
+        'isAvailable',
+        'stock',
+        'image',
+        'rank',
+      ]);
       return response;
     },
     async safeDelete(product) {
@@ -54,7 +62,7 @@ export const useSingleProduct = defineStore('singleProduct', {
     },
     validateProductForm() {
       //check name
-      const regexName = new RegExp('^[A-Za-z][A-Za-z -]{1,29}$');
+      const regexName = /^([à-ü]|[a-z0-9_-]){3,29}$/gi;
       this.formErrors.name = !this.product.name
         ? 'This field is required.'
         : !regexName.test(this.product.name)

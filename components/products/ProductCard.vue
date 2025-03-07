@@ -16,7 +16,7 @@
       <p v-if="forAdmin">
         Ordre : {{ product.rank }}
         <br />
-        Stock : {{ product.stock }}
+        Stock : {{ product.stock === -1 ? "Illimité" : product.stock }}
       </p>
     </label>
   </div>

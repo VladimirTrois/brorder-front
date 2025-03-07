@@ -39,6 +39,14 @@
       :resetError="() => (singleProduct.formErrors.weight = '')"
     />
     <Input
+      id="rank"
+      placeHolder="Ordre"
+      type="number"
+      v-model="singleProduct.product.rank"
+      :error="singleProduct.formErrors.rank"
+      :resetError="() => (singleProduct.formErrors.rank = '')"
+    />
+    <Input
       id="stock"
       placeHolder="Stock"
       type="number"
@@ -47,14 +55,6 @@
       :resetError="() => (singleProduct.formErrors.stock = '')"
     />
     <p class="legendStock -mt-3 mb-3">(-1 illimité)</p>
-    <Input
-      id="rank"
-      placeHolder="Ordre"
-      type="number"
-      v-model="singleProduct.product.rank"
-      :error="singleProduct.formErrors.rank"
-      :resetError="() => (singleProduct.formErrors.rank = '')"
-    />
     <Input
       id="imagePath"
       placeHolder="Image"

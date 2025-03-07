@@ -9,13 +9,13 @@ export default (api) => ({
       method: 'POST',
       body: data,
     }),
-  update: (id, data) => {
+  update: (id, data, selectedProperties) => {
     return api(`/products/${id}`, {
       headers: {
         'Content-Type': 'application/merge-patch+json',
       },
       method: 'PATCH',
-      body: pickForPatch(data),
+      body: pickProperties(data, selectedProperties),
     });
   },
   delete: (id) => api(`/products/${id}`, { method: 'DELETE' }),
@@ -29,7 +29,7 @@ function pickForPatch(order) {
     'isAvailable',
     'stock',
     'image',
-    'order',
+    'rank',
   ]);
 }
 
