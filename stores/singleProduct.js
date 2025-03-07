@@ -62,7 +62,7 @@ export const useSingleProduct = defineStore('singleProduct', {
     },
     validateProductForm() {
       //check name
-      const regexName = /^([à-ü]|[a-z0-9_-]){3,29}$/gi;
+      const regexName = /([à-ü]|[a-z0-9_-\s]){3,29}/gi;
       this.formErrors.name = !this.product.name
         ? 'This field is required.'
         : !regexName.test(this.product.name)
