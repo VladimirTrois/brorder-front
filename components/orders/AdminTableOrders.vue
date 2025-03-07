@@ -125,7 +125,10 @@ const updateSearch = (searchByName, searchByPitch) => {
 
 const changeDeleteOrder = async (order) => {
   order.isDeleted = !order.isDeleted;
-  const response = await singleOrder.update(order, ["isDeleted"]);
+  const { response, error } = await singleOrder.update(order, ["isDeleted"]);
+  if (error) {
+    order.isDeleted = !order.isDeleted;
+  }
 };
 
 const gotToEditOrder = async (order) => {
