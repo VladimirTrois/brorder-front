@@ -148,11 +148,8 @@ export const useSingleOrder = defineStore('singleOrder', {
         ? preparedOrder.pitch.toUpperCase()
         : null;
 
-      //First letter uppercase for name
-      preparedOrder.name = preparedOrder.name
-        ? preparedOrder.name[0].toUpperCase() +
-          preparedOrder.name.slice(1).toLowerCase()
-        : null;
+      //Lowercase full name
+      preparedOrder.name = preparedOrder.name.toLowerCase();
 
       //Add product field coresponding IRI
       preparedOrder.items.map((a) => {

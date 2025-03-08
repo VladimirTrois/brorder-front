@@ -73,7 +73,11 @@
                 @click="changeDeleteOrder(order)"
               />
             </td>
-            <td>{{ order.name }}</td>
+            <td>
+              {{
+                order.name[0].toUpperCase() + order.name.slice(1).toLowerCase()
+              }}
+            </td>
             <td>{{ order.pitch }}</td>
             <td
               class="text-center"
@@ -107,9 +111,7 @@ const searchTimeout = ref(null);
 
 const updateSearch = (searchByName, searchByPitch) => {
   //prepare name search
-  const nameSearch = searchByName
-    ? searchByName[0].toUpperCase() + searchByName.slice(1).toLowerCase()
-    : null;
+  const nameSearch = searchByName ? searchByName.toLowerCase() : null;
 
   //prepare pitch search
   const pitchSearch = searchByPitch ? searchByPitch.toUpperCase() : null;

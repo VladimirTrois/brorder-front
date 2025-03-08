@@ -1,7 +1,8 @@
 <template>
   <div v-if="order" class="orderView">
     <div class="text-center font-bold text-xl w-full mb-2">
-      {{ order.name }} {{ order.pitch }}
+      {{ order.name[0].toUpperCase() + order.name.slice(1).toLowerCase() }}
+      {{ order.pitch }}
     </div>
     <div
       class="grid grid-cols-3 gap-1 w-full"
