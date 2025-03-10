@@ -74,6 +74,7 @@ const handleSelectProduct = (product) => {
 
 onMounted(() => {
   fetchImages();
+  collectionProduct.isAvailable = null;
   collectionProduct.fetchProducts();
 });
 

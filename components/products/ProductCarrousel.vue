@@ -2,11 +2,11 @@
   <div class="carrouselProducts">
     <LazyProductCard
       class="productInCarrousel"
-      v-for="availableProduct in products"
-      :key="availableProduct.name"
-      :product="availableProduct"
+      v-for="product in products"
+      :key="product.name"
+      :product="product"
       :forAdmin="forAdmin"
-      @click="$emit('clickProduct', availableProduct)"
+      @click="$emit('clickProduct', product)"
     />
   </div>
 </template>

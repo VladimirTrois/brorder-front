@@ -28,7 +28,7 @@ definePageMeta({
   layout: "admin",
 });
 useSeoMeta({
-  title: "Commande",
+  title: "Commande admin",
 });
 
 const route = useRoute();
