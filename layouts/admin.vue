@@ -6,14 +6,14 @@
       <NavBarLink to="/admin/products" text="Produits" />
       <NavBarLink to="/admin/stats" text="Statistiques" />
       <NavBarLink to="/admin/products/images" text="Images" />
-      <div class="w-full flex justify-end">
+      <div class="w-full flex justify-end place-items-center">
         <a href="/admin/login">
           <IconButton
             class="logoutBtn"
             color="primary"
             size="md"
             name="material-symbols:logout"
-            @click="logout"
+            @click="authStore.logout()"
           />
         </a>
       </div>
@@ -26,8 +26,7 @@
 </template>
 
 <script setup>
-import { useAuth } from "~/composables/useAuth";
-const { logout } = useAuth();
+const authStore = useAuthStore();
 </script>
 
 <style lang="postcss">

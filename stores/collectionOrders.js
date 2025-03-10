@@ -95,13 +95,10 @@ export const useCollectionOrder = defineStore('collectionOrder', {
       }
     },
     setFilters(filters) {
-      console.log(this.date);
-      console.log(filters);
       Object.assign(this, filters);
       // Reset to first page when filters change and set orders to empty array
       this.orders = [];
       this.currentPage = 1;
-      console.log(this.date);
       this.fetchOrders();
     },
 

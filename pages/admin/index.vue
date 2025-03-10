@@ -77,19 +77,30 @@
             :key="order.id"
           >
             <td>
-              <IconButton
-                class="-m-1"
-                v-if="order.isTaken"
-                color="second"
-                name="material-symbols:undo"
-                @click="revertSell(order)"
-              />
-              <IconButton
-                v-else
-                class="p-1 -m-1"
-                name="material-symbols:shopping-cart-checkout"
-                @click="sellModal(order)"
-              />
+              <div
+                class="flex flex-row justify-evenly items-center place-items-center"
+              >
+                <IconButton
+                  class="-m-1"
+                  v-if="order.isTaken"
+                  color="second"
+                  name="material-symbols:undo"
+                  @click="revertSell(order)"
+                />
+                <IconButton
+                  v-else
+                  class="p-1 -m-1"
+                  name="material-symbols:shopping-cart-checkout"
+                  @click="sellModal(order)"
+                />
+                <IconButton
+                  class="p-1 -m-1"
+                  size="sm"
+                  color="second"
+                  name="material-symbols:autorenew-rounded"
+                  @click="renew(order)"
+                />
+              </div>
             </td>
             <td>
               {{
@@ -241,11 +252,11 @@ const renew = async (order) => {
   newOrder.items = JSON.parse(JSON.stringify(order.items));
   console.log(newOrder.items);
   newOrder.pickUpDate = formatDate(tomorrowDate());
-  newOrder.items.map((a) => {
-    a["product"] = a.product["@id"];
-  });
   console.log(newOrder);
   const { response, error } = await singleOrder.create(newOrder);
+  if (response) {
+    openModal("Succès", "Commande recommandé");
+  }
   if (error) {
     openModal("Erreur", error);
   }

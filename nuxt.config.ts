@@ -3,18 +3,20 @@ export default defineNuxtConfig({
   runtimeConfig: {
     secureToken: process.env.NUXT_SECURE_TOKEN, // Private token
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://default-api-url.com',
-    }
+      apiBase:
+        process.env.NUXT_PUBLIC_API_BASE_URL || 'http://default-api-url.com',
+    },
   },
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
   routeRules: {
-    '*': { cors: true,
+    '*': {
+      cors: true,
       headers: {
-        'Access-Control-Allow-Origin': 'https://your-allowed-origin.com'
-      }
-    }
+        'Access-Control-Allow-Origin': 'https://your-allowed-origin.com',
+      },
+    },
   },
 
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
@@ -24,7 +26,7 @@ export default defineNuxtConfig({
   components: [
     {
       path: '~/components',
-      pathPrefix: false,    
+      pathPrefix: false,
     },
   ],
 
@@ -58,12 +60,12 @@ export default defineNuxtConfig({
     ],
     defaults: {
       styles: ['normal'],
-    }
+    },
   },
   colorMode: {
-    classSuffix:''
+    classSuffix: '',
   },
   pinia: {
     storesDirs: ['./stores/**'],
   },
-})
+});

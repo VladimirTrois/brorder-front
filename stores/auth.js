@@ -1,89 +1,53 @@
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
-  state: () => {
-    return {
-      user: {
-        username: '',
-      },
-      loading: false,
-      errors: {
-        username: '',
-        password: '',
-        login: '',
-      },
-    };
-  },
+  state: () => ({
+    token: useCookie('accessToken', { sameSite: 'lax', secure: true }),
+    tokenRefresh: useCookie('refreshToken', { sameSite: 'lax', secure: true }),
+  }),
 
   getters: {
-    isAuthenticated: () => {
-      return !!useCookie('accessToken').value;
+    isAuthenticated: (state) => {
+      return !!state.token;
     },
   },
 
   actions: {
     setTokens(accessToken, refreshToken) {
-      useCookie('accessToken', { sameSite: 'lax', secure: true }).value =
-        accessToken;
+      this.token = accessToken;
       refreshCookie('accessToken');
-      useCookie('refreshToken', { sameSite: 'lax', secure: true }).value =
-        refreshToken;
+      this.tokenRefresh = refreshToken;
       refreshCookie('refreshToken');
     },
-    setUser(user) {
-      this.user = user;
-    },
-    setUsername(username) {
-      this.user.username = username;
-    },
+
     clearAuth() {
-      this.user.username = '';
-      useCookie('accessToken', { sameSite: 'lax' }).value = null;
+      this.username = '';
+      this.token = null;
+      refreshCookie('accessToken');
       useCookie('refreshToken', { sameSite: 'lax' }).value = null;
+      refreshCookie('refreshToken');
     },
 
-    async authenticateUser() {
-      this.loading = true;
-      const { $brorder } = useNuxtApp();
-      let data = null;
+    async login(credentials) {
+      const { $api } = useNuxtApp();
       try {
-        data = await $brorder('/api/login', {
+        const response = await $api('/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/ld+json' },
-          body: this.user,
+          body: credentials,
         });
-        if (data) {
-          const token = useCookie('token');
-          token.value = data.token;
-          this.authenticated = true; // set authenticated  state value to true
+        if (response) {
+          this.setTokens(response.token, response.refresh_token);
+          this.username = credentials.username;
+          navigateTo('/admin');
         }
-      } catch (err) {
-        console.log(err);
-        this.errors.login = 'Invalid credentials';
-        setTimeout(() => {
-          this.errors.login = '';
-        }, 3000);
-      } finally {
-        this.loading = false;
+      } catch (error) {
+        alert('Wrong Credentials', error);
       }
     },
 
-    isUserValid() {
-      if (this.user.username == '') {
-        this.errors.username = 'Invalid username';
-        return false;
-      }
-      if (this.user.password == '') {
-        this.errors.password = 'Invalid password';
-        return false;
-      }
-      return true;
-    },
-
-    logUserOut() {
-      this.token = useCookie('token'); // useCookie new hook in nuxt 3
-      this.authenticated = false; // set authenticated  state value to false
-      this.token = null; // clear the token cookie
+    logout() {
+      this.clearAuth();
+      navigateTo('/admin/login');
     },
   },
 });

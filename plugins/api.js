@@ -52,9 +52,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             fatal: true,
           });
         case 409:
-          console.error('response');
-          console.error(response._data);
-          console.error(response._data.detail);
           throw createError({
             statusCode: response.status,
             statusMessage: response._data.message,

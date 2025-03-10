@@ -35,9 +35,8 @@ useSeoMeta({
   title: "Login",
 });
 
-import { useAuth } from "~/composables/useAuth";
+const authStore = useAuthStore();
 
-const { login } = useAuth();
 const credentials = reactive({
   username: "",
   password: "",
@@ -50,12 +49,7 @@ const errors = reactive({
 
 //Handle login form
 const handleLogin = async () => {
-  if (await login(credentials)) {
-    navigateTo("/admin");
-  } else {
-    // Handle login error
-    alert("Wrong credentials");
-  }
+  await authStore.login(credentials);
 };
 </script>
 
