@@ -4,28 +4,27 @@
       id="switch-y"
       name="tripple"
       type="radio"
-      :value="false"
       class="switch-input"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', false)"
     />
     <label for="switch-y" class="switch-label switch-label-y">A valider</label>
+
     <input
       id="switch-i"
       name="tripple"
       type="radio"
-      :value="null"
       class="switch-input"
       checked
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', null)"
     />
     <label for="switch-i" class="switch-label switch-label-i">Toutes</label>
+
     <input
       id="switch-n"
       name="tripple"
       type="radio"
-      :value="true"
       class="switch-input"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', true)"
     />
     <label for="switch-n" class="switch-label switch-label-n">Vendue</label>
     <span class="switch-selector"></span>

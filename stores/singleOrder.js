@@ -43,6 +43,32 @@ export const useSingleOrder = defineStore('singleOrder', {
         items: '',
       };
     },
+    newOrderFrom(pickUpDate, order) {
+      let newOrder = new Object();
+      newOrder.pickUpdate = pickUpDate;
+      newOrder.isTaken = false;
+      newOrder.isDeleted = false;
+      newOrder.name = order.name;
+      newOrder.pitch = order.pitch;
+      newOrder.total = order.total;
+      newOrder.items = order.items;
+      newOrder.items.forEach((item) => {
+        delete item.id;
+        delete item['@id'];
+        delete item['@type'];
+      });
+      this.order = newOrder;
+      this.formErrors = {
+        id: '',
+        name: '',
+        pitch: '',
+        pickUpDate: '',
+        total: '',
+        isTaken: '',
+        isDeleted: '',
+        items: '',
+      };
+    },
 
     async fetch(id) {
       const api = useAPI();

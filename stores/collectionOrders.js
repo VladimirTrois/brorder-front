@@ -50,7 +50,6 @@ export const useCollectionOrder = defineStore('collectionOrder', {
         page: this.currentPage,
         itemsPerPage: this.itemsPerPage,
         name: this.searchByName,
-        'orderBy[isTaken]': 'asc',
         'orderBy[name]': this.sortBy === 'name' ? this.sortOrder : null,
         pitch: this.searchByPitch,
         'orderBy[pitch]': this.sortBy === 'pitch' ? this.sortOrder : null,

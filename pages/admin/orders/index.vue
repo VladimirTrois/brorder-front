@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+import { getDateWritten, formatDate, tomorrowDate } from "~/functions/date";
 definePageMeta({
   layout: "admin",
 });
@@ -36,12 +37,12 @@ watch(
   () => refreshNuxtData()
 );
 
-import { getDateWritten, formatDate, tomorrowDate } from "~/functions/date";
 const collectionOrders = useCollectionOrder();
 const showDatePicker = ref(false);
 const selectedDate = ref(tomorrowDate());
 
 collectionOrders.date = formatDate(selectedDate.value);
+collectionOrders.isTaken = null;
 collectionOrders.isDeleted = null;
 
 const attrs = ref([

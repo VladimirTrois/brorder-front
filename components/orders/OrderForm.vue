@@ -73,6 +73,7 @@
 </template>
 
 <script setup>
+import { tomorrowDate, formatDate } from "~/functions/date";
 const props = defineProps({
   typeOfForm: {
     type: String,
@@ -146,7 +147,7 @@ const editOrder = async () => {
 
 const refresh = () => {
   if (props.typeOfForm === "create") {
-    singleOrder.newOrder();
+    singleOrder.newOrder(formatDate(tomorrowDate()));
   }
   collectionProduct.fetchProducts();
 };

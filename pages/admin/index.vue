@@ -170,12 +170,14 @@
       :totalPages="collectionOrders.totalPages"
       @pageChange="collectionOrders.setPage"
     />
-    <OrderModal
+    <Modal
       :isOpen="isModalOpen"
       :title="modalTitle"
-      :message="modalMessage"
-      :order="singleOrder.order"
+      :content="modalContent"
+      :type="modalType"
       @close="closeModal"
+      @refresh="refreshPage"
+      @replace="editOrder"
       @sell="sell(singleOrder.order)"
       @renew="renew(singleOrder.order)"
     />
@@ -183,6 +185,7 @@
 </template>
 
 <script setup>
+import { formatDate, tomorrowDate } from "~/functions/date";
 definePageMeta({
   layout: "admin",
 });
@@ -190,10 +193,14 @@ useSeoMeta({
   title: "Admin",
 });
 
-import { formatDate, tomorrowDate } from "~/functions/date";
-
-const { isModalOpen, modalTitle, modalMessage, closeModal, openModal } =
-  useModal();
+const {
+  isModalOpen,
+  modalType,
+  modalTitle,
+  modalContent,
+  closeModal,
+  openModal,
+} = useModal();
 const currentDate = useCurrentDate();
 const collectionOrders = useCollectionOrder();
 const productStore = useCollectionProduct();
@@ -231,7 +238,7 @@ const updateFilters = () => {
 
 const sellModal = (order) => {
   singleOrder.order = order;
-  openModal("À vendre");
+  openModal("À vendre", singleOrder.order, "sellOrder");
 };
 
 const revertSell = async (order) => {
@@ -244,23 +251,47 @@ const revertSell = async (order) => {
 };
 
 const renew = async (order) => {
-  let newOrder = new Object();
-  newOrder.name = order.name;
-  newOrder.pitch = order.pitch;
-  newOrder.total = order.total;
-  console.log(order.items);
-  newOrder.items = JSON.parse(JSON.stringify(order.items));
-  console.log(newOrder.items);
-  newOrder.pickUpDate = formatDate(tomorrowDate());
-  console.log(newOrder);
-  const { response, error } = await singleOrder.create(newOrder);
+  singleOrder.newOrderFrom(formatDate(tomorrowDate()), order);
+  const { response, error } = await singleOrder.create(singleOrder.order);
   if (response) {
-    openModal("Succès", "Commande recommandé");
+    openModal("Commande recommandée", response, "showOrder");
+  } else {
+    if (error.message.includes("already used")) {
+      singleOrder.existingOrder = error.data.cause;
+      singleOrder.order.id = singleOrder.existingOrder.id;
+      openModal(
+        "Doublon !",
+        [
+          "Nom et Emplacement déjà utilisé.",
+          singleOrder.existingOrder,
+          singleOrder.order,
+        ],
+        "orderExist"
+      );
+    } else if (error.message.includes("Not enough stock available")) {
+      openModal("Le stock n'est plus disponible", error, "error");
+    } else {
+      openModal("Erreur", error, "error");
+    }
   }
-  if (error) {
-    openModal("Erreur", error);
+};
+
+const editOrder = async () => {
+  if (singleOrder.isOrderFormValid()) {
+    const { response, error } = await singleOrder.update(singleOrder.order, [
+      "name",
+      "isTaken",
+      "isDeleted",
+      "pitch",
+      "pickUpDate",
+      "items",
+    ]);
+    if (response) {
+      openModal("Commande modifée.", response, "showOrder");
+    } else {
+      openModal("Erreur", error, "error");
+    }
   }
-  refreshPage();
 };
 
 const sell = async () => {
@@ -269,7 +300,7 @@ const sell = async () => {
     "isTaken",
   ]);
   if (error) {
-    openModal("Erreur", error);
+    openModal("Erreur", error, "error");
   }
   refreshPage();
 };

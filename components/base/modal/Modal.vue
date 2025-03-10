@@ -10,7 +10,7 @@
       </template>
       <template #body>
         <div class="text-center">
-          {{ message }}
+          {{ content }}
         </div>
       </template>
     </ModalDialog>
@@ -27,6 +27,36 @@
       </template>
       <template #body>
         <OrderView :order="content" />
+      </template>
+    </ModalDialog>
+    <ModalDialog
+      v-else-if="type === 'sellOrder'"
+      :show="isOpen"
+      @close="$emit('close')"
+    >
+      <template #header>
+        <h3>{{ title }}</h3>
+      </template>
+      <template #body>
+        <OrderView :order="content" />
+      </template>
+      <template #footer>
+        <div class="grid grid-cols-2">
+          <IconButton
+            class="mr-3"
+            name="material-symbols:check-box"
+            @click="
+              $emit('sell');
+              $emit('close');
+            "
+          />
+          <IconButton
+            class="ml-9"
+            color="second"
+            name="material-symbols:cancel"
+            @click="$emit('close')"
+          />
+        </div>
       </template>
     </ModalDialog>
     <ModalDialog
@@ -108,7 +138,7 @@
 <script setup>
 const props = defineProps(["content", "isOpen", "title", "order", "type"]);
 
-defineEmits(["close", "replace", "refresh"]);
+defineEmits(["close", "replace", "refresh", "sell", "renew"]);
 </script>
 
 <style lang="postcss">
