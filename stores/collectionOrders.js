@@ -43,6 +43,11 @@ export const useCollectionOrder = defineStore('collectionOrder', {
 
   //actions
   actions: {
+    reset() {
+      this.orders = [];
+      this.totalItems = 0;
+      this.currentPage = 1;
+    },
     async fetchOrders() {
       const api = useAPI();
       const orderBy = 'order[' + this.sortBy + ']';

@@ -31,12 +31,6 @@ useSeoMeta({
   title: "Commande admin",
 });
 
-const route = useRoute();
-watch(
-  () => route.query,
-  () => refreshNuxtData()
-);
-
 const collectionOrders = useCollectionOrder();
 const showDatePicker = ref(false);
 const selectedDate = ref(tomorrowDate());
@@ -61,4 +55,7 @@ const changeDate = () => {
     });
   }
 };
+onMounted(() => {
+  collectionOrders.reset();
+});
 </script>

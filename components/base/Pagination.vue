@@ -1,15 +1,15 @@
 <template>
   <div class="pagination">
     <IconButton
-      size="sm"
-      name="material-symbols:arrow-left"
+      size="xs"
+      name="material-symbols:chevron-left"
       @click="changePage(currentPage - 1)"
       :disabled="currentPage === 1"
     />
     <span class="mx-2">{{ currentPage }} / {{ totalPages }}</span>
     <IconButton
-      size="sm"
-      name="material-symbols:arrow-right"
+      size="xs"
+      name="material-symbols:chevron-right"
       @click="changePage(currentPage + 1)"
       :disabled="currentPage === totalPages"
     />
@@ -39,6 +39,6 @@ function changePage(newPage) {
 
 <style lang="postcss">
 .pagination {
-  @apply m-auto flex justify-center items-center cursor-pointer;
+  @apply flex justify-center items-center cursor-pointer;
 }
 </style>

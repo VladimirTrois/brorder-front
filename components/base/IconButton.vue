@@ -1,6 +1,6 @@
 <template>
   <button :class="['buttonWithIcon', 'group', colorClassesButton, sizeClass]">
-    <Icon :class="[colorClassesIcon, sizeClass]" :name="name" />
+    <Icon :class="['icon', colorClassesIcon, sizeClass]" :name="name" />
   </button>
 </template>
 

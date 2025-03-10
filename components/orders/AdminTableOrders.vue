@@ -93,12 +93,12 @@
         </tbody>
       </table>
     </div>
-
     <Pagination
+      class="mt-2 mb-4"
       v-if="collectionOrders.totalPages > 1"
       :currentPage="collectionOrders.currentPage"
       :totalPages="collectionOrders.totalPages"
-      @pageChange="collectionOrders.setPage(newPage)"
+      @pageChange="collectionOrders.setPage"
     />
   </div>
 </template>
@@ -108,6 +108,13 @@ const collectionOrders = useCollectionOrder();
 const singleOrder = useSingleOrder();
 const productStore = useCollectionProduct();
 const searchTimeout = ref(null);
+
+const route = useRoute();
+watch(
+  () => route.query,
+  () => refreshNuxtData(),
+  () => collectionOrders.reset()
+);
 
 const updateSearch = (searchByName, searchByPitch) => {
   //prepare name search
@@ -139,6 +146,7 @@ const gotToEditOrder = async (order) => {
 };
 
 onMounted(() => {
+  collectionOrders.reset();
   productStore.isAvailable = true;
   productStore.fetchProducts();
   collectionOrders.fetchOrders();

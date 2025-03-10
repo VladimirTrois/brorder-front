@@ -9,7 +9,7 @@
       ></ToggleMultiple>
     </div>
     <div class="tableContainer">
-      <table>
+      <table class="table">
         <div v-if="collectionOrders.totalItems === 0">
           <h2 class="text-center">Pas de commande</h2>
         </div>
@@ -120,10 +120,8 @@
         </tbody>
         <tfoot>
           <tr>
-            <td></td>
-            <td></td>
-            <td class="text-right">Restants:</td>
-            <th
+            <td colspan="3" class="text-right">Restants:</td>
+            <td
               class="text-center"
               v-for="product in productStore.products[productStore.currentPage]"
               :key="product.name"
@@ -137,14 +135,12 @@
                   }}</span
                 >
               </div>
-            </th>
+            </td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td class="text-right">Total Produit:</td>
-            <th
+            <td colspan="3" class="text-right">Total Produit:</td>
+            <td
               class="text-center"
               v-for="product in productStore.products[productStore.currentPage]"
               :key="product.name"
@@ -158,18 +154,31 @@
                   }}</span
                 >
               </div>
-            </th>
+            </td>
             <td></td>
+          </tr>
+          <tr
+            v-if="
+              collectionOrders.totalPages > 1 &&
+              productStore.products[productStore.currentPage]
+            "
+          >
+            <td
+              :colspan="
+                4 + productStore.products[productStore.currentPage].length
+              "
+            >
+              <Pagination
+                v-if="collectionOrders.totalPages > 1"
+                :currentPage="collectionOrders.currentPage"
+                :totalPages="collectionOrders.totalPages"
+                @pageChange="collectionOrders.setPage"
+              />
+            </td>
           </tr>
         </tfoot>
       </table>
     </div>
-    <Pagination
-      v-if="collectionOrders.totalPages > 1"
-      :currentPage="collectionOrders.currentPage"
-      :totalPages="collectionOrders.totalPages"
-      @pageChange="collectionOrders.setPage"
-    />
     <Modal
       :isOpen="isModalOpen"
       :title="modalTitle"
@@ -210,7 +219,8 @@ const searchDebounce = ref(null);
 const route = useRoute();
 watch(
   () => route.query,
-  () => refreshNuxtData()
+  () => refreshNuxtData(),
+  () => collectionOrders.reset()
 );
 
 const updateSearch = (searchByName, searchByPitch) => {
@@ -313,6 +323,7 @@ const refreshPage = async () => {
 };
 
 onMounted(() => {
+  collectionOrders.reset();
   collectionOrders.date = formatDate(new Date());
   collectionOrders.isDeleted = false;
   collectionOrders.fetchOrders();
@@ -323,7 +334,8 @@ onMounted(() => {
 
 <style lang="postcss" scoped>
 .tableContainer {
-  @apply relative flex flex-col w-full h-full overflow-auto md:overflow-visible text-sm md:text-base rounded-lg border-2;
+  @apply relative flex flex-col w-full h-full overflow-auto md:overflow-visible text-sm md:text-base rounded-lg border-2
+  mb-4;
   &:hover {
     @apply border-dark_accent;
   }
@@ -339,8 +351,9 @@ thead {
   @apply uppercase bg-primary_mono text-light_shades sticky top-0;
 }
 tfoot {
-  @apply uppercase bg-primary_mono text-light_shades sticky bottom-0;
+  @apply font-bold uppercase bg-primary_mono text-light_shades sticky bottom-0;
 }
+
 th,
 td {
   @apply px-2 py-1;
