@@ -1,33 +1,29 @@
 <template>
   <div>
-    <div class="flex">
-      <SvgoBin
-        class="icon -ml-1 md:ml-0 mr-4"
-        alt="delete"
-        loading="lazy"
+    <div class="flex items-center w-fit">
+      <IconButton
+        class="mr-3"
+        size="xs"
+        name="solar:trash-bin-minimalistic-linear"
         @click="removeItem"
       />
-      <SvgoMinus
-        :class="item.quantity < 2 ? 'invisible' : 'icon mr-2'"
-        alt="-"
-        loading="lazy"
+      <IconButton
+        :class="item.quantity < 2 ? 'invisible' : ''"
+        size="xs"
+        name="carbon:subtract"
         @click="item.quantity--"
       />
-      <SvgoPlus
+      <p class="text-center mx-2">{{ item.quantity }}</p>
+      <IconButton
         :class="
           item.product.stock >= 0 && item.quantity >= item.product.stock
             ? 'invisible'
-            : 'icon mr-3'
+            : ''
         "
-        alt="+"
-        loading="lazy"
+        size="xs"
+        name="carbon:add"
         @click="item.quantity++"
       />
-      <div>
-        <p class="mx-1">
-          {{ item.quantity }}
-        </p>
-      </div>
     </div>
     <p class="text-center text-second">
       {{

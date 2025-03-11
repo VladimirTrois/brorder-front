@@ -19,12 +19,12 @@
         <OrderFormItemsTable v-if="singleOrder.order.items.length > 0" />
         <p
           v-else
-          class="text-center text-xl"
+          class="text-center text-xl mb-4"
           :class="singleOrder.formErrors.items ? 'text-second' : ''"
         >
-          Selectionnez des articles
+          Cliquez un article pour l'ajouter
           <br />
-          Choose products
+          Click on a product to add it
         </p>
         <div
           class="text-second text-center"
@@ -47,7 +47,7 @@
           >Modifier</Button
         >
       </div>
-      <div class="md:col-span-3">
+      <div class="md:col-span-3 md:-mt-28">
         <LazyProductCarrousel
           v-if="collectionProduct.productsFromCurrentPage"
           :products="
@@ -56,6 +56,12 @@
             )
           "
           @clickProduct="addProduct"
+        />
+        <IconButton
+          v-else
+          size="sm"
+          name="material-symbols:refresh"
+          @click="collectionProduct.fetchProducts"
         />
       </div>
     </div>
@@ -74,6 +80,7 @@
 
 <script setup>
 import { tomorrowDate, formatDate } from "~/functions/date";
+import IconButton from "../base/IconButton.vue";
 const props = defineProps({
   typeOfForm: {
     type: String,

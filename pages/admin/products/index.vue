@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-center">Gestion des produits</h2>
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mt-4">
       <LazyFormProduct
         :type-of-form="singleProduct.product.id ? 'edit' : 'create'"
         class="md:col-span-2 justify-self-center md:justify-self-end"

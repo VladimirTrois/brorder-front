@@ -1,5 +1,8 @@
 <template>
-  <button :class="['buttonWithIcon', 'group', colorClassesButton, sizeClass]">
+  <button
+    :class="['buttonWithIcon', 'group', colorClassesButton]"
+    class="w-max"
+  >
     <Icon :class="[colorClassesIcon, sizeClass]" :name="name" />
   </button>
 </template>
@@ -13,7 +16,7 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: "10",
+    default: "md",
   },
 });
 
@@ -43,6 +46,8 @@ const colorClassesIcon = computed(() => {
 
 const sizeClass = computed(() => {
   switch (props.size) {
+    case "2xs":
+      return "size-4 md:size-6";
     case "xs":
       return "size-6 md:size-8";
     case "sm":

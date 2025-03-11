@@ -1,6 +1,6 @@
 <template>
   <Transition name="modal">
-    <div v-if="show" class="modal-mask">
+    <div v-if="show" class="modal-mask" @click.self="$emit('close')">
       <div class="modal-container">
         <div :class="['modal-header', colorClasses]">
           <slot name="header">Sample Test</slot>

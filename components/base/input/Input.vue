@@ -2,7 +2,7 @@
   <div class="InputContainer group">
     <input
       :id="id"
-      class="outline-none px-3 py-3 peer bg-transparent"
+      class="outline-none px-2 py-2 peer bg-transparent"
       autocomplete="off"
       :type="type"
       @focus="

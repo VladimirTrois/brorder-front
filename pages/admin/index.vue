@@ -1,7 +1,6 @@
 <template>
   <div id="todayOrder">
-    <h2 class="text-center">Commandes du {{ currentDate }}</h2>
-
+    <h3 class="text-center">Commandes du {{ currentDate }}</h3>
     <div class="my-2 flex justify-center">
       <ToggleMultiple
         v-model="collectionOrders.isTaken"
@@ -78,11 +77,12 @@
           >
             <td>
               <div
-                class="flex flex-row justify-evenly items-center place-items-center"
+                class="grid grid-cols-2 gap justify-evenly items-center place-items-center"
               >
                 <IconButton
-                  class="-m-1"
                   v-if="order.isTaken"
+                  class="p-1 -m-1"
+                  size="sm"
                   color="second"
                   name="material-symbols:undo"
                   @click="revertSell(order)"
@@ -90,14 +90,13 @@
                 <IconButton
                   v-else
                   class="p-1 -m-1"
-                  name="material-symbols:shopping-cart-checkout"
+                  name="tabler:shopping-bag"
                   @click="sellModal(order)"
                 />
                 <IconButton
                   class="p-1 -m-1"
                   size="sm"
-                  color="second"
-                  name="material-symbols:autorenew-rounded"
+                  name="material-symbols:360"
                   @click="renew(order)"
                 />
               </div>
@@ -248,7 +247,7 @@ const updateFilters = () => {
 
 const sellModal = (order) => {
   singleOrder.order = order;
-  openModal("À vendre", singleOrder.order, "sellOrder");
+  openModal("Commande", singleOrder.order, "sellOrder");
 };
 
 const revertSell = async (order) => {
@@ -264,7 +263,7 @@ const renew = async (order) => {
   singleOrder.newOrderFrom(formatDate(tomorrowDate()), order);
   const { response, error } = await singleOrder.create(singleOrder.order);
   if (response) {
-    openModal("Commande recommandée", response, "showOrder");
+    openModal("Recommandée", response, "showOrder");
   } else {
     if (error.message.includes("already used")) {
       singleOrder.existingOrder = error.data.cause;

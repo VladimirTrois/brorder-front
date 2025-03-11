@@ -1,6 +1,6 @@
 <template>
   <div class="tableContainer">
-    <table class="table" style="width: auto">
+    <table class="table w-max">
       <thead>
         <tr>
           <th scope="col" class="w-5/12 md:w-5/12">Qté</th>
@@ -34,11 +34,13 @@
       <tfoot>
         <tr>
           <td class="text-lg md:text-xl">
-            <SvgoBin
-              class="binFooter ml-3"
+            <IconButton
               v-if="singleOrder.order.items.length > 0"
+              class="ml-3"
+              color="second"
               alt="delete-basket"
-              loading="lazy"
+              size="xs"
+              name="solar:trash-bin-minimalistic-linear"
               @click="singleOrder.order.items = []"
             />
           </td>
@@ -96,14 +98,5 @@ td {
 }
 .totalWritten {
   @apply pl-2;
-}
-.binFooter {
-  @apply h-full border border-transparent rounded text-dark_shades;
-  &:hover {
-    @apply bg-dark_shades text-white;
-  }
-  &:active {
-    @apply bg-white text-dark_shades;
-  }
 }
 </style>

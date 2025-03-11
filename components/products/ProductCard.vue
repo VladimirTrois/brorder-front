@@ -3,16 +3,12 @@
     class="productContainer"
     :class="product.isAvailable ? null : 'opacity-50'"
   >
-    <Image
-      class="productImage"
-      :filename="product.image"
-      :id="product.name"
-    /><br />
+    <Image class="productImage" :filename="product.image" :id="product.name" />
     <label class="productLabel" :for="product.name">
-      {{ product.name }}
-      <br />
-      {{ (product.price / 100).toFixed(2) }}€
-      <br />
+      <p>
+        {{ product.name }} <br />
+        {{ (product.price / 100).toFixed(2) }}€
+      </p>
       <p v-if="forAdmin">
         Ordre : {{ product.rank }}
         <br />
@@ -46,6 +42,6 @@ defineProps({
   @apply rounded-lg w-fit;
 }
 .productLabel {
-  @apply block text-center overflow-x-scroll text-nowrap text-sm md:text-base relative -top-4;
+  @apply block text-center overflow-x-scroll text-nowrap text-sm md:text-base relative;
 }
 </style>

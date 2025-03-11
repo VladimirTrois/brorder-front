@@ -41,20 +41,27 @@
         <OrderView :order="content" />
       </template>
       <template #footer>
-        <div class="grid grid-cols-2">
+        <div class="flex w-full items-center place-content-between px-4">
           <IconButton
-            class="mr-3"
-            name="material-symbols:check-box"
+            size="sm"
+            color="second"
+            name="material-symbols:close"
+            @click="$emit('close')"
+          />
+          <IconButton
+            name="mdi:cash-register"
             @click="
               $emit('sell');
               $emit('close');
             "
           />
           <IconButton
-            class="ml-9"
-            color="second"
-            name="material-symbols:cancel"
-            @click="$emit('close')"
+            name="material-symbols:sync-desktop-outline"
+            @click="
+              $emit('sell');
+              $emit('renew');
+              $emit('close');
+            "
           />
         </div>
       </template>

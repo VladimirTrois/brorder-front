@@ -1,19 +1,19 @@
 <template>
   <form class="formProduct" id="product" @submit.prevent="handleSubmit">
     <div class="w-full overflow-x-auto px-8">
-      <h2 class="w-full text-center inline-block mb-8">
+      <h3 class="w-full text-center inline-block mb-2">
         {{
           typeOfForm === "edit"
-            ? `Editing : ${singleProduct.product.name}`
+            ? `Edition : ${singleProduct.product.name}`
             : `Nouveau Produit`
         }}
-      </h2>
+      </h3>
     </div>
     <Toggle
-      class="mb-4 justify-self-center"
+      class="mb-2 justify-self-center"
       v-model="singleProduct.product.isAvailable"
     >
-      {{ singleProduct.product.isAvailable ? "Available" : "Disabled" }}
+      {{ singleProduct.product.isAvailable ? "Actif" : "Inactif" }}
     </Toggle>
     <Input
       id="name"

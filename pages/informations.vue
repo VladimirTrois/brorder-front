@@ -70,7 +70,7 @@
 
 <style lang="postcss" scoped>
 .tableContainer {
-  @apply relative flex flex-col w-full h-full overflow-auto md:overflow-visible text-sm md:text-base rounded-lg border-2;
+  @apply relative flex flex-col w-full h-full overflow-auto text-sm md:text-base rounded-lg border-2;
   &:hover {
     @apply border-dark_accent;
   }
