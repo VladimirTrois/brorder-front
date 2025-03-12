@@ -22,9 +22,8 @@
           class="text-center text-xl mb-4"
           :class="singleOrder.formErrors.items ? 'text-second' : ''"
         >
-          Cliquez un article pour l'ajouter
-          <br />
-          Click on a product to add it
+          Cliquez sur un article pour l'ajouter
+          <br /><i> Click on a product to add it </i>
         </p>
         <div
           class="text-second text-center"
