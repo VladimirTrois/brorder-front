@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="['buttonWithIcon', 'group', colorClassesButton]"
+    :class="['buttonWithIcon', 'group', colorClassesButton, sizeClass]"
     class="w-max"
   >
     <Icon :class="[colorClassesIcon, sizeClass]" :name="name" />

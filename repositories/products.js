@@ -21,18 +21,6 @@ export default (api) => ({
   delete: (id) => api(`/products/${id}`, { method: 'DELETE' }),
 });
 
-function pickForPatch(order) {
-  return pickProperties(order, [
-    'name',
-    'price',
-    'weight',
-    'isAvailable',
-    'stock',
-    'image',
-    'rank',
-  ]);
-}
-
 function pickProperties(obj, props) {
   return props.reduce((result, prop) => {
     if (obj.hasOwnProperty(prop)) {

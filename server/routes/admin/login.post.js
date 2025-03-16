@@ -13,9 +13,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  console.log(username);
-  console.log(password);
-
   try {
     // Forward credentials to the external authentication API
     const { token, refreshToken } = await $fetch(

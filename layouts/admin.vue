@@ -6,16 +6,15 @@
       <NavBarLink to="/admin/products" text="Produits" />
       <NavBarLink to="/admin/stats" text="Statistiques" />
       <NavBarLink to="/admin/products/images" text="Images" />
+      <NavBarLink to="/admin/allergies" text="Allergies" />
       <div class="w-full flex justify-end place-items-center">
-        <a href="/admin/login">
-          <IconButton
-            class="logoutBtn"
-            color="primary"
-            size="md"
-            name="material-symbols:logout"
-            @click="authStore.logout()"
-          />
-        </a>
+        <IconButton
+          class="logoutBtn"
+          color="primary"
+          size="md"
+          name="material-symbols:logout"
+          @click="authStore.logout()"
+        />
       </div>
     </NavBar>
     <main class="mainAdmin">

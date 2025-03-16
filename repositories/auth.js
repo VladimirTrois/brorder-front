@@ -9,5 +9,4 @@ export default (api) => ({
       method: 'POST',
       body: { refreshToken },
     }),
-  // You can add more auth-related methods here
 });

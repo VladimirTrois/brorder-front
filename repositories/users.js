@@ -4,5 +4,4 @@ export default (api) => ({
   create: (data) => api('/users', { method: 'POST', body: data }),
   update: (id, data) => api(`/users/${id}`, { method: 'PATCH', body: data }),
   delete: (id) => api(`/users/${id}`, { method: 'DELETE' }),
-  // Add other methods as needed
 });
