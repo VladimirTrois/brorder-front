@@ -1,5 +1,9 @@
 export default (api) => ({
   getAll: (params) => api('/products', { params }),
+  getAllWithAllergies: (params) =>
+    api('/products/allergies', {
+      params,
+    }),
   getOne: (id) => api(`/products/${id}`),
   create: (data) =>
     api('/products', {

@@ -5,6 +5,7 @@ export const useAllergies = defineStore('allergies', {
   //state
   state: () => ({
     collection: [],
+    selectedAllergy: {},
     allergy: {
       name: '',
     },
@@ -26,6 +27,7 @@ export const useAllergies = defineStore('allergies', {
       const response = await api.allergies.getAll();
       this.collection = response.member;
     },
+
     async create(allergy) {
       const api = useAPI();
       let response = null;
@@ -37,6 +39,7 @@ export const useAllergies = defineStore('allergies', {
       }
       return { response, error };
     },
+
     async update(allergy) {
       const api = useAPI();
       let response = null;
@@ -48,6 +51,7 @@ export const useAllergies = defineStore('allergies', {
       }
       return { response, error };
     },
+
     async delete(allergy) {
       const api = useAPI();
       let response = null;

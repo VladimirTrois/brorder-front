@@ -1,5 +1,4 @@
 import { defineEventHandler, readBody, setCookie, createError } from 'h3';
-import fetch from 'node-fetch'; // Use node-fetch for external API calls
 
 export default defineEventHandler(async (event) => {
   // Get credentials from the request body

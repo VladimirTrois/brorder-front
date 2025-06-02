@@ -1,7 +1,7 @@
 <template>
   <div class="navbar" id="navBar">
     <div class="top" id="navBar">
-      <div>
+      <div class="w-fit">
         <img src="/img/Logo.svg" alt="Logo" class="logo" />
       </div>
       <div class="sm:hidden">
@@ -19,7 +19,7 @@
         />
       </div>
     </div>
-    <div class="drawer" :class="isOpen ? 'block' : 'hidden'">
+    <div class="drawer" :class="isOpen ? '' : 'hidden'">
       <slot />
     </div>
   </div>
@@ -45,7 +45,7 @@ const toggleNav = () => {
   @apply w-full px-3 sm:flex sm:p-0 sm:items-center mb-3 sm:mb-0;
 }
 .logo {
-  @apply h-14 fill-current;
+  @apply min-h-14 h-14 md:min-w-max max-w-full;
 }
 .toggleIcon {
   @apply w-10 h-10 fill-current text-light_shades bg-transparent rounded-md border-2 border-transparent;

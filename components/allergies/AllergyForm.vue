@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="allergyForm">
     <h3 class="mb-2">Liste des allergies</h3>
     <IconButton
       v-if="allergies.collection.length === 0"
@@ -7,22 +7,21 @@
       name="material-symbols:refresh"
       @click="refreshPage"
     />
-
-    <div
+    <AllergyCard
       v-else
       class="grid gap-0"
       v-for="allergy in allergies.collection"
       :key="allergy.name"
-    >
-      <AllergyCard @click="allergies.allergy = allergy" :allergy="allergy" />
-    </div>
+      @click="allergies.allergy = allergy"
+      :allergy="allergy"
+    />
     <IconButton
       v-if="allergies.allergy.id"
       size="xs"
       name="material-symbols:add"
       @click="allergies.newAllergy"
     />
-    <form class="flex place-items-center mt-4" @submit.prevent="handleSubmit">
+    <form class="mt-4 flex flex-wrap items-center" @submit.prevent="">
       <Input
         id="name"
         :placeHolder="
@@ -32,25 +31,27 @@
         :error="allergies.formErrors.name"
         :resetError="() => (allergies.formErrors.name = '')"
       />
-      <IconButton
-        v-if="allergies.allergy.id"
-        size="sm"
-        name="material-symbols:save"
-        type="submit"
-      />
-      <IconButton
-        v-if="allergies.allergy.id"
-        size="sm"
-        color="second"
-        name="material-symbols:delete"
-        @click="handleDelete"
-      />
-      <IconButton
-        v-else
-        size="sm"
-        name="material-symbols:upload-rounded"
-        type="submit"
-      />
+      <div class="flex">
+        <IconButton
+          v-if="allergies.allergy.id"
+          size="sm"
+          name="material-symbols:save"
+          @click="handleSubmit"
+        />
+        <IconButton
+          v-else
+          size="sm"
+          name="material-symbols:upload-rounded"
+          @click="handleSubmit"
+        />
+        <IconButton
+          v-if="allergies.allergy.id"
+          size="sm"
+          color="second"
+          name="material-symbols:delete"
+          @click="handleDelete"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -80,8 +81,10 @@ const refreshPage = async () => {
   allergies.newAllergy();
   await allergies.fetchAllergies();
 };
-
-onMounted(() => {
-  refreshPage();
-});
 </script>
+
+<style lang="postcss">
+.allergyForm {
+  @apply m-auto grid grid-cols-1 max-w-fit text-sm md:text-base lg:text-xl bg-light_shades shadow-md shadow-primary_mono rounded p-2 overflow-auto;
+}
+</style>

@@ -27,6 +27,18 @@ export const useCollectionProduct = defineStore('collectionProduct', {
 
   //actions
   actions: {
+    reset() {
+      this.products = [];
+      this.totalItems = 0;
+      this.currentPage = 1;
+    },
+
+    getProductIndexFromID(id) {
+      return this.productsFromCurrentPage.findIndex(
+        (product) => product?.id === id,
+      );
+    },
+
     async fetchProducts() {
       this.isCollectionFetched = false;
       const api = useAPI();
@@ -43,6 +55,22 @@ export const useCollectionProduct = defineStore('collectionProduct', {
       this.totalItems = response.totalItems;
       this.isCollectionFetched = true;
     },
+
+    async fetchProductsWithAllergies() {
+      this.isCollectionFetched = false;
+      const api = useAPIV2();
+      const response = await api.products.getAllWithAllergies({
+        page: this.currentPage,
+        itemsPerPage: this.itemsPerPage,
+        isAvailable: this.isAvailable,
+        ['orderBy[' + this.sortBy + ']']: this.sortOrder,
+      });
+
+      this.products[this.currentPage] = response.member;
+      this.totalItems = response.totalItems;
+      this.isCollectionFetched = true;
+    },
+
     setPage(page) {
       this.currentPage = page;
       if (!this.products[this.currentPage]) {

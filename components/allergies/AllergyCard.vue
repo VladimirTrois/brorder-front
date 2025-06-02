@@ -10,7 +10,7 @@ const props = defineProps(["allergy"]);
     
     <style lang="postcss" scoped>
 .allergyContainer {
-  @apply min-w-32 max-w-40 p-1 inline static float-start rounded-lg border border-transparent justify-center place-items-center;
+  @apply p-1 rounded-lg border border-transparent text-nowrap;
   &:hover {
     @apply bg-gray-200 border border-dark_accent;
   }

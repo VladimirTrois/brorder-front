@@ -64,7 +64,7 @@ const model = defineModel();
 }
 
 .inputLabelBase {
-  @apply absolute left-[9px] top-px text-sm transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
+  @apply absolute left-[9px] top-px text-sm transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none text-nowrap 
   peer-placeholder-shown:top-1/2 
   peer-placeholder-shown:text-base
   md:peer-placeholder-shown:text-lg

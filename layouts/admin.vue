@@ -33,7 +33,7 @@ const authStore = useAuthStore();
   @apply bg-light_shades mx-auto min-h-screen flex flex-col flex-1;
 }
 .mainAdmin {
-  @apply container mx-auto my-auto px-4 pt-4 flex-grow text-sm sm:text-base text-black bg-transparent;
+  @apply container mx-auto my-auto px-4 pt-4 mb-4 flex-grow text-sm sm:text-base text-black bg-transparent;
 }
 h1 {
   @apply text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold leading-none tracking-tight;

@@ -1,12 +1,17 @@
 <template>
   <div>
-    <div class="md:grid md:grid-cols-5">
-      <div class="col-span-2">
-        <AllergyForm />
-      </div>
-      <div class="col-span-3">3 cols</div>
-      <ProductAllergies />
-    </div>
+    <LazyProductInfosTable
+      v-if="collectionProduct.productsFromCurrentPage"
+      class="mb-4"
+      :isPublic="false"
+    />
+    <IconButton
+      v-else
+      size="sm"
+      name="material-symbols:refresh"
+      @click="refreshPage"
+    />
+    <LazyAllergyForm v-if="allergies.collection" />
   </div>
 </template>
 
@@ -16,5 +21,19 @@ definePageMeta({
 });
 useSeoMeta({
   title: "Allergies",
+});
+
+const allergies = useAllergies();
+const collectionProduct = useCollectionProduct();
+
+const refreshPage = async () => {
+  collectionProduct.reset();
+  collectionProduct.isAvailable = true;
+  await allergies.fetchAllergies();
+  await collectionProduct.fetchProductsWithAllergies();
+};
+
+onMounted(() => {
+  refreshPage();
 });
 </script>

@@ -14,7 +14,7 @@ const refreshNavigation = async () => {
 
 <style lang="postcss">
 .navBarLink {
-  @apply block rounded px-2 text-light_shades mt-1 text-lg sm:mt-0 sm:ml-4  sm:py-1 md:text-xl;
+  @apply block rounded px-1 text-light_shades mt-1 text-lg sm:text-base lg:ml-4 lg:text-xl sm:mt-0   sm:py-1;
   &:hover {
     @apply underline underline-offset-4 md:underline-offset-8 decoration-4 decoration-second;
   }

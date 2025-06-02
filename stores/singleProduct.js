@@ -15,6 +15,7 @@ export const useSingleProduct = defineStore('singleProduct', {
       image: '',
       rank: '',
     },
+    newAllergy: {},
   }),
 
   getters: {},
@@ -25,6 +26,24 @@ export const useSingleProduct = defineStore('singleProduct', {
       let newProduct = new Object();
       newProduct.isAvailable = true;
       this.product = newProduct;
+    },
+
+    getProductAllergy(product, allergyName) {
+      return product.allergies.find(
+        (productAllergy) => productAllergy.allergy.name === allergyName,
+      );
+    },
+
+    orderProductAllergiesBy(product, allergies) {
+      const orderedAllergies = [];
+      allergies.forEach((allergy) => {
+        let allergyIndex = product.allergies.findIndex(
+          (productAllergy) => productAllergy.allergy.name === allergy.name,
+        );
+        if (allergyIndex)
+          orderedAllergies.push(product.allergies.splice(allergyIndex, 1));
+      });
+      product.allergies = orderedAllergies;
     },
 
     async fetch(id) {
@@ -50,6 +69,28 @@ export const useSingleProduct = defineStore('singleProduct', {
       ]);
       return response;
     },
+    async updateProperties(product, properties) {
+      const api = useAPI();
+      const response = await api.products.update(
+        product.id,
+        product,
+        properties,
+      );
+      return response;
+    },
+    async updateProductAllergies(productAllergy) {
+      const preparedProductAllergy = JSON.parse(JSON.stringify(productAllergy));
+      const IRI = preparedProductAllergy.allergy['@id'];
+      delete preparedProductAllergy.allergy;
+      preparedProductAllergy.allergy = IRI;
+
+      const api = useAPI();
+      const response = await api.productAllergies.update(
+        preparedProductAllergy.id,
+        preparedProductAllergy,
+      );
+      return response;
+    },
     async safeDelete(product) {
       product.isDeleted = true;
       const response = await this.updateItem(product);
@@ -60,6 +101,21 @@ export const useSingleProduct = defineStore('singleProduct', {
       const response = await api.products.delete(product.id);
       return response;
     },
+
+    prepareProductAllergies(product) {
+      const preparedProduct = JSON.parse(JSON.stringify(product));
+      preparedProduct.allergies.map((productAllergy, index) => {
+        if (productAllergy['@id']) {
+          preparedProduct.allergies[index] = productAllergy['@id'];
+        } else {
+          const IRI = productAllergy.allergy['@id'];
+          delete productAllergy.allergy;
+          productAllergy.allergy = IRI;
+        }
+      });
+      return preparedProduct;
+    },
+
     validateProductForm() {
       //check name
       const regexName = /([à-ü]|[a-z0-9_-\s]){3,29}/gi;
