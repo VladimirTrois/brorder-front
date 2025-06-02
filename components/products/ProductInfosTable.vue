@@ -95,7 +95,7 @@ onMounted(() => {
   }
 }
 .table {
-  @apply table-fixed border-spacing-2 min-w-max overflow-scroll rounded;
+  @apply table-auto border-spacing-2 min-w-max overflow-scroll rounded;
 }
 
 tbody {
